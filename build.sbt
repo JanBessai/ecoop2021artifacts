@@ -1,6 +1,4 @@
-import sbt.Keys.autoScalaLibrary
-
-val defaultSettings = 
+val defaultSettings =
   Seq(
     crossPaths := false,
     autoScalaLibrary := false,
@@ -13,18 +11,14 @@ val defaultSettings =
     parallelExecution in Test := false
   )
 
-val shared = Project("shared", file("shared")).settings(defaultSettings)
-val coco = Project("coco", file("coco")).settings(defaultSettings).dependsOn(shared)
-val extensible_visitor = Project("extensible_visitor", file("extensible_visitor")).settings(defaultSettings).dependsOn(shared)
-val oo = Project("oo", file("oo")).settings(defaultSettings).dependsOn(shared)
-val trivially = Project("trivially", file("trivially")).settings(defaultSettings).dependsOn(shared)
-val vita = Project("vita", file("vita")).settings(defaultSettings).dependsOn(shared)
+lazy val shared = Project("shared", file("shared")).settings(defaultSettings)
+lazy val coco = Project("coco", file("coco")).settings(defaultSettings).dependsOn(shared)
+lazy val extensible_visitor = Project("extensible_visitor", file("extensible_visitor")).settings(defaultSettings).dependsOn(shared)
+lazy val oo = Project("oo", file("oo")).settings(defaultSettings).dependsOn(shared)
+lazy val trivially = Project("trivially", file("trivially")).settings(defaultSettings).dependsOn(shared)
+lazy val vita = Project("vita", file("vita")).settings(defaultSettings).dependsOn(shared)
 
-val root =
-  Project("root", file("."))
-  .dependsOn(coco, extensible_visitor, oo, trivially, vita)
-
-val benchmarks = Project("benchmarks", file("benchmarks"))
+lazy val benchmarks = Project("benchmarks", file("benchmarks"))
   .settings(
     scalaVersion := "2.13.5",
     libraryDependencies ++= Seq(
@@ -32,7 +26,8 @@ val benchmarks = Project("benchmarks", file("benchmarks"))
     ),
     testFrameworks += new TestFramework("org.scalameter.ScalaMeterFramework"),
     logBuffered := false,
-    parallelExecution in Test := false
-  ).dependsOn(root)
+    parallelExecution in Test := false,
+    Test / classLoaderLayeringStrategy := ClassLoaderLayeringStrategy.Flat
+  ).dependsOn(coco, extensible_visitor, oo, trivially, vita)
 
 
