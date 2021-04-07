@@ -1,11 +1,8 @@
 package coco.ep.m7.finalized;
 
-import coco.ep.m7.finalized.Exp;
-
 public class Mult extends Exp implements coco.ep.m7.Mult<Exp> {
 
     protected Exp left;
-
     protected Exp right;
 
     public Mult(Exp _left, Exp _right) {
@@ -14,18 +11,16 @@ public class Mult extends Exp implements coco.ep.m7.Mult<Exp> {
     }
 
     public Exp getLeft() {
-        return this.left;
+        return left;
     }
-
     public Exp getRight() {
-        return this.right;
+        return right;
     }   
     
     public void setLeft(coco.ep.Exp<Exp> _left) {
-        this.left = convert(_left);
+        left = convert(_left);
     }
-
     public void setRight(coco.ep.Exp<Exp> _right) {
-        this.right = convert(_right);
+        right = convert(_right);
     }
 }

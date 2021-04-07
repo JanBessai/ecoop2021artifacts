@@ -4,15 +4,14 @@ import coco.ep.m2.Exp;
 
 public interface Mult<FT> extends Exp<FT>, Factory<FT> {
 
-    public abstract Exp<FT> getLeft();
+    Exp<FT> getLeft();
+    Exp<FT> getRight();
 
-    public abstract Exp<FT> getRight();
-
-    public default String prettyp() {
-        return "(" + this.convert(this.getLeft()).prettyp() + "*" + this.convert(this.getRight()).prettyp() + ")";
+    default String prettyp() {
+        return "(" + convert(getLeft()).prettyp() + "*" + convert(getRight()).prettyp() + ")";
     }
 
-    public default Double eval() {
-        return this.convert(this.getLeft()).eval() * this.convert(this.getRight()).eval();
+    default Double eval() {
+        return convert(getLeft()).eval() * convert(getRight()).eval();
     }
 }

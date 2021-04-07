@@ -1,35 +1,34 @@
 package coco.ep.m4;
 
-import coco.ep.m4.Exp;
 import java.util.List;
 
 public interface Mult<FT> extends coco.ep.m3.Mult<FT>, Exp<FT> {
 	void setLeft(coco.ep.Exp<FT> left);
 	void setRight(coco.ep.Exp<FT> right);
 	
-	public default void truncate (int level) {
+	default void truncate (int level) {
 		if (level > 1) {
-			this.convert(this.getLeft()).truncate(level-1);
-			this.convert(this.getRight()).truncate(level-1);
+			convert(getLeft()).truncate(level-1);
+			convert(getRight()).truncate(level-1);
 		} else {
-			setLeft(this.lit(this.convert(this.getLeft()).eval()));
-			setRight(this.lit(this.convert(this.getRight()).eval()));
+			setLeft(this.lit(convert(getLeft()).eval()));
+			setRight(this.lit(convert(getRight()).eval()));
 		}
 	}
 	
-    public default coco.ep.Exp<FT> simplify() {
-        if (Double.valueOf(this.convert(this.getLeft()).eval()).equals(0.0) || Double.valueOf(this.convert(this.getRight()).eval()).equals(0.0)) {
+    default coco.ep.Exp<FT> simplify() {
+        if (convert(getLeft()).eval().equals(0.0) || convert(getRight()).eval().equals(0.0)) {
             return this.lit(0.0);
-        } else if (Double.valueOf(this.convert(this.getLeft()).eval()).equals(1.0)) {
-            return this.convert(this.getRight()).simplify();
-        } else if (Double.valueOf(this.convert(this.getRight()).eval()).equals(1.0)) {
-            return this.convert(this.getLeft()).simplify();
+        } else if (convert(getLeft()).eval().equals(1.0)) {
+            return convert(getRight()).simplify();
+        } else if (convert(getRight()).eval().equals(1.0)) {
+            return convert(getLeft()).simplify();
         } else {
-            return this.mult(this.convert(this.getLeft()).simplify(), this.convert(this.getRight()).simplify());
+            return this.mult(convert(getLeft()).simplify(), convert(getRight()).simplify());
         }
     }
 
-    public default List<Double> collect() {
-        return java.util.stream.Stream.concat(this.convert(this.getLeft()).collect().stream(), this.convert(this.getRight()).collect().stream()).collect(java.util.stream.Collectors.toList());
+    default List<Double> collect() {
+        return java.util.stream.Stream.concat(convert(getLeft()).collect().stream(), convert(getRight()).collect().stream()).collect(java.util.stream.Collectors.toList());
     }
 }

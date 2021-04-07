@@ -1,12 +1,8 @@
 package coco.ep.m0;
 
-import coco.ep.m0.Exp;
-
 public interface Lit<FT> extends Exp<FT> {
 
-    public abstract Double getValue();
+    Double getValue();
 
-    public default Double eval() {
-        return this.getValue();
-    }
+    default Double eval() { return getValue();  }
 }

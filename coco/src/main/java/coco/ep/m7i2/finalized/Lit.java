@@ -9,6 +9,6 @@ public class Lit extends Exp implements coco.ep.m7i2.Lit<Exp> {
     }
 
     public Double getValue() {
-        return this.value;
+        return value;
     }
 }

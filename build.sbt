@@ -17,6 +17,7 @@ lazy val extensible_visitor = Project("extensible_visitor", file("extensible_vis
 lazy val oo = Project("oo", file("oo")).settings(defaultSettings).dependsOn(shared)
 lazy val trivially = Project("trivially", file("trivially")).settings(defaultSettings).dependsOn(shared)
 lazy val vita = Project("vita", file("vita")).settings(defaultSettings).dependsOn(shared)
+lazy val interpreter = Project("interpreter", file("interpreter")).settings(defaultSettings).dependsOn(shared)
 
 lazy val benchmarks = Project("benchmarks", file("benchmarks"))
   .settings(
@@ -28,6 +29,6 @@ lazy val benchmarks = Project("benchmarks", file("benchmarks"))
     logBuffered := false,
     parallelExecution in Test := false,
     Test / classLoaderLayeringStrategy := ClassLoaderLayeringStrategy.Flat
-  ).dependsOn(coco, extensible_visitor, oo, trivially, vita)
+  ).dependsOn(coco, extensible_visitor, oo, trivially, vita, interpreter)
 
 

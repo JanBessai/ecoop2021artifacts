@@ -5,7 +5,6 @@ import coco.ep.m2.finalized.Exp;
 public class Divd extends Exp implements Factory, coco.ep.m3.Divd<Exp> {
 
     protected Exp left;
-
     protected Exp right;
 
     public Divd(Exp _left, Exp _right) {
@@ -14,10 +13,10 @@ public class Divd extends Exp implements Factory, coco.ep.m3.Divd<Exp> {
     }
 
     public Exp getLeft() {
-        return this.left;
+        return left;
     }
 
     public Exp getRight() {
-        return this.right;
+        return right;
     }
 }

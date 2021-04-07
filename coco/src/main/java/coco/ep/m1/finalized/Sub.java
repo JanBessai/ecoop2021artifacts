@@ -14,10 +14,10 @@ public class Sub extends Exp implements Factory, coco.ep.m1.Sub<Exp> {
     }
 
     public Exp getLeft() {
-        return this.left;
+        return left;
     }
 
     public Exp getRight() {
-        return this.right;
+        return right;
     }
 }

@@ -1,11 +1,8 @@
 package coco.ep.m6.finalized;
 
-import coco.ep.m6.finalized.Exp;
-
 public class Sub extends Exp implements coco.ep.m6.Sub<Exp> {
 
     protected Exp left;
-
     protected Exp right;
 
     public Sub(Exp _left, Exp _right) {
@@ -13,19 +10,15 @@ public class Sub extends Exp implements coco.ep.m6.Sub<Exp> {
         this.right = _right;
     }
 
-    public Exp getLeft() {
-        return this.left;
-    }
-
+    public Exp getLeft() { return left; }
     public Exp getRight() {
-        return this.right;
+        return right;
     }   
     
     public void setLeft(coco.ep.Exp<Exp> _left) {
-        this.left = convert(_left);
+        left = convert(_left);
     }
-
     public void setRight(coco.ep.Exp<Exp> _right) {
-        this.right = convert(_right);
+        right = convert(_right);
     }
 }

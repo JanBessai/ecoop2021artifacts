@@ -1,16 +1,15 @@
 package coco.ep.m5;
 
-import coco.ep.m5.Exp;
 import util.Node;
 import util.Tree;
 
 public interface Neg<FT> extends coco.ep.m4.Neg<FT>, Exp<FT> {
 
-    public default Tree astree() {
-        return new Node(this.convert(this).id(), this.convert(this.getInner()).astree());
+    default Tree astree() {
+        return new Node(convert(this).id(), convert(getInner()).astree());
     }
 
-    public default Integer id() {
+    default Integer id() {
         return 78192;
     }
 }

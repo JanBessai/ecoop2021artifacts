@@ -1,4 +1,5 @@
 package ep
+
 import org.scalameter.KeyValue
 import org.scalameter.api._
 
@@ -38,6 +39,13 @@ object EvalBenchmark extends Bench.OfflineReport {
     val startSimplify: m7i2.Exp[m7i2.finalized.Visitor] = sub(lit(1.0), lit(1.0))
     val simplifyExps = sizes.map(size => (0 until size).foldLeft(startSimplify)((current, _) => power(current, current)))
   }
+  object interpreterObjects {
+    import interpreter.ep.m7i2.MergedExp
+    val startEval: MergedExp = interpreter.ep.m7i2.MergedExpFactory.Power(interpreter.ep.m7i2.MergedExpFactory.Lit(1.0), interpreter.ep.m7i2.MergedExpFactory.Lit(1.0001))
+    val evalExps = sizes.map(size => (0 until size).foldLeft(startEval)((current, _) => interpreter.ep.m7i2.MergedExpFactory.Power(current, current)))
+    val startSimplify: MergedExp = interpreter.ep.m7i2.MergedExpFactory.Sub(interpreter.ep.m7i2.MergedExpFactory.Lit(1.0), interpreter.ep.m7i2.MergedExpFactory.Lit(1.0))
+    val simplifyExps = sizes.map(size => (0 until size).foldLeft(startSimplify)((current, _) => interpreter.ep.m7i2.MergedExpFactory.Power(current, current)))
+  }
 
   performance of "eval" config(testConfig:_*) in {
     measure method "coco" in {
@@ -60,7 +68,13 @@ object EvalBenchmark extends Bench.OfflineReport {
         vitaObjects.convert(exp).eval()
       }
     }
+    measure method "interpreter" in {
+      using(interpreterObjects.evalExps) in { exp =>
+        exp.eval()
+      }
+    }
   }
+
   performance of "simplify" config(testConfig:_*) in {
     measure method "coco" in {
       using(cocoObjects.simplifyExps) in { exp =>
@@ -79,6 +93,12 @@ object EvalBenchmark extends Bench.OfflineReport {
     }
     measure method "vita" in {
       using(vitaObjects.simplifyExps) in { exp =>
+        exp.simplify()
+      }
+    }
+
+    measure method "interpreter" in {
+      using(interpreterObjects.simplifyExps) in { exp =>
         exp.simplify()
       }
     }

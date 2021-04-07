@@ -4,13 +4,13 @@ import coco.ep.m2.Exp;
 
 public interface Neg<FT> extends Exp<FT>, Factory<FT> {
 
-    public abstract Exp<FT> getInner();
+    Exp<FT> getInner();
 
-    public default String prettyp() {
-        return "-" + this.convert(this.getInner()).prettyp();
+    default String prettyp() {
+        return "-" + convert(getInner()).prettyp();
     }
 
-    public default Double eval() {
-        return -1.0 * this.convert(this.getInner()).eval();
+    default Double eval() {
+        return -1.0 * convert(getInner()).eval();
     }
 }

@@ -11,6 +11,6 @@ public class Neg extends Exp implements Factory, coco.ep.m3.Neg<Exp> {
     }
 
     public Exp getInner() {
-        return this.inner;
+        return inner;
     }
 }

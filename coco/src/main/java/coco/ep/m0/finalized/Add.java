@@ -1,7 +1,5 @@
 package coco.ep.m0.finalized;
 
-import coco.ep.m0.finalized.Exp;
-
 public class Add extends Exp implements coco.ep.m0.Add<Exp> {
 
     protected Exp left;
@@ -14,10 +12,10 @@ public class Add extends Exp implements coco.ep.m0.Add<Exp> {
     }
 
     public Exp getLeft() {
-        return this.left;
+        return left;
     }
 
     public Exp getRight() {
-        return this.right;
+        return right;
     }
 }

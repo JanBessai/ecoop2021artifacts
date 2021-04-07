@@ -4,10 +4,10 @@ import coco.ep.Exp;
 
 public interface Lit<FT> extends coco.ep.m6.Lit<FT>, coco.ep.m7.Exp<FT> {
 
-    public default Exp<FT> powby(Exp<FT> other) {
-        Double exponentValue = this.convert(this.convert(other)).eval();
+    default Exp<FT> powby(Exp<FT> other) {
+        Double exponentValue = convert(other).eval();
         Exp<FT> result = this;
-        Double counter = Math.floor(Math.abs(exponentValue));
+        double counter = Math.floor(Math.abs(exponentValue));
         while (1.0 < counter) {
             result = this.mult(result, this);
             counter = counter - 1.0;
