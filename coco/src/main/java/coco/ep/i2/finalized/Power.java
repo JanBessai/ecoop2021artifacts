@@ -5,7 +5,6 @@ import coco.ep.i1.finalized.Exp;
 public class Power extends Exp implements Factory, coco.ep.i2.Power<Exp> {
 
     protected Exp left;
-
     protected Exp right;
 
     public Power(Exp _left, Exp _right) {
@@ -16,7 +15,6 @@ public class Power extends Exp implements Factory, coco.ep.i2.Power<Exp> {
     public Exp getLeft() {
         return this.left;
     }
-
     public Exp getRight() {
         return this.right;
     }

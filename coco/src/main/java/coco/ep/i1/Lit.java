@@ -4,7 +4,7 @@ import coco.ep.Exp;
 
 public interface Lit<FT> extends coco.ep.m2.Lit<FT>, coco.ep.i1.Exp<FT> {
 
-    public default Exp<FT> multby(Exp<FT> other) {
+    default Exp<FT> multby(Exp<FT> other) {
         Exp<FT> result = this.convert(other);
         Double counter = Math.floor(Math.abs(this.getValue()));
         while (1.0 < counter) {

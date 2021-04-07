@@ -1,7 +1,5 @@
 package util;
 
-import util.Tree;
-
 public final class Leaf<T> implements Tree {
 
     public final T value;

@@ -9,8 +9,13 @@ import java.util.List;
 public interface Power<FT> extends coco.ep.i2.Power<FT>, coco.ep.m7i2.Exp<FT>, Factory<FT> {
 	void setLeft(coco.ep.Exp<FT> left);
 	void setRight(coco.ep.Exp<FT> right);
-	
-	default void truncate (int level) {
+
+    default coco.ep.Exp<FT> multby(coco.ep.Exp<FT> other) {return this.mult(this, convert(other)); }
+    default coco.ep.Exp<FT> powby(coco.ep.Exp<FT> other) {
+        return this.power(this, convert(other));
+    }
+
+    default void truncate (int level) {
 		if (level > 1) {
 			convert(getLeft()).truncate(level-1);
 			convert(getRight()).truncate(level-1);
@@ -25,6 +30,8 @@ public interface Power<FT> extends coco.ep.i2.Power<FT>, coco.ep.m7i2.Exp<FT>, F
             return this.lit(1.0);
         } else if (convert(getLeft()).eval().equals(1.0)) {
             return this.lit(1.0);
+        } else if (convert(getRight()).eval().equals(1.0)) {
+            return getLeft();
         } else {
             return this.power(convert(getLeft()).simplify(), convert(getRight()).simplify());
         }
@@ -43,10 +50,14 @@ public interface Power<FT> extends coco.ep.i2.Power<FT>, coco.ep.m7i2.Exp<FT>, F
     }
 
     default Boolean equals(Exp<FT> other) {
-        return this.convert(this).astree().equals(convert(other).astree());
+        return convert(this).astree().equals(convert(other).astree());
     }
 
-    default Exp<FT> powby(Exp<FT> other) {
-        return this.power(this, convert(other));
+    default Boolean isPower(coco.ep.Exp<FT> left, coco.ep.Exp<FT> right) {
+        return convert(left).eql(getLeft()) && convert(right).eql(getRight());
+    }
+
+    default Boolean eql(coco.ep.Exp<FT> that) {
+	    return convert(that).isPower(convert(getLeft()), convert(getRight()));
     }
 }

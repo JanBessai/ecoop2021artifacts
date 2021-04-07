@@ -14,7 +14,6 @@ public class Sub extends Exp implements coco.ep.m4.Sub<Exp> {
     public Exp getLeft() {
         return left;
     }
-
     public Exp getRight() {
         return right;
     }
@@ -22,7 +21,6 @@ public class Sub extends Exp implements coco.ep.m4.Sub<Exp> {
     public void setLeft(coco.ep.Exp<Exp> _left) {
         left = convert(_left);
     }
-
     public void setRight(coco.ep.Exp<Exp> _right) {
         right = convert(_right);
     }

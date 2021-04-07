@@ -7,7 +7,7 @@ public interface Neg<FT> extends Exp<FT>, Factory<FT> {
     Exp<FT> getInner();
 
     default String prettyp() {
-        return "-" + convert(getInner()).prettyp();
+        return "(-" + convert(getInner()).prettyp() + ")";
     }
 
     default Double eval() {

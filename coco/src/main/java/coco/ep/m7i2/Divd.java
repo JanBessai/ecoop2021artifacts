@@ -7,8 +7,7 @@ public interface Divd<FT> extends coco.ep.m7.Divd<FT>, coco.ep.m3.Divd<FT>, coco
     default Exp<FT> multby(Exp<FT> other) {
         return this.mult(this, convert(other));
     }
-
     default Exp<FT> powby(Exp<FT> other) {
-        return this.divd(convert(getLeft()).powby(convert(other)), convert(getRight()).powby(convert(other)));
+        return this.power(this, convert(other));
     }
 }

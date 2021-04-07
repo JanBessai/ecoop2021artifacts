@@ -1,13 +1,20 @@
 package coco.ep;
 
 import coco.ep.m0.Factory;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class M0Test {
     public interface TestTemplate<FT> extends Factory<FT> {
         default void test() {
-            org.junit.Assert.assertTrue("", Double.valueOf(this.convert(this.add(this.lit(1.0), this.lit(2.0))).eval()).equals(3.0));
-            org.junit.Assert.assertTrue("", Double.valueOf(this.convert(this.lit(5.0)).eval()).equals(5.0));
+            Exp<FT> expr1 = this.add(this.lit(1.0), this.lit(2.0));
+            org.junit.Assert.assertEquals(3.0, convert(expr1).eval(), 0.0);
+
+            Exp<FT> expr2 = this.lit(2.0);
+            org.junit.Assert.assertEquals(2.0, convert(expr2).eval(), 0.0);
+
+            Assert.assertEquals(3.0, convert(this.add(this.lit(1.0), this.lit(2.0))).eval(), 0.0);
+            Assert.assertEquals(5.0, convert(this.lit(5.0)).eval(), 0.0);
         }
     }
 

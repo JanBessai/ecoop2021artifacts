@@ -11,5 +11,4 @@ public class Lit extends Exp implements coco.ep.m4.Lit<Exp> {
     public Double getValue() {
         return value;
     }
-    
 }
