@@ -25,6 +25,10 @@ public class Lit extends Exp {
         return java.util.Arrays.asList(this.value);
     }
 
+    public void truncate (int level) {
+        // do nothing
+    }
+
     public Tree astree() {
         return new Node(this.id(), new Leaf<Double>(this.value));
     }
@@ -37,7 +41,16 @@ public class Lit extends Exp {
         return this.astree().equals(other.astree());
     }
 
-    public Exp multby(Exp other) {
+    public Boolean isLit(Double d) {
+        return d.equals(value);
+    }
+
+    public Boolean eql(Exp that) {
+        return that.isLit(value);
+    }
+
+    // ORIGINAL implementation for multby before merge
+    public Exp multby_old(Exp other) {
         Exp result = other;
         Double counter = Math.floor(Math.abs(this.value));
         while (1.0 < counter) {
@@ -50,7 +63,12 @@ public class Lit extends Exp {
         return result;
     }
 
-    public Exp powby(Exp other) {
+    public Exp multby(Exp other) {
+        return new Mult(this, other);
+    }
+
+    // ORIGINAL implementation for powby before merge
+    public Exp powby_old(Exp other) {
         Double exponentValue = other.eval();
         Exp result = this;
         Double counter = Math.floor(Math.abs(exponentValue));
@@ -62,6 +80,10 @@ public class Lit extends Exp {
             result = new Divd(new oo.ep.Lit(1.0), result);
         }
         return result;
+    }
+
+    public Exp powby(Exp other) {
+        return new Power(this, other);
     }
 
     public Double eval() {

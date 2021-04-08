@@ -18,6 +18,6 @@ public interface Sub<V> extends trivially.ep.m4.Sub<V>, Exp<V> {
     }
 
     default Exp<V> simplify() {
-        return this.convert(trivially.ep.m4.Sub.super.simplify());
+        return convert(trivially.ep.m4.Sub.super.simplify());
     }
 }

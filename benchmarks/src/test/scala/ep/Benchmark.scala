@@ -32,19 +32,12 @@ object EvalBenchmark extends Bench.OfflineReport {
     val startSimplify: Exp = new Sub(new Lit(1.0), new Lit(1.0))
     val simplifyExps = sizes.map(size => (0 until size).foldLeft(startSimplify)((current, _) => new Power(current, current)))
   }
-  object vitaObjects extends vita.ep.m7i2.finalized.Factory {
-    import vita.ep._
-    val startEval: m7i2.Exp[m7i2.finalized.Visitor] = this.power(this.lit(1.0), this.lit(1.0001))
-    val evalExps = sizes.map(size => (0 until size).foldLeft(startEval)((current, _) => this.power(current, current)))
-    val startSimplify: m7i2.Exp[m7i2.finalized.Visitor] = sub(lit(1.0), lit(1.0))
-    val simplifyExps = sizes.map(size => (0 until size).foldLeft(startSimplify)((current, _) => power(current, current)))
-  }
-  object interpreterObjects {
+object interpreterObjects {
     import interpreter.ep.m7i2.MergedExp
-    val startEval: MergedExp = interpreter.ep.m7i2.MergedExpFactory.Power(interpreter.ep.m7i2.MergedExpFactory.Lit(1.0), interpreter.ep.m7i2.MergedExpFactory.Lit(1.0001))
-    val evalExps = sizes.map(size => (0 until size).foldLeft(startEval)((current, _) => interpreter.ep.m7i2.MergedExpFactory.Power(current, current)))
-    val startSimplify: MergedExp = interpreter.ep.m7i2.MergedExpFactory.Sub(interpreter.ep.m7i2.MergedExpFactory.Lit(1.0), interpreter.ep.m7i2.MergedExpFactory.Lit(1.0))
-    val simplifyExps = sizes.map(size => (0 until size).foldLeft(startSimplify)((current, _) => interpreter.ep.m7i2.MergedExpFactory.Power(current, current)))
+    val startEval: MergedExp = interpreter.ep.m7i2.MergedExpFactory.power(interpreter.ep.m7i2.MergedExpFactory.lit(1.0), interpreter.ep.m7i2.MergedExpFactory.lit(1.0001))
+    val evalExps = sizes.map(size => (0 until size).foldLeft(startEval)((current, _) => interpreter.ep.m7i2.MergedExpFactory.power(current, current)))
+    val startSimplify: MergedExp = interpreter.ep.m7i2.MergedExpFactory.sub(interpreter.ep.m7i2.MergedExpFactory.lit(1.0), interpreter.ep.m7i2.MergedExpFactory.lit(1.0))
+    val simplifyExps = sizes.map(size => (0 until size).foldLeft(startSimplify)((current, _) => interpreter.ep.m7i2.MergedExpFactory.power(current, current)))
   }
 
   performance of "eval" config(testConfig:_*) in {
@@ -61,11 +54,6 @@ object EvalBenchmark extends Bench.OfflineReport {
     measure method "ev" in {
       using(evObjects.evalExps) in { exp =>
         exp.accept(new ev.ep.EvalPower)
-      }
-    }
-    measure method "vita" in {
-      using(vitaObjects.evalExps) in { exp =>
-        vitaObjects.convert(exp).eval()
       }
     }
     measure method "interpreter" in {
@@ -91,12 +79,6 @@ object EvalBenchmark extends Bench.OfflineReport {
         exp.accept(new ev.ep.SimplifyPower)
       }
     }
-    measure method "vita" in {
-      using(vitaObjects.simplifyExps) in { exp =>
-        exp.simplify()
-      }
-    }
-
     measure method "interpreter" in {
       using(interpreterObjects.simplifyExps) in { exp =>
         exp.simplify()

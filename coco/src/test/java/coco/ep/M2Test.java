@@ -15,8 +15,8 @@ public class M2Test {
             Exp<FT> expr2 = this.lit(2.0);
             org.junit.Assert.assertEquals("2.0", convert(expr2).prettyp());
 
-            Assert.assertEquals("(1.0-2.0)", this.convert(this.sub(this.lit(1.0), this.lit(2.0))).prettyp());
-            Assert.assertEquals("((1.0-2.0)+(5.0+6.0))", this.convert(this.add(this.sub(this.lit(1.0), this.lit(2.0)), this.add(this.lit(5.0), this.lit(6.0)))).prettyp());
+            Assert.assertEquals("(1.0-2.0)", convert(this.sub(this.lit(1.0), this.lit(2.0))).prettyp());
+            Assert.assertEquals("((1.0-2.0)+(5.0+6.0))", convert(this.add(this.sub(this.lit(1.0), this.lit(2.0)), this.add(this.lit(5.0), this.lit(6.0)))).prettyp());
         }
     }
     private static class ActualTest implements M2Test.TestTemplate<coco.ep.m2.finalized.Exp>, coco.ep.m2.finalized.Factory {}

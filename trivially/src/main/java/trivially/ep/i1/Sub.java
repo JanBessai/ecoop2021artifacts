@@ -6,6 +6,6 @@ public interface Sub<V> extends trivially.ep.m2.Sub<V>, Exp<V> {
     Exp<V> getRight();
 
     default Exp<V> multby(trivially.ep.Exp<V> other) {
-        return this.sub(this.getLeft().multby(this.convert(other)), this.getRight().multby(this.convert(other)));
+        return this.sub(this.getLeft().multby(convert(other)), this.getRight().multby(convert(other)));
     }
 }

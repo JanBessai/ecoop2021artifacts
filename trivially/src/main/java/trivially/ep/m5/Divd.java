@@ -18,6 +18,6 @@ public interface Divd<V> extends trivially.ep.m4.Divd<V>, Exp<V> {
     }
 
     default Exp<V> simplify() {
-        return this.convert(trivially.ep.m4.Divd.super.simplify());
+        return convert(trivially.ep.m4.Divd.super.simplify());
     }
 }

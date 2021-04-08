@@ -7,7 +7,7 @@ public interface Block<FT> extends dom.m0.Exp<FT> {
 	default String format() {
 		StringBuilder sb = new StringBuilder();
 		for (dom.Exp<FT> tag : getTags()) {
-			sb.append(this.convert(tag).format());
+			sb.append(convert(tag).format());
 		}
 		
 		return sb.append("\n").toString();

@@ -13,7 +13,7 @@ public class Neg extends Exp {
     }
 
     public String prettyp() {
-        return "-" + this.inner.prettyp();
+        return "(-" + this.inner.prettyp() + ")";
     }
 
     public Exp simplify() {
@@ -28,6 +28,14 @@ public class Neg extends Exp {
         return this.inner.collect();
     }
 
+    public void truncate (int level) {
+        if (level > 1) {
+            inner.truncate(level-1);
+        } else {
+            inner = new Lit(inner.eval());
+        }
+    }
+
     public Tree astree() {
         return new Node(this.id(), this.inner.astree());
     }
@@ -40,13 +48,21 @@ public class Neg extends Exp {
         return this.astree().equals(other.astree());
     }
 
+    public Boolean isNeg(Exp inner) {
+        return inner.eql(this.inner);
+    }
+
+    public Boolean eql(Exp that) {
+        return that.isNeg(this.inner);
+    }
+
+    // simplified because of merge
     public Exp multby(Exp other) {
         return new Mult(this, other);
     }
 
-    public Exp powby(Exp other) {
-        return new Mult(new Lit(1.0).powby(this.inner), this.inner.powby(other));
-    }
+    // simplified because of merge
+    public Exp powby(Exp other) { return new Power(this, other); }
 
     public Double eval() {
         return -1.0 * this.inner.eval();

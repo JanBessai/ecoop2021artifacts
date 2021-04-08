@@ -6,7 +6,6 @@ import util.Tree;
 public interface Mult<V> extends trivially.ep.m4.Mult<V>, Exp<V> {
 
     Exp<V> getLeft();
-
     Exp<V> getRight();
 
     default Tree astree() {
@@ -18,6 +17,6 @@ public interface Mult<V> extends trivially.ep.m4.Mult<V>, Exp<V> {
     }
 
     default Exp<V> simplify() {
-        return this.convert(trivially.ep.m4.Mult.super.simplify());
+        return convert(trivially.ep.m4.Mult.super.simplify());
     }
 }

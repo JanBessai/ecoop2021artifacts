@@ -6,7 +6,7 @@ public interface Add<V> extends trivially.ep.m7.Add<V>, trivially.ep.i2.Add<V>, 
     Exp<V> getRight();
 
     default Exp<V> simplify() {
-        return this.convert(trivially.ep.m7.Add.super.simplify());
+        return convert(trivially.ep.m7.Add.super.simplify());
     }
 
     default Exp<V> multby(trivially.ep.Exp<V> other) {

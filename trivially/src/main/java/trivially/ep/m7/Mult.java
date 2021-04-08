@@ -6,10 +6,10 @@ public interface Mult<V> extends trivially.ep.m6.Mult<V>, Exp<V> {
     Exp<V> getRight();
 
     default Exp<V> powby(trivially.ep.Exp<V> other) {
-        return this.mult(this.getLeft().powby(this.convert(other)), this.getRight().powby(this.convert(other)));
+        return this.mult(this.getLeft().powby(convert(other)), this.getRight().powby(convert(other)));
     }
 
     default Exp<V> simplify() {
-        return this.convert(trivially.ep.m6.Mult.super.simplify());
+        return convert(trivially.ep.m6.Mult.super.simplify());
     }
 }

@@ -5,7 +5,7 @@ public interface Lit<V> extends trivially.ep.m6.Lit<V>, Exp<V> {
     Double getValue();
 
     default Exp<V> powby(trivially.ep.Exp<V> other) {
-        Double exponentValue = this.convert(other).eval();
+        Double exponentValue = convert(other).eval();
         Exp<V> result = this;
         Double counter = Math.floor(Math.abs(exponentValue));
         while (1.0 < counter) {
@@ -19,7 +19,7 @@ public interface Lit<V> extends trivially.ep.m6.Lit<V>, Exp<V> {
     }
 
     default Exp<V> simplify() {
-        return this.convert(trivially.ep.m6.Lit.super.simplify());
+        return convert(trivially.ep.m6.Lit.super.simplify());
     }
 
 }

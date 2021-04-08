@@ -9,10 +9,10 @@ public interface Factory extends trivially.ep.i1.Exp<trivially.ep.i1.finalized.V
     }
 
     default trivially.ep.i1.Exp<trivially.ep.i1.finalized.Visitor> add(Exp<trivially.ep.i1.finalized.Visitor> left, Exp<trivially.ep.i1.finalized.Visitor> right) {
-        return new Add(this.convert(left), this.convert(right));
+        return new Add(convert(left), convert(right));
     }
 
     default trivially.ep.i1.Exp<trivially.ep.i1.finalized.Visitor> sub(Exp<trivially.ep.i1.finalized.Visitor> left, Exp<trivially.ep.i1.finalized.Visitor> right) {
-        return new Sub(this.convert(left), this.convert(right));
+        return new Sub(convert(left), convert(right));
     }
 }

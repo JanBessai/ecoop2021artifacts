@@ -17,6 +17,6 @@ public interface Lit<V> extends trivially.ep.m4.Lit<V>, Exp<V> {
     }
 
     default Exp<V> simplify() {
-        return this.convert(trivially.ep.m4.Lit.super.simplify());
+        return convert(trivially.ep.m4.Lit.super.simplify());
     }
 }

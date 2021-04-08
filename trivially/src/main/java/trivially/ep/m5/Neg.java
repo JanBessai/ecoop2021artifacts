@@ -16,6 +16,6 @@ public interface Neg<V> extends trivially.ep.m4.Neg<V>, Exp<V> {
     }
 
     default Exp<V> simplify() {
-        return this.convert(trivially.ep.m4.Neg.super.simplify());
+        return convert(trivially.ep.m4.Neg.super.simplify());
     }
 }

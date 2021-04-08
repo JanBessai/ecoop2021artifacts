@@ -8,7 +8,7 @@ import coco.ep.i1.finalized.Sub;
 public interface Factory extends coco.ep.i1.Factory<coco.ep.i1.finalized.Exp> {
 
     public default coco.ep.i1.finalized.Exp sub(Exp<coco.ep.i1.finalized.Exp> left, Exp<coco.ep.i1.finalized.Exp> right) {
-        return new Sub(this.convert(left), this.convert(right));
+        return new Sub(convert(left), convert(right));
     }
 
     public default coco.ep.i1.finalized.Exp lit(Double value) {
@@ -16,7 +16,7 @@ public interface Factory extends coco.ep.i1.Factory<coco.ep.i1.finalized.Exp> {
     }
 
     public default coco.ep.i1.finalized.Exp add(Exp<coco.ep.i1.finalized.Exp> left, Exp<coco.ep.i1.finalized.Exp> right) {
-        return new Add(this.convert(left), this.convert(right));
+        return new Add(convert(left), convert(right));
     }
 
     public default coco.ep.i1.finalized.Exp convert(Exp<coco.ep.i1.finalized.Exp> other) {

@@ -17,6 +17,6 @@ public interface Add<V> extends trivially.ep.m4.Add<V>, Exp<V> {
     }
 
     default Exp<V> simplify() {
-        return this.convert(trivially.ep.m4.Add.super.simplify());
+        return convert(trivially.ep.m4.Add.super.simplify());
     }
 }

@@ -31,6 +31,16 @@ public class Sub extends Exp {
         return java.util.stream.Stream.concat(this.left.collect().stream(), this.right.collect().stream()).collect(java.util.stream.Collectors.toList());
     }
 
+    public void truncate (int level) {
+        if (level > 1) {
+            left.truncate(level-1);
+            right.truncate(level-1);
+        } else {
+            left = new Lit(left.eval());
+            right = new Lit(right.eval());
+        }
+    }
+
     public Tree astree() {
         return new Node(this.id(), this.left.astree(), this.right.astree());
     }
@@ -41,6 +51,14 @@ public class Sub extends Exp {
 
     public Boolean equals(Exp other) {
         return this.astree().equals(other.astree());
+    }
+
+    public Boolean isSub(Exp left, Exp right) {
+        return left.eql(this.left) && right.eql(this.right);
+    }
+
+    public Boolean eql(Exp that) {
+        return that.isSub(this.left, this.right);
     }
 
     public Exp multby(Exp other) {

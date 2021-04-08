@@ -6,7 +6,7 @@ public interface Divd<V> extends trivially.ep.m7.Divd<V>, Exp<V> {
     Exp<V> getRight();
 
     default Exp<V> simplify() {
-        return this.convert(trivially.ep.m7.Divd.super.simplify());
+        return convert(trivially.ep.m7.Divd.super.simplify());
     }
 
     default Exp<V> multby(trivially.ep.Exp<V> other) {

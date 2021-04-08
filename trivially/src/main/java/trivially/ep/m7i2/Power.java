@@ -22,11 +22,11 @@ public interface Power<V> extends Exp<V>, trivially.ep.i2.Power<V> {
     }
 
     default Exp<V> powby(trivially.ep.Exp<V> other) {
-        return this.power(this, this.convert(other));
+        return this.power(this, convert(other));
     }
 
     default Boolean isPower(trivially.ep.Exp<V> left, trivially.ep.Exp<V> right) {
-        return this.convert(left).eql(getLeft()) && this.convert(right).eql(getRight());
+        return convert(left).eql(getLeft()) && convert(right).eql(getRight());
     }
 
     default java.util.List<Double> collect() {
@@ -42,11 +42,10 @@ public interface Power<V> extends Exp<V>, trivially.ep.i2.Power<V> {
     }
 
     default Boolean equals(trivially.ep.Exp<V> other) {
-        return this.astree().equals(this.convert(other).astree());
+        return this.astree().equals(convert(other).astree());
     }
 
     default Boolean eql(trivially.ep.Exp<V> that) {
-        Exp<V> ss = this.convert(that);
-        return this.convert(that).isPower(getLeft(), getRight());
+        return convert(that).isPower(getLeft(), getRight());
     }
 }

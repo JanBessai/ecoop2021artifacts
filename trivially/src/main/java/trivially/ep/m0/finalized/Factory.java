@@ -9,6 +9,6 @@ public interface Factory extends Exp<trivially.ep.m0.finalized.Visitor> {
     }
 
     default Exp<trivially.ep.m0.finalized.Visitor> add(trivially.ep.Exp<trivially.ep.m0.finalized.Visitor> left, trivially.ep.Exp<trivially.ep.m0.finalized.Visitor> right) {
-        return new Add(this.convert(left), this.convert(right));
+        return new Add(convert(left), convert(right));
     }
 }

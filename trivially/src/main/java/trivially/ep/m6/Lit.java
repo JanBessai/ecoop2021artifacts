@@ -5,7 +5,7 @@ public interface Lit<V> extends trivially.ep.m5.Lit<V>, Exp<V> {
     Double getValue();
 
     default Boolean equals(trivially.ep.Exp<V> other) {
-        return this.astree().equals(this.convert(other).astree());
+        return this.astree().equals(convert(other).astree());
     }
 
     default Boolean isLit(Double d) {
@@ -17,6 +17,6 @@ public interface Lit<V> extends trivially.ep.m5.Lit<V>, Exp<V> {
     }
 
     default Exp<V> simplify() {
-        return this.convert(trivially.ep.m5.Lit.super.simplify());
+        return convert(trivially.ep.m5.Lit.super.simplify());
     }
 }

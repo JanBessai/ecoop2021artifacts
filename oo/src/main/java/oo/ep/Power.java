@@ -20,10 +20,12 @@ public class Power extends Exp {
     }
 
     public Exp simplify() {
-        if (Double.valueOf(this.right.eval()).equals(0.0)) {
+        if (this.right.eval().equals(0.0)) {
             return new Lit(1.0);
-        } else if (Double.valueOf(this.left.eval()).equals(1.0)) {
+        } else if (this.left.eval().equals(1.0)) {
             return new Lit(1.0);
+        } else if (right.eval().equals(1.0)) {
+            return left.simplify();
         } else {
             return new oo.ep.Power(this.left.simplify(), this.right.simplify());
         }
@@ -31,6 +33,16 @@ public class Power extends Exp {
 
     public List<Double> collect() {
         return java.util.stream.Stream.concat(this.left.collect().stream(), this.right.collect().stream()).collect(java.util.stream.Collectors.toList());
+    }
+
+    public void truncate (int level) {
+        if (level > 1) {
+            left.truncate(level-1);
+            right.truncate(level-1);
+        } else {
+            left = new Lit(left.eval());
+            right = new Lit(right.eval());
+        }
     }
 
     public Tree astree() {
@@ -45,8 +57,18 @@ public class Power extends Exp {
         return this.astree().equals(other.astree());
     }
 
+    public Boolean isPower(Exp left, Exp right) {
+        return left.eql(this.left) && right.eql(this.right);
+    }
+
+    public Boolean eql(Exp that) {
+        return that.isPower(this.left, this.right);
+    }
+
     public Exp multby(Exp other) {
-        return new oo.ep.Power(this.left, new Add(this.right, new Lit(Math.log(2.718281828459045) / Math.log(this.right.eval()) / Math.log(2.718281828459045) / Math.log(this.left.eval()))));
+        double base = left.eval();
+        double addedExp = Math.log(other.eval())/Math.log(base);
+        return new oo.ep.Power(this.left, new Add(this.right, new Lit(addedExp)));
     }
 
     public Exp powby(Exp other) {
