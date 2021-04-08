@@ -4,9 +4,7 @@ import interpreter.ep.i2.EvalPrettypMultByPower;
 import interpreter.ep.m6.EqualsExp;
 import interpreter.ep.m7.PowByExp;
 
-import static interpreter.ep.m7i2.MergedExpFactory.Lit;
-import static interpreter.ep.m7i2.MergedExpFactory.Mult;
-import static interpreter.ep.m7i2.MergedExpFactory.Power;
+import static interpreter.ep.m7i2.MergedExpFactory.*;
 
 import interpreter.ep.i1.MultByExp;
 
@@ -28,13 +26,13 @@ public class MergedPower extends EvalPrettypMultByPower implements MergedExp {
 	/** Take advantage of results from both branches. */
 	@Override
 	public MergedExp multby(MultByExp other) {
-        return Mult(this, (MergedExp) other);
+        return mult(this, (MergedExp) other);
     }
 	
 	/** Take advantage of results from both branches. */
 	@Override
 	public MergedExp powby(PowByExp other) {
-		return Power(this, (MergedExp)other);
+		return power(this, (MergedExp)other);
 	}
 
 	/** Cannot covariantly overide the parameter to the method. */
@@ -73,8 +71,8 @@ public class MergedPower extends EvalPrettypMultByPower implements MergedExp {
 			getLeft().truncate(level-1);
 			getRight().truncate(level-1);
 		} else {
-			setLeft(Lit(getLeft().eval()));
-			setRight(Lit(getRight().eval()));
+			setLeft(lit(getLeft().eval()));
+			setRight(lit(getRight().eval()));
 		}
 	}
 
@@ -82,14 +80,14 @@ public class MergedPower extends EvalPrettypMultByPower implements MergedExp {
 	public MergedExp simplify() {
 		double leftVal = getLeft().eval();
 		double rightVal = getRight().eval();
-		if (leftVal == 0) {
-			return Lit(0.0);
+		if (leftVal == 1) {
+			return lit(1.0);
 		} else if (rightVal == 0) {
-			return Lit(1.0);
+			return lit(1.0);
 		} else if (rightVal == 1) {
 			return getLeft().simplify();
 		} else {
-			return Power(getLeft().simplify(), getRight().simplify());
+			return power(getLeft().simplify(), getRight().simplify());
 		}
 	}
 

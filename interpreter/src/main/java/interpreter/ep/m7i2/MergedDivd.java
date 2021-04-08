@@ -1,9 +1,6 @@
 package interpreter.ep.m7i2;
 
-import static interpreter.ep.m7i2.MergedExpFactory.Lit;
-import static interpreter.ep.m7i2.MergedExpFactory.Divd;
-import static interpreter.ep.m7i2.MergedExpFactory.Mult;
-import static interpreter.ep.m7i2.MergedExpFactory.Power;
+import static interpreter.ep.m7i2.MergedExpFactory.*;
 
 import interpreter.ep.i1.MultByExp;
 import interpreter.ep.m7.PowByDivd;
@@ -27,27 +24,27 @@ public class MergedDivd extends PowByDivd implements MergedExp {
         double leftVal = getLeft().eval();
         double rightVal = getRight().eval();
         if (leftVal == 0) {
-            return Lit(0.0);
+            return lit(0.0);
         } else if (rightVal == 1) {
             return getLeft().simplify();
         } else if (leftVal == rightVal) {
-            return Lit(1.0);
+            return lit(1.0);
         } else if (leftVal == -rightVal) {
-            return Lit(-1.0);
+            return lit(-1.0);
         } else {
-            return Divd(getLeft().simplify(), getRight().simplify());
+            return divd(getLeft().simplify(), getRight().simplify());
         }
     }
     
 	/** Take advantage of results from both branches. */
 	@Override
 	public MergedExp powby(PowByExp other) {
-		return Power(this, (MergedExp)other);
+		return power(this, (MergedExp)other);
 	}
 
 	/** Take advantage of results from both branches. */
 	@Override
 	public MergedExp multby(MultByExp other) {
-        return Mult(this, (MergedExp) other);
+        return mult(this, (MergedExp) other);
     }
 }

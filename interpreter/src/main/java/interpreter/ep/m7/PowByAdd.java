@@ -19,6 +19,6 @@ public class PowByAdd extends EqualsAdd implements PowByExp {
     }
 
 	public PowByExp powby(PowByExp other) {
-        return Add(this.getLeft().powby(other), this.getRight().powby(other));
+        return lit(this.eval()).powby(other);
     }
 }

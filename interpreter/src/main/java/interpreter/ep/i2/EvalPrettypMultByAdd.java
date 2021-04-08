@@ -11,15 +11,13 @@ public class EvalPrettypMultByAdd extends MultByAdd implements MultByExp {
 		super(left, right);
 	}
     
-    public MultByExp getLeft() {
-        return (MultByExp) this.getLeft();
-    }
+    public MultByExp getLeft() { return (MultByExp) left; }
 
     public MultByExp getRight() {
-        return (MultByExp) this.getRight();
+        return (MultByExp) right;
     }
 
 	public MultByExp multby(MultByExp other) {
-        return Add(this.getLeft().multby(other), this.getRight().multby(other));
+        return add(this.getLeft().multby(other), this.getRight().multby(other));
     }
 }

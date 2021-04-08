@@ -30,8 +30,8 @@ public class CollectSimplifyDivd extends PrettypDivd implements CollectSimplifyE
 			getLeft().truncate(level-1);
 			getRight().truncate(level-1);
 		} else {
-			setLeft(Lit(getLeft().eval()));
-			setRight(Lit(getRight().eval()));
+			setLeft(lit(getLeft().eval()));
+			setRight(lit(getRight().eval()));
 		}
 	}
     
@@ -39,15 +39,15 @@ public class CollectSimplifyDivd extends PrettypDivd implements CollectSimplifyE
         double leftVal = getLeft().eval();
         double rightVal = getRight().eval();
         if (leftVal == 0) {
-            return Lit(0.0);
+            return lit(0.0);
         } else if (rightVal == 1) {
             return getLeft().simplify();
         } else if (leftVal == rightVal) {
-            return Lit(1.0);
+            return lit(1.0);
         } else if (leftVal == -rightVal) {
-            return Lit(-1.0);
+            return lit(-1.0);
         } else {
-            return Divd(getLeft().simplify(), getRight().simplify());
+            return divd(getLeft().simplify(), getRight().simplify());
         }
     }
 

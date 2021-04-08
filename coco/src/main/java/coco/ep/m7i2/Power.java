@@ -31,7 +31,7 @@ public interface Power<FT> extends coco.ep.i2.Power<FT>, coco.ep.m7i2.Exp<FT>, F
         } else if (convert(getLeft()).eval().equals(1.0)) {
             return this.lit(1.0);
         } else if (convert(getRight()).eval().equals(1.0)) {
-            return getLeft();
+            return convert(getLeft()).simplify();
         } else {
             return this.power(convert(getLeft()).simplify(), convert(getRight()).simplify());
         }

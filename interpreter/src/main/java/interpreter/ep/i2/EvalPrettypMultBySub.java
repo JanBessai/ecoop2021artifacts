@@ -20,6 +20,6 @@ public class EvalPrettypMultBySub extends MultBySub implements MultByExp {
     }
 
 	public MultByExp multby(MultByExp other) {
-        return Sub(this.getLeft().multby(other), this.getRight().multby(other));
+        return sub(this.getLeft().multby(other), this.getRight().multby(other));
     }
 }

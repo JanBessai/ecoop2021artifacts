@@ -17,12 +17,12 @@ public class MultByLit extends PrettypLit implements MultByExp {
         MultByExp result = other;
         Double counter = Math.floor(Math.abs(this.getValue()));
         while (1.0 < counter) {
-            result = Add(result, other);
+            result = add(result, other);
             counter = counter - 1.0;
         }
         
         if (this.getValue() < 0.0) {
-            result = Sub(Lit(0.0), result);
+            result = sub(lit(0.0), result);
         }
         return result;
     }

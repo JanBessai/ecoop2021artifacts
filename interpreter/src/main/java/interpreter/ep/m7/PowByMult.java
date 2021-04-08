@@ -19,6 +19,6 @@ public class PowByMult extends EqualsMult implements PowByExp {
     }
 
 	public PowByExp powby(PowByExp other) {
-        return Mult(this.getLeft().powby(other), this.getRight().powby(other));
+        return mult(this.getLeft().powby(other), this.getRight().powby(other));
     }
 }

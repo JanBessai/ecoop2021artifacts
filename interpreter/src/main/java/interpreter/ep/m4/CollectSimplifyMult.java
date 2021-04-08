@@ -30,8 +30,8 @@ public class CollectSimplifyMult extends PrettypMult implements CollectSimplifyE
 			getLeft().truncate(level-1);
 			getRight().truncate(level-1);
 		} else {
-			setLeft(Lit(getLeft().eval()));
-			setRight(Lit(getRight().eval()));
+			setLeft(lit(getLeft().eval()));
+			setRight(lit(getRight().eval()));
 		}
 	}
     
@@ -39,13 +39,13 @@ public class CollectSimplifyMult extends PrettypMult implements CollectSimplifyE
         double leftVal = getLeft().eval();
         double rightVal = getRight().eval();
         if (leftVal == 0 || rightVal == 0) {
-            return Lit(0.0);
+            return lit(0.0);
         } else if (leftVal == 1) {
             return getRight().simplify();
         } else if (rightVal == 1) {
             return getLeft().simplify();
         } else {
-            return Mult(getLeft().simplify(), getRight().simplify());
+            return mult(getLeft().simplify(), getRight().simplify());
         }
     }
 
@@ -55,5 +55,4 @@ public class CollectSimplifyMult extends PrettypMult implements CollectSimplifyE
         tmpList3.addAll(getRight().collect());
         return tmpList3;
     }
-
 }

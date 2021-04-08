@@ -19,6 +19,6 @@ public class MultByAdd extends PrettypAdd implements MultByExp {
 
     /** Distribute Multiplication to arguments. */
 	public MultByExp multby(MultByExp other) {
-        return Add(this.getLeft().multby(other), this.getRight().multby(other));
+        return add(this.getLeft().multby(other), this.getRight().multby(other));
     }
 }

@@ -1,6 +1,7 @@
 package interpreter.ep.i2;
 
 import interpreter.ep.i1.MultByExp;
+import static interpreter.ep.i2.EvalPrettypMultByExpFactory.*;
 
 public class EvalPrettypMultByPower implements MultByExp {
 
@@ -30,6 +31,9 @@ public class EvalPrettypMultByPower implements MultByExp {
     }
     
     public MultByExp multby(MultByExp other) {
-    	return new EvalPrettypMultByPower(getLeft().multby(other), getRight().multby(other));
+    	//return EvalPrettypMultByExpFactory.power(getLeft().multby(other), getRight().multby(other));
+        double leftEval = getLeft().eval();
+        double added = Math.log(other.eval()) / Math.log(leftEval);
+        return power(this.getLeft(), add(this.getRight(), lit(added)));
     }
 }

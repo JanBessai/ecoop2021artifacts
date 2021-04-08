@@ -30,16 +30,16 @@ public class CollectSimplifySub extends PrettypSub implements CollectSimplifyExp
 			getLeft().truncate(level-1);
 			getRight().truncate(level-1);
 		} else {
-			setLeft(Lit(getLeft().eval()));
-			setRight(Lit(getRight().eval()));
+			setLeft(lit(getLeft().eval()));
+			setRight(lit(getRight().eval()));
 		}
 	}
     
     public CollectSimplifyExp simplify() {
-        if (getLeft().eval() == getRight().eval()) {
-            return Lit(0.0);
+        if (getLeft().eval().equals(getRight().eval())) {
+            return lit(0.0);
         } else {
-            return Sub(getLeft().simplify(), getRight().simplify());
+            return sub(getLeft().simplify(), getRight().simplify());
         }
     }
 
@@ -49,5 +49,4 @@ public class CollectSimplifySub extends PrettypSub implements CollectSimplifyExp
         tmpList5.addAll(getRight().collect());
         return tmpList5;
     }
-
 }

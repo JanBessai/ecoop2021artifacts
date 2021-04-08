@@ -17,6 +17,6 @@ public class PowByDivd extends EqualsDivd implements PowByExp {
     public PowByExp getRight() { return (PowByExp) this.right;  }
 
 	public PowByExp powby(PowByExp other) {
-        return Divd(this.getLeft().powby(other), this.getRight().powby(other));
+        return divd(this.getLeft().powby(other), this.getRight().powby(other));
     }
 }

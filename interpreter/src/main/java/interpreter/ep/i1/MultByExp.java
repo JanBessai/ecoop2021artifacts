@@ -4,5 +4,5 @@ import interpreter.ep.m2.PrettypExp;
 
 public interface MultByExp extends PrettypExp {
 
-    public MultByExp multby(MultByExp other);
+    MultByExp multby(MultByExp other);
 }

@@ -19,11 +19,11 @@ public class PowByLit extends EqualsLit implements PowByExp {
         PowByExp result = this;
         Double counter = Math.floor(Math.abs(exponentValue));
         while (1.0 < counter) {
-            result = Mult(result, this);
+            result = mult(result, this);
             counter = counter - 1.0;
         }
         if (this.getValue() < 0.0) {
-            result = Divd(Lit(1.0), result);
+            result = divd(lit(1.0), result);
         }
         return result;
     }

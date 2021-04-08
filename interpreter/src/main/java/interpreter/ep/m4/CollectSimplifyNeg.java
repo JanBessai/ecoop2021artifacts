@@ -22,15 +22,15 @@ public class CollectSimplifyNeg extends PrettypNeg implements CollectSimplifyExp
 		if (level > 1) {
 			getInner().truncate(level-1);
 		} else {
-			setInner(Lit(getInner().eval()));
+			setInner(lit(getInner().eval()));
 		}
 	}
     
     public CollectSimplifyExp simplify() {
         if (getInner().eval() == 0) {
-            return Lit(0.0);
+            return lit(0.0);
         } else {
-            return Neg(getInner().simplify());
+            return neg(getInner().simplify());
         }
     }
 
@@ -39,5 +39,4 @@ public class CollectSimplifyNeg extends PrettypNeg implements CollectSimplifyExp
         tmpList2.addAll(getInner().collect());
         return tmpList2;
     }
-
 }

@@ -1,9 +1,7 @@
 package interpreter.ep.m4;
 
-import static interpreter.ep.m4.CollectSimplifyExpFactory.Add;
-import static interpreter.ep.m4.CollectSimplifyExpFactory.Lit;
-
 import interpreter.ep.m2.PrettypAdd;
+import static interpreter.ep.m4.CollectSimplifyExpFactory.*;
 
 public class CollectSimplifyAdd extends PrettypAdd implements CollectSimplifyExp {
 
@@ -31,8 +29,8 @@ public class CollectSimplifyAdd extends PrettypAdd implements CollectSimplifyExp
 			getLeft().truncate(level-1);
 			getRight().truncate(level-1);
 		} else {
-			setLeft(Lit(getLeft().eval()));
-			setRight(Lit(getRight().eval()));
+			setLeft(lit(getLeft().eval()));
+			setRight(lit(getRight().eval()));
 		}
 	}
     
@@ -40,13 +38,13 @@ public class CollectSimplifyAdd extends PrettypAdd implements CollectSimplifyExp
         double leftVal = getLeft().eval();
         double rightVal = getRight().eval();
         if ((leftVal == 0 && rightVal == 0) || (leftVal + rightVal == 0)) {
-            return Lit(0.0);
+            return lit(0.0);
         } else if (leftVal == 0) {
             return getRight().simplify();
         } else if (rightVal == 0) {
             return getLeft().simplify();
         } else {
-            return Add(getLeft().simplify(), getRight().simplify());
+            return add(getLeft().simplify(), getRight().simplify());
         }
     }
 
@@ -56,5 +54,4 @@ public class CollectSimplifyAdd extends PrettypAdd implements CollectSimplifyExp
         tmpList7.addAll(getRight().collect());
         return tmpList7;
     }
-
 }

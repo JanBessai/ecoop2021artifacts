@@ -19,7 +19,7 @@ public class CollectSimplifyLit extends PrettypLit implements CollectSimplifyExp
     }
 
     public CollectSimplifyExp simplify() {
-        return Lit(getValue());
+        return lit(getValue());
     }
 
     public java.util.List<Double> collect() {

@@ -15,6 +15,6 @@ public class PowByNeg extends EqualsNeg implements PowByExp {
     }
 
 	public PowByExp powby(PowByExp other) {
-        return Neg(this.getInner().powby(other));
+        return mult(lit(1.0).powby(getInner()), getInner().powby(other));
     }
 }

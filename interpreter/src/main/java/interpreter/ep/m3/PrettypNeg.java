@@ -19,6 +19,6 @@ public class PrettypNeg implements PrettypExp {
     }
 
     public String prettyp() {
-        return "-" + getInner().prettyp();
+        return "(-" + getInner().prettyp() + ")";
     }
 }

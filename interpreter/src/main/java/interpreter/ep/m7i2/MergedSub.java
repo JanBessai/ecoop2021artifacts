@@ -1,9 +1,6 @@
 package interpreter.ep.m7i2;
 
-import static interpreter.ep.m7i2.MergedExpFactory.Power;
-import static interpreter.ep.m7i2.MergedExpFactory.Sub;
-import static interpreter.ep.m7i2.MergedExpFactory.Lit;
-import static interpreter.ep.m7i2.MergedExpFactory.Mult;
+import static interpreter.ep.m7i2.MergedExpFactory.*;
 
 import interpreter.ep.i1.MultByExp;
 import interpreter.ep.m7.PowByExp;
@@ -26,20 +23,20 @@ public class MergedSub extends PowBySub implements MergedExp {
 	/** Take advantage of results from both branches. */
 	@Override
 	public MergedExp powby(PowByExp other) {
-		return Power(this, (MergedExp)other);
+		return power(this, (MergedExp)other);
 	}
 
 	/** Take advantage of results from both branches. */
 	@Override
 	public MergedExp multby(MultByExp other) {
-        return Mult(this, (MergedExp) other);
+        return mult(this, (MergedExp) other);
     }
 	
 	public MergedExp simplify() {
 		if (getLeft().eval() == getRight().eval()) {
-			return Lit(0.0);
+			return lit(0.0);
 		} else {
-			return Sub(getLeft().simplify(), getRight().simplify());
+			return sub(getLeft().simplify(), getRight().simplify());
 		}
 	}
 }

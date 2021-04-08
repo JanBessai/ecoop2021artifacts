@@ -13,11 +13,10 @@ public class AstreeIdzLit extends CollectSimplifyLit implements AstreeIdzExp {
     }
 
     public util.Tree astree() {
-        return new util.Leaf(getValue());
+        return new util.Node(idz(), new util.Leaf<Double>(getValue()));
     }
 
     public Integer idz() {
         return 76407;
     }
-
 }
