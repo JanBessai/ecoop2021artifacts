@@ -1,16 +1,11 @@
 package trivially.ep.i1;
 
-public abstract interface Sub<V> extends trivially.ep.m6.Sub<V>, Exp<V> {
+public interface Sub<V> extends trivially.ep.m2.Sub<V>, Exp<V> {
 
-    public abstract Exp<V> getLeft();
+    Exp<V> getLeft();
+    Exp<V> getRight();
 
-    public abstract Exp<V> getRight();
-
-    public default Exp<V> multby(trivially.ep.Exp<V> other) {
+    default Exp<V> multby(trivially.ep.Exp<V> other) {
         return this.sub(this.getLeft().multby(this.convert(other)), this.getRight().multby(this.convert(other)));
-    }
-
-    public default Exp<V> simplify() {
-        return this.convert(trivially.ep.m6.Sub.super.simplify());
     }
 }

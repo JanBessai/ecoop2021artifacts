@@ -1,10 +1,10 @@
 package trivially.ep.m7;
 
-public abstract interface Lit<V> extends trivially.ep.i1.Lit<V>, Exp<V> {
+public interface Lit<V> extends trivially.ep.m6.Lit<V>, Exp<V> {
 
-    public abstract Double getValue();
+    Double getValue();
 
-    public default Exp<V> powby(trivially.ep.Exp<V> other) {
+    default Exp<V> powby(trivially.ep.Exp<V> other) {
         Double exponentValue = this.convert(other).eval();
         Exp<V> result = this;
         Double counter = Math.floor(Math.abs(exponentValue));
@@ -18,11 +18,8 @@ public abstract interface Lit<V> extends trivially.ep.i1.Lit<V>, Exp<V> {
         return result;
     }
 
-    public default Exp<V> simplify() {
-        return this.convert(trivially.ep.i1.Lit.super.simplify());
+    default Exp<V> simplify() {
+        return this.convert(trivially.ep.m6.Lit.super.simplify());
     }
 
-    public default Exp<V> multby(trivially.ep.Exp<V> other) {
-        return this.convert(trivially.ep.i1.Lit.super.multby(other));
-    }
 }

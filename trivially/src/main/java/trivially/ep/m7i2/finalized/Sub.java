@@ -5,7 +5,6 @@ import trivially.ep.m7i2.Exp;
 public class Sub implements trivially.ep.m7i2.Sub<Visitor>, Factory {
 
     protected Exp<Visitor> left;
-
     protected Exp<Visitor> right;
 
     public Sub(Exp<Visitor> _left, Exp<Visitor> _right) {
@@ -16,7 +15,6 @@ public class Sub implements trivially.ep.m7i2.Sub<Visitor>, Factory {
     public Exp<Visitor> getLeft() {
         return this.left;
     }
-
     public Exp<Visitor> getRight() {
         return this.right;
     }

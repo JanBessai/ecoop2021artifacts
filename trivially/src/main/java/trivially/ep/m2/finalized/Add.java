@@ -5,7 +5,6 @@ import trivially.ep.m2.Exp;
 public class Add implements trivially.ep.m2.Add<Visitor>, Factory {
 
     protected Exp<Visitor> left;
-
     protected Exp<Visitor> right;
 
     public Add(Exp<Visitor> _left, Exp<Visitor> _right) {
@@ -16,7 +15,6 @@ public class Add implements trivially.ep.m2.Add<Visitor>, Factory {
     public Exp<Visitor> getLeft() {
         return this.left;
     }
-
     public Exp<Visitor> getRight() {
         return this.right;
     }

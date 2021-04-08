@@ -1,20 +1,19 @@
 package trivially.ep.m7i2;
 
-public abstract interface Sub<V> extends trivially.ep.i2.Sub<V>, Exp<V> {
+public interface Sub<V> extends trivially.ep.m7.Sub<V>, trivially.ep.i2.Sub<V>, Exp<V> {
 
-    public abstract Exp<V> getLeft();
+    Exp<V> getLeft();
+    Exp<V> getRight();
 
-    public abstract Exp<V> getRight();
-
-    public default Exp<V> simplify() {
-        return this.convert(trivially.ep.i2.Sub.super.simplify());
+    default Exp<V> simplify() {
+        return this.convert(trivially.ep.m7.Sub.super.simplify());
     }
 
-    public default Exp<V> multby(trivially.ep.Exp<V> other) {
-        return this.convert(trivially.ep.i2.Sub.super.multby(other));
+    default Exp<V> multby(trivially.ep.Exp<V> other) {
+        return this.mult(this, convert(other));
     }
 
-    public default Exp<V> powby(trivially.ep.Exp<V> other) {
-        return this.convert(trivially.ep.i2.Sub.super.powby(other));
+    default Exp<V> powby(trivially.ep.Exp<V> other) {
+        return this.power(this, convert(other));
     }
 }

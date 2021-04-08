@@ -5,7 +5,6 @@ import trivially.ep.m5.Exp;
 public class Mult implements trivially.ep.m5.Mult<Visitor>, Factory {
 
     protected Exp<Visitor> left;
-
     protected Exp<Visitor> right;
 
     public Mult(Exp<Visitor> _left, Exp<Visitor> _right) {
@@ -16,7 +15,6 @@ public class Mult implements trivially.ep.m5.Mult<Visitor>, Factory {
     public Exp<Visitor> getLeft() {
         return this.left;
     }
-
     public Exp<Visitor> getRight() {
         return this.right;
     }

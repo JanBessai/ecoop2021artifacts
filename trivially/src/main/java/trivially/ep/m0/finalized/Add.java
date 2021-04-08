@@ -16,7 +16,6 @@ public class Add implements trivially.ep.m0.Add<Visitor>, Factory {
     public Exp<Visitor> getLeft() {
         return this.left;
     }
-
     public Exp<Visitor> getRight() {
         return this.right;
     }

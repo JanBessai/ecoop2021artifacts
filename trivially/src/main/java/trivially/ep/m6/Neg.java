@@ -1,14 +1,23 @@
 package trivially.ep.m6;
 
-public abstract interface Neg<V> extends trivially.ep.m5.Neg<V>, Exp<V> {
+public interface Neg<V> extends trivially.ep.m5.Neg<V>, Exp<V> {
 
-    public abstract Exp<V> getInner();
+    Exp<V> getInner();
 
-    public default Boolean equals(trivially.ep.Exp<V> other) {
+    default Boolean equals(trivially.ep.Exp<V> other) {
         return this.astree().equals(this.convert(other).astree());
     }
 
-    public default Exp<V> simplify() {
+    @Override
+    default Boolean isNeg(trivially.ep.Exp<V> inner) {
+        return this.convert(inner).eql(getInner());
+    }
+
+    default Boolean eql(trivially.ep.Exp<V> that) {
+        return this.convert(that).isNeg(getInner());
+    }
+
+    default Exp<V> simplify() {
         return this.convert(trivially.ep.m5.Neg.super.simplify());
     }
 }

@@ -1,12 +1,11 @@
 package trivially.ep.m2;
 
-public abstract interface Add<V> extends trivially.ep.m1.Add<V>, Exp<V> {
+public interface Add<V> extends trivially.ep.m1.Add<V>, Exp<V> {
 
-    public abstract Exp<V> getLeft();
+    Exp<V> getLeft();
+    Exp<V> getRight();
 
-    public abstract Exp<V> getRight();
-
-    public default String prettyp() {
+    default String prettyp() {
         return "(" + this.getLeft().prettyp() + "+" + this.getRight().prettyp() + ")";
     }
 }

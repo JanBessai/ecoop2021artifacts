@@ -3,21 +3,20 @@ package trivially.ep.m5;
 import util.Node;
 import util.Tree;
 
-public abstract interface Add<V> extends trivially.ep.m4.Add<V>, Exp<V> {
+public interface Add<V> extends trivially.ep.m4.Add<V>, Exp<V> {
 
-    public abstract Exp<V> getLeft();
+    Exp<V> getLeft();
+    Exp<V> getRight();
 
-    public abstract Exp<V> getRight();
-
-    public default Tree astree() {
+    default Tree astree() {
         return new Node(this.id(), this.getLeft().astree(), this.getRight().astree());
     }
 
-    public default Integer id() {
+    default Integer id() {
         return 65665;
     }
 
-    public default Exp<V> simplify() {
+    default Exp<V> simplify() {
         return this.convert(trivially.ep.m4.Add.super.simplify());
     }
 }

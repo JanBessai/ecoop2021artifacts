@@ -1,16 +1,23 @@
 package trivially.ep.m6;
 
-public abstract interface Mult<V> extends trivially.ep.m5.Mult<V>, Exp<V> {
+public interface Mult<V> extends trivially.ep.m5.Mult<V>, Exp<V> {
 
-    public abstract Exp<V> getLeft();
+    Exp<V> getLeft();
 
-    public abstract Exp<V> getRight();
+    Exp<V> getRight();
 
-    public default Boolean equals(trivially.ep.Exp<V> other) {
+    default Boolean equals(trivially.ep.Exp<V> other) {
         return this.astree().equals(this.convert(other).astree());
     }
+    @Override
+    default Boolean isMult(trivially.ep.Exp<V> left, trivially.ep.Exp<V> right) {
+        return this.convert(left).eql(getLeft()) && this.convert(right).eql(getRight());
+    }
 
-    public default Exp<V> simplify() {
+    default Boolean eql(trivially.ep.Exp<V> that) {
+        return this.convert(that).isMult(getLeft(), getRight());
+    }
+    default Exp<V> simplify() {
         return this.convert(trivially.ep.m5.Mult.super.simplify());
     }
 }

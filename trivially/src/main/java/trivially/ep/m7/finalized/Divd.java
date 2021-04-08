@@ -5,7 +5,6 @@ import trivially.ep.m7.Exp;
 public class Divd implements trivially.ep.m7.Divd<Visitor>, Factory {
 
     protected Exp<Visitor> left;
-
     protected Exp<Visitor> right;
 
     public Divd(Exp<Visitor> _left, Exp<Visitor> _right) {
@@ -16,7 +15,6 @@ public class Divd implements trivially.ep.m7.Divd<Visitor>, Factory {
     public Exp<Visitor> getLeft() {
         return this.left;
     }
-
     public Exp<Visitor> getRight() {
         return this.right;
     }
