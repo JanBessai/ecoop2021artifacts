@@ -1,5 +1,9 @@
 package ep
 
+import ev.ep.i2.{EvalPower, Power}
+import ev.ep.m0.Lit
+import ev.ep.m1.Sub
+import ev.ep.m7i2.SimplifyPower
 import org.scalameter.KeyValue
 import org.scalameter.api._
 
@@ -53,7 +57,7 @@ object interpreterObjects {
     }
     measure method "ev" in {
       using(evObjects.evalExps) in { exp =>
-        exp.accept(new ev.ep.EvalPower)
+        exp.accept(new EvalPower)
       }
     }
     measure method "interpreter" in {
@@ -76,7 +80,7 @@ object interpreterObjects {
     }
     measure method "ev" in {
       using(evObjects.simplifyExps) in { exp =>
-        exp.accept(new ev.ep.SimplifyPower)
+        exp.accept(new SimplifyPower)
       }
     }
     measure method "interpreter" in {

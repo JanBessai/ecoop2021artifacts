@@ -1,47 +1,65 @@
 package ev.ep;
 
+import ev.ep.m6.*;
+import ev.ep.m6.Eql;
+import ev.ep.m6.EqlQuery;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class M6Test {
 
+    public static class TestTemplate {
+        void test() {
+
+            Lit lit1 = new Lit(1.0);
+            Lit lit2 = new Lit(2.0);
+            Mult mult1 = new Mult(lit1, lit2);
+            Divd divd1 = new Divd(lit1, lit2);
+            Add add1 = new Add(lit1, lit2);
+            Sub sub1 = new Sub(lit1, lit2);
+            Neg neg1 = new Neg(lit1);
+
+            Assert.assertEquals(lit1, lit1);
+            Assert.assertNotEquals(lit1, lit2);
+            Assert.assertEquals(mult1, mult1);
+            Assert.assertNotEquals(mult1, divd1);
+            Assert.assertEquals(divd1, divd1);
+            Assert.assertNotEquals(divd1, add1);
+            Assert.assertEquals(add1, add1);
+            Assert.assertNotEquals(add1, sub1);
+            Assert.assertEquals(sub1, sub1);
+            Assert.assertNotEquals(sub1, neg1);
+            Assert.assertEquals(neg1, neg1);
+            Assert.assertNotEquals(neg1, mult1);
+
+            org.junit.Assert.assertFalse(lit1.accept(makeEql(lit2)));
+            org.junit.Assert.assertTrue(lit1.accept(makeEql(lit1)));
+            org.junit.Assert.assertFalse(mult1.accept(makeEql(lit2)));
+            org.junit.Assert.assertTrue(mult1.accept(makeEql(mult1)));
+            org.junit.Assert.assertFalse(mult1.accept(makeEql(divd1)));
+            org.junit.Assert.assertTrue(divd1.accept(makeEql(divd1)));
+            org.junit.Assert.assertFalse(divd1.accept(makeEql(add1)));
+            org.junit.Assert.assertTrue(add1.accept(makeEql(add1)));
+            org.junit.Assert.assertFalse(add1.accept(makeEql(sub1)));
+            org.junit.Assert.assertTrue(sub1.accept(makeEql(sub1)));
+            org.junit.Assert.assertFalse(sub1.accept(makeEql(neg1)));
+            org.junit.Assert.assertTrue(neg1.accept(makeEql(neg1)));
+            org.junit.Assert.assertFalse(neg1.accept(makeEql(mult1)));
+
+            org.junit.Assert.assertTrue(new Sub(new Lit(1.0), new Lit(73.0)).accept(makeEql(new Sub(new Lit(1.0), new Lit(73.0)))));
+            org.junit.Assert.assertFalse(new Mult(new Divd(new Lit(5.0), new Lit(2.0)), new Lit(4.0)).accept(makeEql(new Mult(new Divd(new Lit(5.0), new Lit(2.0)), new Lit(3.0)))));
+            org.junit.Assert.assertTrue(new Mult(new Divd(new Lit(5.0), new Lit(2.0)), new Lit(4.0)).accept(makeEql(new Mult(new Divd(new Lit(5.0), new Lit(2.0)), new Lit(4.0)))));
+            org.junit.Assert.assertTrue(new Neg(new Mult(new Divd(new Lit(5.0), new Lit(2.0)), new Lit(4.0))).accept(makeEql(new Neg(new Mult(new Divd(new Lit(5.0), new Lit(2.0)), new Lit(4.0))))));
+            org.junit.Assert.assertFalse(new Mult(new Divd(new Lit(5.0), new Lit(2.0)), new Lit(4.0)).accept(makeEql(new Neg(new Mult(new Divd(new Lit(5.0), new Lit(2.0)), new Lit(4.0))))));
+            org.junit.Assert.assertFalse(new Divd(new Lit(6.0), new Lit(2.0)).accept(makeEql(new Divd(new Lit(8.0), new Lit(2.0)))));
+            org.junit.Assert.assertTrue(new Divd(new Lit(6.0), new Lit(2.0)).accept(makeEql(new Divd(new Lit(6.0), new Lit(2.0)))));
+            org.junit.Assert.assertTrue(new Add(new Lit(5.0), new Lit(3.0)).accept(makeEql(new Add(new Lit(5.0), new Lit(3.0)))));
+            org.junit.Assert.assertFalse(new Add(new Lit(5.0), new Lit(3.0)).accept(makeEql(new Mult(new Divd(new Lit(5.0), new Lit(2.0)), new Lit(3.0)))));
+        }
+
+        public Eql makeEql(EqlQuery exp) { return new Eql((Exp)exp); }
+    }
+
     @Test
-    public void testTest() {
-        org.junit.Assert.assertTrue("", Boolean.valueOf(new Sub(new Lit(1.0), new Lit(73.0)).<Boolean>accept(this.makeEquals(new Sub(new Lit(1.0), new Lit(73.0))))).equals(true));
-        org.junit.Assert.assertTrue("", Boolean.valueOf(new Mult(new Divd(new Lit(5.0), new Lit(2.0)), new Lit(4.0)).<Boolean>accept(this.makeEquals(new Mult(new Divd(new Lit(5.0), new Lit(2.0)), new Lit(3.0))))).equals(false));
-        org.junit.Assert.assertTrue("", Boolean.valueOf(new Mult(new Divd(new Lit(5.0), new Lit(2.0)), new Lit(4.0)).<Boolean>accept(this.makeEquals(new Mult(new Divd(new Lit(5.0), new Lit(2.0)), new Lit(4.0))))).equals(true));
-        org.junit.Assert.assertTrue("", Boolean.valueOf(new Neg(new Mult(new Divd(new Lit(5.0), new Lit(2.0)), new Lit(4.0))).<Boolean>accept(this.makeEquals(new Neg(new Mult(new Divd(new Lit(5.0), new Lit(2.0)), new Lit(4.0)))))).equals(true));
-        org.junit.Assert.assertTrue("", Boolean.valueOf(new Mult(new Divd(new Lit(5.0), new Lit(2.0)), new Lit(4.0)).<Boolean>accept(this.makeEquals(new Neg(new Mult(new Divd(new Lit(5.0), new Lit(2.0)), new Lit(4.0)))))).equals(false));
-        org.junit.Assert.assertTrue("", Boolean.valueOf(new Divd(new Lit(6.0), new Lit(2.0)).<Boolean>accept(this.makeEquals(new Divd(new Lit(8.0), new Lit(2.0))))).equals(false));
-        org.junit.Assert.assertTrue("", Boolean.valueOf(new Divd(new Lit(6.0), new Lit(2.0)).<Boolean>accept(this.makeEquals(new Divd(new Lit(6.0), new Lit(2.0))))).equals(true));
-        org.junit.Assert.assertTrue("", Boolean.valueOf(new Add(new Lit(5.0), new Lit(3.0)).<Boolean>accept(this.makeEquals(new Add(new Lit(5.0), new Lit(3.0))))).equals(true));
-        org.junit.Assert.assertTrue("", Boolean.valueOf(new Add(new Lit(5.0), new Lit(3.0)).<Boolean>accept(this.makeEquals(new Mult(new Divd(new Lit(5.0), new Lit(2.0)), new Lit(3.0))))).equals(false));
-    }
-
-    public EvalDivdMultNeg makeEval() {
-        return new EvalDivdMultNeg();
-    }
-
-    public PrettypDivdMultNeg makePrettyp() {
-        return new PrettypDivdMultNeg();
-    }
-
-    public Simplify makeSimplify() {
-        return new Simplify();
-    }
-
-    public Collect makeCollect() {
-        return new Collect();
-    }
-
-    public Astree makeAstree() {
-        return new Astree();
-    }
-
-    public Id makeId() {
-        return new Id();
-    }
-
-    public Equals makeEquals(Exp other) {
-        return new Equals(other);
-    }
+    public void testTest() { new TestTemplate().test(); }
 }

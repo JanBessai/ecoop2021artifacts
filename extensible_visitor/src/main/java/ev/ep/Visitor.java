@@ -1,8 +1,11 @@
 package ev.ep;
 
+import ev.ep.m0.Add;
+import ev.ep.m0.Lit;
+
 public interface Visitor<R> {
 
-    public abstract R visit(Lit exp);
+    R visit(Lit exp);
 
-    public abstract R visit(Add exp);
+    R visit(Add exp);
 }

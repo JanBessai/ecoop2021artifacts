@@ -1,43 +1,39 @@
 package ev.ep;
 
+import ev.ep.m7.EvalDivdMultNegTruncateEqual;
+import ev.ep.m6.*;
+import ev.ep.m7.PowBy;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class M7Test {
 
+    public static class TestTemplate {
+        void test() {
+
+            Exp pby = new Lit(3.0).accept(makePowby(new Lit(2.0)));
+            Exp d1 = new Divd(new Lit(5.0), new Lit(2.0)).accept(makePowby(new Lit(2.0)));
+            Exp m1 = new Mult(new Lit(5.0), new Lit(2.0)).accept(makePowby(new Lit(2.0)));
+            Exp a1 = new Add(new Lit(5.0), new Lit(2.0)).accept(makePowby(new Lit(2.0)));
+            Exp s1 = new Sub(new Lit(5.0), new Lit(3.0)).accept(makePowby(new Lit(2.0)));
+            Exp n1 = new Neg(new Lit(5.0)).accept(makePowby(new Lit(2.0)));
+
+            Assert.assertEquals(9.0, pby.accept(makeEval()), 0.0);
+            Assert.assertEquals(6.25, d1.accept(makeEval()), 0.0);
+            Assert.assertEquals(100.0, m1.accept(makeEval()), 0.0);
+            Assert.assertEquals(49.0, a1.accept(makeEval()), 0.0);
+            Assert.assertEquals(4.0, s1.accept(makeEval()), 0.0);
+            Assert.assertEquals(25.0, n1.accept(makeEval()), 0.0);
+
+            Assert.assertEquals(28561.0, new Add(new Lit(1.0), new Lit(12.0)).accept(makePowby(new Lit(4.0))).accept(makeEval()), 0.0);
+        }
+
+        public EvalDivdMultNegTruncateEqual makeEval() {
+            return new EvalDivdMultNegTruncateEqual();
+        }
+        public PowBy makePowby(Exp exp) { return new PowBy(exp); }
+    }
+
     @Test
-    public void testTest() {
-        org.junit.Assert.assertTrue("", Double.valueOf(new Add(new Lit(1.0), new Lit(12.0)).<Exp>accept(this.makePowBy(new Lit(4.0))).<Double>accept(this.makeEval())).equals(28561.0));
-    }
-
-    public EvalDivdMultNeg makeEval() {
-        return new EvalDivdMultNeg();
-    }
-
-    public PrettypDivdMultNeg makePrettyp() {
-        return new PrettypDivdMultNeg();
-    }
-
-    public Simplify makeSimplify() {
-        return new Simplify();
-    }
-
-    public Collect makeCollect() {
-        return new Collect();
-    }
-
-    public Astree makeAstree() {
-        return new Astree();
-    }
-
-    public Id makeId() {
-        return new Id();
-    }
-
-    public Equals makeEquals(Exp other) {
-        return new Equals(other);
-    }
-
-    public PowBy makePowBy(Exp other) {
-        return new PowBy(other);
-    }
+    public void testTest() { new TestTemplate().test(); }
 }
