@@ -20,7 +20,7 @@ public class Sub extends Exp {
     }
 
     public Exp simplify() {
-        if (Double.valueOf(this.left.eval()).equals(this.right.eval())) {
+        if (this.left.eval().equals(this.right.eval())) {
             return new Lit(0.0);
         } else {
             return new oo.ep.Sub(this.left.simplify(), this.right.simplify());

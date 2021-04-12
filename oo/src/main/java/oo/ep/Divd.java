@@ -20,13 +20,13 @@ public class Divd extends Exp {
     }
 
     public Exp simplify() {
-        if (Double.valueOf(this.left.eval()).equals(0.0)) {
+        if (this.left.eval().equals(0.0)) {
             return new Lit(0.0);
-        } else if (Double.valueOf(this.right.eval()).equals(1.0)) {
+        } else if (this.right.eval().equals(1.0)) {
             return this.left.simplify();
-        } else if (Double.valueOf(this.left.eval()).equals(this.right.eval())) {
+        } else if (this.left.eval().equals(this.right.eval())) {
             return new Lit(1.0);
-        } else if (Double.valueOf(this.left.eval()).equals(-1.0 * this.right.eval())) {
+        } else if (this.left.eval().equals(-1.0 * this.right.eval())) {
             return new Lit(-1.0);
         } else {
             return new oo.ep.Divd(this.left.simplify(), this.right.simplify());

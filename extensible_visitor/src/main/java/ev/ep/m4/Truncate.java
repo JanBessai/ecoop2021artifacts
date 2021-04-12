@@ -2,16 +2,20 @@ package ev.ep.m4;
 
 import ev.ep.Exp;
 
+/**
+ * Truncate does not play well with earlier instances, since there is no
+ * setLeft() and setRight() for these data types until they are introduced.
+ *
+ * Since this operation has a side-effect, the solution opts to provide a
+ * veneer to satisfy the compiler, but it will throw runtime exceptions
+ * if the new operation is invoked on an earlier data type.
+ */
 public class Truncate implements VisitorDivdMultNegTruncate<Exp> {
     int level;
 
-    // unsafe runtime exceptions
-    public Exp visit(ev.ep.m0.Lit exp) {
-        return visit((ev.ep.m4.Lit)exp);
-    }
-    public Exp visit(ev.ep.m0.Add exp) {
-        return visit((ev.ep.m4.Add)exp);
-    }
+    // Might be unsafe, if invoked using objects from older evolution branch.
+    public Exp visit(ev.ep.m0.Lit exp) { return visit((ev.ep.m4.Lit)exp); }
+    public Exp visit(ev.ep.m0.Add exp) { return visit((ev.ep.m4.Add)exp); }
     public Exp visit(ev.ep.m1.Sub exp) {
         return visit((ev.ep.m4.Sub)exp);
     }

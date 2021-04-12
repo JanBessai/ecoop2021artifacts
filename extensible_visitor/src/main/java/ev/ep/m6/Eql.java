@@ -2,12 +2,18 @@ package ev.ep.m6;
 
 import ev.ep.Exp;
 
+/**
+ * Eql demands that the Exp class provides default isDataType() helper methods
+ * which are overridden by the respective subclasses. As such, any attempt
+ * to invoke Eql on an older data type instance will fail.
+ */
 public class Eql implements VisitorDivdMultNegTruncateEqual<Boolean> {
 
-    protected Exp other;
+    protected EqlQuery other;
 
+    /** Any attempt to try to perform Eql with a datatype from the past will fail. */
     public Eql(Exp _other) {
-        this.other = _other;
+        this.other = (EqlQuery) _other;
     }
 
     public Boolean visit(ev.ep.m0.Lit exp) {
@@ -36,12 +42,12 @@ public class Eql implements VisitorDivdMultNegTruncateEqual<Boolean> {
     public Boolean visit(ev.ep.m4.Lit exp) { return visit((ev.ep.m6.Lit) exp); }
     public Boolean visit(ev.ep.m4.Add exp) { return visit((ev.ep.m6.Add) exp); }
 
-    public Boolean visit(Neg exp) { return ((EqlQuery)other).isNeg((EqlQuery)exp.getInner());  }
-    public Boolean visit(Mult exp) { return ((EqlQuery)other).isMult((EqlQuery)exp.getLeft(), (EqlQuery)exp.getRight()); }
-    public Boolean visit(Divd exp) { return ((EqlQuery)other).isDivd((EqlQuery)exp.getLeft(), (EqlQuery)exp.getRight()); }
-    public Boolean visit(Sub exp) { return ((EqlQuery)other).isSub((EqlQuery)exp.getLeft(), (EqlQuery)exp.getRight()); }
-    public Boolean visit(Add exp) { return ((EqlQuery)other).isAdd((EqlQuery)exp.getLeft(), (EqlQuery)exp.getRight()); }
-    public Boolean visit(Lit exp) { return ((EqlQuery)other).isLit(exp.getValue()); }
+    public Boolean visit(Neg exp) { return (other).isNeg((EqlQuery)exp.getInner());  }
+    public Boolean visit(Mult exp) { return (other).isMult((EqlQuery)exp.getLeft(), (EqlQuery)exp.getRight()); }
+    public Boolean visit(Divd exp) { return (other).isDivd((EqlQuery)exp.getLeft(), (EqlQuery)exp.getRight()); }
+    public Boolean visit(Sub exp) { return (other).isSub((EqlQuery)exp.getLeft(), (EqlQuery)exp.getRight()); }
+    public Boolean visit(Add exp) { return (other).isAdd((EqlQuery)exp.getLeft(), (EqlQuery)exp.getRight()); }
+    public Boolean visit(Lit exp) { return (other).isLit(exp.getValue()); }
 
     public Eql makeEql(Exp _other) { return new Eql(_other); }
 

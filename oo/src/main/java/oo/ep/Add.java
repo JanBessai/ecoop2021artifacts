@@ -22,9 +22,9 @@ public class Add extends Exp {
     public Exp simplify() {
         if (Double.valueOf(this.left.eval() + this.right.eval()).equals(0.0)) {
             return new Lit(0.0);
-        } else if (Double.valueOf(this.left.eval()).equals(0.0)) {
+        } else if (this.left.eval().equals(0.0)) {
             return this.right.simplify();
-        } else if (Double.valueOf(this.right.eval()).equals(0.0)) {
+        } else if (this.right.eval().equals(0.0)) {
             return this.left.simplify();
         } else {
             return new oo.ep.Add(this.left.simplify(), this.right.simplify());

@@ -12,30 +12,64 @@ public class PowBy implements VisitorDivdMultNegTruncateEqual<Exp> {
         this.other = _other;
     }
 
-    // unsafe dynamic checks.
     public Exp visit(ev.ep.m0.Lit exp) {
-        return visit((ev.ep.m6.Lit)exp);
+        Double exponentValue = this.other.<Double>accept(this.makeEval());
+        Exp result = exp;
+        double counter = Math.floor(Math.abs(exponentValue));
+        while (1.0 < counter) {
+            result = new Mult(result, exp);
+            counter = counter - 1.0;
+        }
+        if (exp.getValue() < 0.0) {
+            result = new Divd(new Lit(1.0), result);
+        }
+        return result;
     }
     public Exp visit(ev.ep.m0.Add exp) {
-        return visit((ev.ep.m6.Add)exp);
+        return new Lit(exp.<Double>accept(this.makeEval())).accept(this.makePowBy(this.other));
     }
-    public Exp visit(ev.ep.m1.Sub exp) { return visit((ev.ep.m6.Sub)exp); }
-    public Exp visit(ev.ep.m3.Neg exp) {
-        return visit((ev.ep.m6.Neg)exp);
-    }
-    public Exp visit(ev.ep.m3.Divd exp) {
-        return visit((ev.ep.m6.Divd)exp);
+    public Exp visit(ev.ep.m1.Sub exp) {
+        return new Lit(exp.<Double>accept(this.makeEval())).accept(this.makePowBy(this.other));
     }
     public Exp visit(ev.ep.m3.Mult exp) {
-        return visit((ev.ep.m6.Mult)exp);
+        return new Mult(exp.getLeft().accept(this.makePowBy(this.other)), exp.getRight().accept(this.makePowBy(this.other)));
+    }
+    public Exp visit(ev.ep.m3.Divd exp) {
+        return new Divd(exp.getLeft().accept(this.makePowBy(this.other)), exp.getRight().accept(this.makePowBy(this.other)));
     }
 
-    public Exp visit(ev.ep.m4.Neg exp) { return visit((ev.ep.m6.Neg) exp); }
-    public Exp visit(ev.ep.m4.Mult exp) { return visit((ev.ep.m6.Mult) exp); }
-    public Exp visit(ev.ep.m4.Divd exp) { return visit((ev.ep.m6.Divd) exp); }
-    public Exp visit(ev.ep.m4.Sub exp) { return visit((ev.ep.m6.Sub) exp); }
-    public Exp visit(ev.ep.m4.Lit exp) { return visit((ev.ep.m6.Lit) exp); }
-    public Exp visit(ev.ep.m4.Add exp) { return visit((ev.ep.m6.Add) exp); }
+    public Exp visit(ev.ep.m3.Neg exp) {
+        return new Mult(new Lit(1.0).accept(this.makePowBy(exp.getInner())), exp.getInner().accept(this.makePowBy(this.other)));
+    }
+
+    public Exp visit(ev.ep.m4.Lit exp) {
+        Double exponentValue = this.other.<Double>accept(this.makeEval());
+        Exp result = exp;
+        double counter = Math.floor(Math.abs(exponentValue));
+        while (1.0 < counter) {
+            result = new Mult(result, exp);
+            counter = counter - 1.0;
+        }
+        if (exp.getValue() < 0.0) {
+            result = new Divd(new Lit(1.0), result);
+        }
+        return result;
+    }
+    public Exp visit(ev.ep.m4.Add exp) {
+        return new Lit(exp.<Double>accept(this.makeEval())).accept(this.makePowBy(this.other));
+    }
+    public Exp visit(ev.ep.m4.Sub exp) {
+        return new Lit(exp.<Double>accept(this.makeEval())).accept(this.makePowBy(this.other));
+    }
+    public Exp visit(ev.ep.m4.Mult exp) {
+        return new Mult(exp.getLeft().accept(this.makePowBy(this.other)), exp.getRight().accept(this.makePowBy(this.other)));
+    }
+    public Exp visit(ev.ep.m4.Divd exp) {
+        return new Divd(exp.getLeft().accept(this.makePowBy(this.other)), exp.getRight().accept(this.makePowBy(this.other)));
+    }
+    public Exp visit(ev.ep.m4.Neg exp) {
+        return new Mult(new Lit(1.0).accept(this.makePowBy(exp.getInner())), exp.getInner().accept(this.makePowBy(this.other)));
+    }
 
     public Exp visit(Neg exp) {
         return new Mult(new Lit(1.0).accept(this.makePowBy(exp.getInner())), exp.getInner().accept(this.makePowBy(this.other)));

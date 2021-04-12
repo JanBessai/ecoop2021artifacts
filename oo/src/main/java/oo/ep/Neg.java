@@ -17,7 +17,7 @@ public class Neg extends Exp {
     }
 
     public Exp simplify() {
-        if (Double.valueOf(this.inner.eval()).equals(0.0)) {
+        if (this.inner.eval().equals(0.0)) {
             return new Lit(0.0);
         } else {
             return new oo.ep.Neg(this.inner.simplify());
