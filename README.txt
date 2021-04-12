@@ -14,8 +14,7 @@ Depth	Mean	Low	High			Mean	Low	High		    Mean	Low	High		    Mean	Low	High	    	M
 11	0.11	0.11	0.11			0.11	0.11	0.11		0.13	0.12	0.14		0.1	    0.1 	0.11		0.11	0.11	0.11
 12	0.23	0.22	0.23			0.22	0.22	0.22		0.26	0.24	0.27		0.21	0.21	0.22		0.22	0.22	0.22
 13	0.72	0.67	0.76			0.7	    0.65	0.74		0.76	0.7	    0.82		0.41	0.41	0.42		0.66	0.61	0.7
-																				
-																				
+
 	Simplify: CoCo					Simplify: OO				Simplify: Extensible Vis.	Simplify: Interpreter		Simplify: Trivially
 Depth	Mean	Low	High			Mean	Low	High		    Mean	Low	High		    Mean	Low	High		    Mean	Low	High
 0	0	    0	    0			    0   	0	    0	    	0	    0   	0	    	0   	0   	0   		0	    0	    0
