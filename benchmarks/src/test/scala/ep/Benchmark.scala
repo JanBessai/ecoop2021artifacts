@@ -50,7 +50,7 @@ object interpreterObjects {
   object triviallyObjects  {
     import trivially.ep.m7i2.Exp
     import trivially.ep.m7i2.finalized._
-    val startEval: Exp[Visitor] = new Power(new Lit(evalBase), new Lit(evalExponent))
+    val startEval: Exp[Visitor] = new Power(new Lit(1.0), new Lit(evalExponent))
     val evalExps:Gen[trivially.ep.m7i2.Exp[trivially.ep.m7i2.finalized.Visitor]] = sizes.map(size => (0 until size).foldLeft(startEval)((current, _) => new Power(current, current)))
     val startSimplify: Exp[Visitor] = new Sub(new Lit(5.0), new Lit(0.0))
     val simplifyExps: Gen[Exp[Visitor]] = sizes.map(size => (0 until size).foldLeft(startSimplify)((current, _) => new Power(current, current)))

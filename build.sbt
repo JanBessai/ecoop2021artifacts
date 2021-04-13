@@ -30,4 +30,3 @@ lazy val benchmarks = Project("benchmarks", file("benchmarks"))
     Test / classLoaderLayeringStrategy := ClassLoaderLayeringStrategy.Flat
   ).dependsOn(coco, extensible_visitor, oo, trivially, interpreter)
 
-
