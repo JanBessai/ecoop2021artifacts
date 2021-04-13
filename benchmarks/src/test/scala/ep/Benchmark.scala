@@ -1,54 +1,58 @@
 package ep
 
+import coco.ep.m7i2.finalized
 import org.scalameter.KeyValue
 import org.scalameter.api._
 
-object EvalBenchmark extends Bench.OfflineReport {
-  val testConfig = Seq[KeyValue](
+object Benchmark extends Bench.OfflineReport {
+  val testConfig: Seq[KeyValue] = Seq[KeyValue](
     exec.benchRuns -> 1000,
     exec.independentSamples -> 10
   )
 
   val sizes: Gen[Int] = Gen.range("size")(0, 13, 1)
 
+  val evalBase = 1.0
+  val evalExponent = 1.0001
+
   object cocoObjects extends coco.ep.m7i2.finalized.Factory {
     import coco.ep._
-    val startEval: Exp[m7i2.finalized.Exp] = this.power(this.lit(1.0), this.lit(1.0001))
-    val evalExps = sizes.map(size => (0 until size).foldLeft(startEval)((current, _) => this.power(current, current)))
-    val startSimplify: Exp[m7i2.finalized.Exp] = sub(lit(1.0), lit(1.0))
-    val simplifyExps = sizes.map(size => (0 until size).foldLeft(startSimplify)((current, _) => power(current, current)))
+    val startEval: Exp[m7i2.finalized.Exp] = this.power(this.lit(evalBase), this.lit(evalExponent))
+    val evalExps: Gen[Exp[finalized.Exp]] = sizes.map(size => (0 until size).foldLeft(startEval)((current, _) => this.power(current, current)))
+    val startSimplify: Exp[m7i2.finalized.Exp] = sub(lit(5.0), lit(0.0))
+    val simplifyExps: Gen[Exp[finalized.Exp]] = sizes.map(size => (0 until size).foldLeft(startSimplify)((current, _) => power(current, current)))
   }
   object ooObjects {
     import oo.ep._
-    val startEval: Exp = new Power(new Lit(1.0), new Lit(1.0001))
-    val evalExps = sizes.map(size => (0 until size).foldLeft(startEval)((current, _) => new Power(current, current)))
-    val startSimplify: Exp = new Sub(new Lit(1.0), new Lit(1.0))
-    val simplifyExps = sizes.map(size => (0 until size).foldLeft(startSimplify)((current, _) => new Power(current, current)))
+    val startEval: Exp = new Power(new Lit(evalBase), new Lit(evalExponent))
+    val evalExps: Gen[Exp] = sizes.map(size => (0 until size).foldLeft(startEval)((current, _) => new Power(current, current)))
+    val startSimplify: Exp = new Sub(new Lit(5.0), new Lit(0.0))
+    val simplifyExps: Gen[Exp] = sizes.map(size => (0 until size).foldLeft(startSimplify)((current, _) => new Power(current, current)))
   }
   object evObjects {
     import ev.ep._
-    import ev.ep.i2.Power
-    import ev.ep.m0.Lit
-    import ev.ep.m1.Sub
+    import ev.ep.m7i2.Power
+    import ev.ep.m7i2.Lit
+    import ev.ep.m7i2.Sub
 
-    val startEval: Exp = new Power(new Lit(1.0), new Lit(1.0001))
-    val evalExps = sizes.map(size => (0 until size).foldLeft(startEval)((current, _) => new Power(current, current)))
-    val startSimplify: Exp = new Sub(new Lit(1.0), new Lit(1.0))
-    val simplifyExps = sizes.map(size => (0 until size).foldLeft(startSimplify)((current, _) => new Power(current, current)))
+    val startEval: Exp = new Power(new Lit(evalBase), new Lit(evalExponent))
+    val evalExps: Gen[Exp] = sizes.map(size => (0 until size).foldLeft(startEval)((current, _) => new Power(current, current)))
+    val startSimplify: Exp = new Sub(new Lit(5.0), new Lit(0.0))
+    val simplifyExps: Gen[Exp] = sizes.map(size => (0 until size).foldLeft(startSimplify)((current, _) => new Power(current, current)))
   }
 object interpreterObjects {
     import interpreter.ep.m7i2.MergedExp
-    val startEval: MergedExp = interpreter.ep.m7i2.MergedExpFactory.power(interpreter.ep.m7i2.MergedExpFactory.lit(1.0), interpreter.ep.m7i2.MergedExpFactory.lit(1.0001))
-    val evalExps = sizes.map(size => (0 until size).foldLeft(startEval)((current, _) => interpreter.ep.m7i2.MergedExpFactory.power(current, current)))
-    val startSimplify: MergedExp = interpreter.ep.m7i2.MergedExpFactory.sub(interpreter.ep.m7i2.MergedExpFactory.lit(1.0), interpreter.ep.m7i2.MergedExpFactory.lit(1.0))
-    val simplifyExps = sizes.map(size => (0 until size).foldLeft(startSimplify)((current, _) => interpreter.ep.m7i2.MergedExpFactory.power(current, current)))
+    val startEval: MergedExp = interpreter.ep.m7i2.MergedExpFactory.power(interpreter.ep.m7i2.MergedExpFactory.lit(evalBase), interpreter.ep.m7i2.MergedExpFactory.lit(evalExponent))
+    val evalExps: Gen[MergedExp] = sizes.map(size => (0 until size).foldLeft(startEval)((current, _) => interpreter.ep.m7i2.MergedExpFactory.power(current, current)))
+    val startSimplify: MergedExp = interpreter.ep.m7i2.MergedExpFactory.sub(interpreter.ep.m7i2.MergedExpFactory.lit(5.0), interpreter.ep.m7i2.MergedExpFactory.lit(0.0))
+    val simplifyExps: Gen[MergedExp] = sizes.map(size => (0 until size).foldLeft(startSimplify)((current, _) => interpreter.ep.m7i2.MergedExpFactory.power(current, current)))
   }
   object triviallyObjects  {
     import trivially.ep.m7i2.Exp
     import trivially.ep.m7i2.finalized._
-    val startEval: Exp[Visitor] = new Power(new Lit(1.0), new Lit(1.0001))
+    val startEval: Exp[Visitor] = new Power(new Lit(evalBase), new Lit(evalExponent))
     val evalExps:Gen[trivially.ep.m7i2.Exp[trivially.ep.m7i2.finalized.Visitor]] = sizes.map(size => (0 until size).foldLeft(startEval)((current, _) => new Power(current, current)))
-    val startSimplify: Exp[Visitor] = new Sub(new Lit(1.0), new Lit(1.0))
+    val startSimplify: Exp[Visitor] = new Sub(new Lit(5.0), new Lit(0.0))
     val simplifyExps: Gen[Exp[Visitor]] = sizes.map(size => (0 until size).foldLeft(startSimplify)((current, _) => new Power(current, current)))
   }
 
