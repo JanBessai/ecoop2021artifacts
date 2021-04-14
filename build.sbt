@@ -8,7 +8,7 @@ val defaultSettings =
     ),
     testFrameworks := Seq(TestFrameworks.JUnit),
     testOptions += Tests.Argument(TestFrameworks.JUnit, "-v"),
-    parallelExecution in Test := false
+    Test / parallelExecution := false
   )
 
 lazy val shared = Project("shared", file("shared")).settings(defaultSettings)
@@ -26,7 +26,7 @@ lazy val benchmarks = Project("benchmarks", file("benchmarks"))
     ),
     testFrameworks += new TestFramework("org.scalameter.ScalaMeterFramework"),
     logBuffered := false,
-    parallelExecution in Test := false,
+    Test / parallelExecution := false,
     Test / classLoaderLayeringStrategy := ClassLoaderLayeringStrategy.Flat
   ).dependsOn(coco, extensible_visitor, oo, trivially, interpreter)
 
