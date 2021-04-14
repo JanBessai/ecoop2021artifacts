@@ -4,9 +4,9 @@ import xml.m0.XML;
 
 public class FTag implements xml.m0.Tag<FXML,FTag,FDocument>, FXML {
     String name;
-    xml.m0.XML<FXML,FTag,FDocument>[] children;
+    FXML[] children;
 
-    public FTag(String name, xml.m0.XML<FXML,FTag,FDocument>[] children) {
+    public FTag(String name, FXML[] children) {
         this.name = name;
         this.children = children;
     }
@@ -15,7 +15,7 @@ public class FTag implements xml.m0.Tag<FXML,FTag,FDocument>, FXML {
     public String getName() { return name; }
 
     @Override
-    public XML<FXML, FTag, FDocument>[] getChildren() {
+    public FXML[] getChildren() {
         return children;
     }
 
@@ -26,6 +26,10 @@ public class FTag implements xml.m0.Tag<FXML,FTag,FDocument>, FXML {
 
     @Override
     public void setChildren(XML<FXML, FTag, FDocument>[] children) {
-        this.children = children;
+        this.children = new FXML[children.length];
+        for (int i = 0; i < this.children.length; i++) {
+            XML<FXML, FTag, FDocument> ss = convert(children[i]);
+            this.children[i] = convert(children[i]);
+        }
     }
 }

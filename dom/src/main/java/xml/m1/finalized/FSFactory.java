@@ -6,8 +6,5 @@ import xml.m1.Schema;
 
 public interface FSFactory extends xml.m0.finalized.FFactory, xml.m1.Factory<FXML, FTag, FDocument> {
 
-    default Schema<FXML, FTag, FDocument> schema(Document<FXML, FTag, FDocument> doc) {
-        return new FSchema(doc);
-    }
-
+    default Schema<FXML, FTag, FDocument> schema(Document<FXML, FTag, FDocument> doc) { return new FSchema(convert(doc));  }
 }
