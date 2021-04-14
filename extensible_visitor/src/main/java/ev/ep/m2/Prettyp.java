@@ -11,7 +11,7 @@ public class Prettyp implements VisitorSub<String> {
     }
 
     public String visit(Sub exp) {
-        return "(" + exp.getLeft().accept(this.makePrettyp()) + "-" + exp.getRight().accept(this.makePrettyp()) + ")";
+        return "(" + exp.getLeft().accept(this) + "-" + exp.getRight().accept(this) + ")";
     }
 
     public String visit(Lit exp) {
@@ -19,10 +19,10 @@ public class Prettyp implements VisitorSub<String> {
     }
 
     public String visit(Add exp) {
-        return "(" + exp.getLeft().accept(this.makePrettyp()) + "+" + exp.getRight().accept(this.makePrettyp()) + ")";
+        return "(" + exp.getLeft().accept(this) + "+" + exp.getRight().accept(this) + ")";
     }
 
-    public Prettyp makePrettyp() {
-        return new Prettyp();
-    }
+//    public Prettyp makePrettyp() {
+//        return new Prettyp();
+//    }
 }

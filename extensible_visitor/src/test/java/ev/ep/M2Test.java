@@ -10,9 +10,9 @@ import org.junit.Test;
 
 public class M2Test {
 
-    public static class TestTemplate {
-        void test() {
-           
+    public interface TestTemplate extends M1Test.TestTemplate {
+        default void test() {
+            M1Test.TestTemplate.super.test();
             Add expr1 = new Add(new Lit(1.0), new Lit(2.0));
             
             Assert.assertEquals("(1.0+2.0)", expr1.accept(this.makePrettyp()));
@@ -24,16 +24,16 @@ public class M2Test {
             Assert.assertEquals("((1.0-2.0)+(5.0+6.0))", new Add(new Sub(new Lit(1.0), new Lit(2.0)), new Add(new Lit(5.0), new Lit(6.0))).accept(this.makePrettyp()));
         }
 
-
-        public EvalSub makeEval() {
+        default EvalSub makeEval() {
             return new EvalSub();
         }
 
-        public Prettyp makePrettyp() {
+        default Prettyp makePrettyp() {
             return new Prettyp();
         }
     }
- 
+    private static class ActualTest implements M2Test.TestTemplate {}
+
     @Test
-    public void testTest() { new TestTemplate().test(); }
+    public void testTest() { new M2Test.ActualTest().test(); }
 }

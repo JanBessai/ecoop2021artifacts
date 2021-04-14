@@ -1,6 +1,7 @@
 package ep
 
 import coco.ep.m7i2.finalized
+import ev.ep.m7i2.{EvalMerged, SimplifyMerged}
 import org.scalameter.KeyValue
 import org.scalameter.api._
 
@@ -74,7 +75,7 @@ object interpreterObjects {
     }
     measure method "ev" in {
       using(evObjects.evalExps) in { exp =>
-        exp.accept(new ev.ep.m7i2.EvalDivdMultNegTruncateEqualPower)
+        exp.accept(new EvalMerged)
       }
     }
     measure method "interpreter" in {
@@ -102,7 +103,7 @@ object interpreterObjects {
     }
     measure method "ev" in {
       using(evObjects.simplifyExps) in { exp =>
-        exp.accept(new ev.ep.m7i2.SimplifyPower)
+        exp.accept(new SimplifyMerged)
       }
     }
     measure method "interpreter" in {

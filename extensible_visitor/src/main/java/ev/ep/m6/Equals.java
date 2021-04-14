@@ -46,7 +46,4 @@ public class Equals implements VisitorDivdMultNeg<Boolean> {
         return new Astree();
     }
 
-    public Equals makeEquals(Exp _other) {
-        return new Equals(_other);
-    }
 }

@@ -1,6 +1,10 @@
 package ev.ep;
 
-import ev.ep.m6.Eql;
+import ev.ep.i2.Power;
+import ev.ep.m0.Lit;
+import ev.ep.m3.Divd;
+import ev.ep.m3.Mult;
+import ev.ep.m3.Neg;
 import ev.ep.m7i2.*;
 import org.junit.Assert;
 import org.junit.Test;
@@ -13,11 +17,11 @@ public class M7i2Test {
         void test() {
 
             Mult m = new Mult(new Lit(2.0), new Lit(5.0));
-            EqlQuery mb = (EqlQuery) m.accept(makeMultBy(new Lit(4.0)));
+            Exp mb = m.accept(makeMultBy(new Lit(4.0)));
 
-            EqlQuery pwr = new Power(new Lit(2.0), new Lit(5.0));
+            Exp pwr = new Power(new Lit(2.0), new Lit(5.0));
             Exp sss = new Lit(2.0).accept(makePowby(new Lit(5.0)));
-            EqlQuery pwr2 = (EqlQuery) sss;
+            Exp pwr2 = sss;
 
             Assert.assertFalse(pwr.accept(makeEql(mb)));
             Assert.assertFalse(mb.accept(makeEql(pwr)));
@@ -63,24 +67,24 @@ public class M7i2Test {
             Assert.assertEquals("((2.0^3.0)^4.0)", pwr4.accept(makePrettyp()));
         }
 
-        public SimplifyPower makeSimplify() {
-            return new SimplifyPower();
+        public SimplifyMerged makeSimplify() {
+            return new SimplifyMerged();
         }
 
-        public EqlPower makeEql(EqlQuery exp) { return new EqlPower((Exp)exp); }
-        public PrettypPower makePrettyp () {
-            return new PrettypPower();
+        public EqlMerged makeEql(Exp exp) { return new EqlMerged(exp); }
+        public PrettypMerged makePrettyp () {
+            return new PrettypMerged();
         }
-        public MultByPower makeMultBy (Exp other) {
-            return new MultByPower(other);
+        public MultByMerged makeMultBy (Exp other) {
+            return new MultByMerged(other);
         }
-        public EvalDivdMultNegTruncateEqualPower makeEval() {
-            return new EvalDivdMultNegTruncateEqualPower();
+        public EvalMerged makeEval() {
+            return new EvalMerged();
         }
-        public PowByPower makePowby(Exp exp) { return new PowByPower(exp); }
-        public CollectPower makeCollect() { return new CollectPower(); }
-        public TruncatePower makeTruncate(int level) {
-            return new TruncatePower(level);
+        public PowByMerged makePowby(Exp exp) { return new PowByMerged(exp); }
+        public CollectMerged makeCollect() { return new CollectMerged(); }
+        public TruncateMerged makeTruncate(int level) {
+            return new TruncateMerged(level);
         }
     }
     @Test

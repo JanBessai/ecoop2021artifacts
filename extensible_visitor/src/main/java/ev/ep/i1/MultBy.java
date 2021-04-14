@@ -16,7 +16,7 @@ public class MultBy implements VisitorSub<Exp> {
     }
 
     public Exp visit(Sub exp) {
-        return new Sub(exp.getLeft().accept(this.makeMultBy(this.other)), exp.getRight().accept(this.makeMultBy(this.other)));
+        return new Sub(exp.getLeft().accept(this), exp.getRight().accept(this));
     }
 
     public Exp visit(Lit exp) {
@@ -33,14 +33,10 @@ public class MultBy implements VisitorSub<Exp> {
     }
 
     public Exp visit(Add exp) {
-        return new Add(exp.getLeft().accept(this.makeMultBy(this.other)), exp.getRight().<Exp>accept(this.makeMultBy(this.other)));
+        return new Add(exp.getLeft().accept(this), exp.getRight().<Exp>accept(this));
     }
 
     public EvalSub makeEval() {
         return new EvalSub();
-    }
-
-    public MultBy makeMultBy(Exp _other) {
-        return new MultBy(_other);
     }
 }

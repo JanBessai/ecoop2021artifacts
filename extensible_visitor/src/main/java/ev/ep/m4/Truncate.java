@@ -1,6 +1,15 @@
 package ev.ep.m4;
 
 import ev.ep.Exp;
+import ev.ep.m3.EvalDivdMultNeg;
+import ev.ep.m3.VisitorDivdMultNeg;
+import ev.ep.m0.Lit;
+import ev.ep.m0.Add;
+import ev.ep.m1.Sub;
+import ev.ep.m3.Mult;
+import ev.ep.m3.Neg;
+import ev.ep.m3.Divd;
+
 
 /**
  * Truncate does not play well with earlier instances, since there is no
@@ -9,25 +18,12 @@ import ev.ep.Exp;
  * Since this operation has a side-effect, the solution opts to provide a
  * veneer to satisfy the compiler, but it will throw runtime exceptions
  * if the new operation is invoked on an earlier data type.
+ *
+ * To support Truncate, each existing data type needs to be subclassed
+ * anew to enable setLeft and setRight methods (or setInner)
  */
-public class Truncate implements VisitorDivdMultNegTruncate<Exp> {
-    int level;
-
-    // Might be unsafe, if invoked using objects from older evolution branch.
-    public Exp visit(ev.ep.m0.Lit exp) { return visit((ev.ep.m4.Lit)exp); }
-    public Exp visit(ev.ep.m0.Add exp) { return visit((ev.ep.m4.Add)exp); }
-    public Exp visit(ev.ep.m1.Sub exp) {
-        return visit((ev.ep.m4.Sub)exp);
-    }
-    public Exp visit(ev.ep.m3.Neg exp) {
-        return visit((ev.ep.m4.Neg)exp);
-    }
-    public Exp visit(ev.ep.m3.Divd exp) {
-        return visit((ev.ep.m4.Divd)exp);
-    }
-    public Exp visit(ev.ep.m3.Mult exp) {
-        return visit((ev.ep.m4.Mult)exp);
-    }
+public class Truncate implements VisitorDivdMultNeg<Exp> {
+    protected int level;
 
     public Truncate(int level) {
         this.level = level;
@@ -95,13 +91,11 @@ public class Truncate implements VisitorDivdMultNegTruncate<Exp> {
         return exp;
     }
 
-    public EvalDivdMultNegTruncate makeEval() {
-        return new EvalDivdMultNegTruncate();
+    public EvalDivdMultNeg makeEval() {
+        return new EvalDivdMultNeg();
     }
 
     public Truncate makeTruncate(int level) {
         return new Truncate(level);
     }
-
-
 }

@@ -7,9 +7,9 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class M0Test {
-    public static class TestTemplate {
-        @Test
-        public void test() {
+    public interface TestTemplate {
+
+        default void test() {
             Add expr1 = new Add(new Lit(1.0), new Lit(2.0));
             Assert.assertEquals(3.0, expr1.<Double>accept(this.makeEval()), 0.0);
 
@@ -23,11 +23,11 @@ public class M0Test {
             Assert.assertEquals(5.0, new Lit(5.0).<Double>accept(this.makeEval()), 0.0);
         }
 
-        public Eval makeEval() {
+        default Eval makeEval() {
             return new Eval();
         }
     }
 
     @Test
-    public void testTest() { new TestTemplate().test(); }
+    public void testTest() { new TestTemplate(){}.test(); }
 }

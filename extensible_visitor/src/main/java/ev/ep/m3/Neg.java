@@ -15,6 +15,8 @@ public class Neg extends Exp {
         return this.inner;
     }
 
+    public void setInner(Exp _inner) { this.inner = _inner; }
+
     public <R> R accept(Visitor<R> v) {
         return ((VisitorDivdMultNeg<R>) v).visit(this);
     }

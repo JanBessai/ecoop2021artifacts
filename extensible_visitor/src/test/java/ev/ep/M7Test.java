@@ -1,6 +1,12 @@
 package ev.ep;
 
-import ev.ep.m7.EvalDivdMultNegTruncateEqual;
+import ev.ep.m0.Add;
+import ev.ep.m0.Lit;
+import ev.ep.m1.Sub;
+import ev.ep.m3.Divd;
+import ev.ep.m3.EvalDivdMultNeg;
+import ev.ep.m3.Mult;
+import ev.ep.m3.Neg;
 import ev.ep.m6.*;
 import ev.ep.m7.PowBy;
 import org.junit.Assert;
@@ -28,8 +34,8 @@ public class M7Test {
             Assert.assertEquals(28561.0, new Add(new Lit(1.0), new Lit(12.0)).accept(makePowby(new Lit(4.0))).accept(makeEval()), 0.0);
         }
 
-        public EvalDivdMultNegTruncateEqual makeEval() {
-            return new EvalDivdMultNegTruncateEqual();
+        public EvalDivdMultNeg makeEval() {
+            return new EvalDivdMultNeg();
         }
         public PowBy makePowby(Exp exp) { return new PowBy(exp); }
     }

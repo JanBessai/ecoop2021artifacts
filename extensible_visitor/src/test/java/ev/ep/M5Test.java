@@ -1,8 +1,16 @@
 package ev.ep;
 
-import ev.ep.m4.*;
+import ev.ep.m3.PrettypDivdMultNeg;
+import ev.ep.m4.Simplify;
 import ev.ep.m5.Astree;
 import ev.ep.m5.Id;
+import ev.ep.m3.Mult;
+import ev.ep.m0.Lit;
+import ev.ep.m0.Add;
+import ev.ep.m1.Sub;
+import ev.ep.m3.Neg;
+import ev.ep.m3.Divd;
+
 import org.junit.Assert;
 import org.junit.Test;
 import util.Leaf;
@@ -51,8 +59,8 @@ public class M5Test {
             org.junit.Assert.assertEquals(tree, tree2);
         }
 
-        public PrettypDivdMultNegTruncate makePrettyp() {
-            return new PrettypDivdMultNegTruncate();
+        public PrettypDivdMultNeg makePrettyp() {
+            return new PrettypDivdMultNeg();
         }
 
         public Simplify makeSimplify() { return new Simplify();}

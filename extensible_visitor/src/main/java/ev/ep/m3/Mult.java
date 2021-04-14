@@ -6,7 +6,6 @@ import ev.ep.Visitor;
 public class Mult extends Exp {
 
     protected Exp left;
-
     protected Exp right;
 
     public Mult(Exp _left, Exp _right) {
@@ -17,10 +16,12 @@ public class Mult extends Exp {
     public Exp getLeft() {
         return this.left;
     }
-
     public Exp getRight() {
         return this.right;
     }
+
+    public void setLeft(Exp _left) { this.left = _left; }
+    public void setRight(Exp _right) { this.right = _right; }
 
     public <R> R accept(Visitor<R> v) {
         return ((VisitorDivdMultNeg<R>) v).visit(this);

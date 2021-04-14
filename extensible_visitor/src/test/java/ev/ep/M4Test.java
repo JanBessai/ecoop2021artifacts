@@ -1,6 +1,13 @@
 package ev.ep;
 
-import ev.ep.m4.*;
+import ev.ep.m0.Add;
+import ev.ep.m0.Lit;
+import ev.ep.m1.Sub;
+import ev.ep.m3.*;
+
+import ev.ep.m4.Collect;
+import ev.ep.m4.Simplify;
+import ev.ep.m4.Truncate;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -98,12 +105,12 @@ public class M4Test {
             Assert.assertEquals(larger.accept(this.makePrettyp()), largerTrunc.accept(this.makePrettyp()));
         }
 
-        public EvalDivdMultNegTruncate makeEval() {
-            return new EvalDivdMultNegTruncate();
+        public EvalDivdMultNeg makeEval() {
+            return new EvalDivdMultNeg();
         }
 
-        public PrettypDivdMultNegTruncate makePrettyp() {
-            return new PrettypDivdMultNegTruncate();
+        public PrettypDivdMultNeg makePrettyp() {
+            return new PrettypDivdMultNeg();
         }
 
         public Simplify makeSimplify() {
@@ -121,3 +128,4 @@ public class M4Test {
     @Test
     public void testTest() { new TestTemplate().test(); }
 }
+

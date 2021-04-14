@@ -1,8 +1,12 @@
 package ev.ep;
 
-import ev.ep.m6.*;
+import ev.ep.m0.Add;
+import ev.ep.m0.Lit;
+import ev.ep.m1.Sub;
+import ev.ep.m3.Divd;
+import ev.ep.m3.Mult;
+import ev.ep.m3.Neg;
 import ev.ep.m6.Eql;
-import ev.ep.m6.EqlQuery;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -57,7 +61,7 @@ public class M6Test {
             org.junit.Assert.assertFalse(new Add(new Lit(5.0), new Lit(3.0)).accept(makeEql(new Mult(new Divd(new Lit(5.0), new Lit(2.0)), new Lit(3.0)))));
         }
 
-        public Eql makeEql(EqlQuery exp) { return new Eql((Exp)exp); }
+        public Eql makeEql(Exp exp) { return new Eql(exp); }
     }
 
     @Test

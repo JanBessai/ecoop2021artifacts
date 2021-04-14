@@ -8,18 +8,18 @@ public class PrettypDivdMultNeg extends Prettyp implements VisitorDivdMultNeg<St
     }
 
     public String visit(Neg exp) {
-        return "(-" + exp.getInner().accept(this.makePrettyp()) + ")";
+        return "(-" + exp.getInner().accept(this) + ")";
     }
 
     public String visit(Mult exp) {
-        return "(" + exp.getLeft().accept(this.makePrettyp()) + "*" + exp.getRight().accept(this.makePrettyp()) + ")";
+        return "(" + exp.getLeft().accept(this) + "*" + exp.getRight().accept(this) + ")";
     }
 
     public String visit(Divd exp) {
-        return "(" + exp.getLeft().accept(this.makePrettyp()) + "/" + exp.getRight().accept(this.makePrettyp()) + ")";
+        return "(" + exp.getLeft().accept(this) + "/" + exp.getRight().accept(this) + ")";
     }
 
-    public PrettypDivdMultNeg makePrettyp() {
-        return new PrettypDivdMultNeg();
-    }
+//    public PrettypDivdMultNeg makePrettyp() {
+//        return new PrettypDivdMultNeg();
+//    }
 }

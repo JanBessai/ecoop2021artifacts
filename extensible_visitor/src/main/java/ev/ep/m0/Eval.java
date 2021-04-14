@@ -12,10 +12,10 @@ public class Eval implements Visitor<Double> {
     }
 
     public Double visit(Add exp) {
-        return exp.getLeft().<Double>accept(this.makeEval()) + exp.getRight().<Double>accept(this.makeEval());
+        return exp.getLeft().<Double>accept(this) + exp.getRight().<Double>accept(this);
     }
 
-    public Eval makeEval() {
-        return new Eval();
-    }
+//    public Eval makeEval() {
+//        return new Eval();
+//    }
 }

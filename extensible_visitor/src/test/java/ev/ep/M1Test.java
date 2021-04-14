@@ -8,9 +8,9 @@ import org.junit.Test;
 
 public class M1Test extends M0Test {
 
-    public static class TestTemplate {
-        void test() {
-
+    public interface TestTemplate extends M0Test.TestTemplate {
+        default void test() {
+            M0Test.TestTemplate.super.test();
             Sub expr1 = new Sub(new Lit(1.0), new Lit(2.0));
             Assert.assertEquals(-1.0, expr1.<Double>accept(this.makeEval()), 0.0);
 
@@ -19,11 +19,12 @@ public class M1Test extends M0Test {
             Assert.assertEquals(new Sub(new Lit(1.0), new Lit(2.0)).<Double>accept(this.makeEval()), -1.0, 0.0);
         }
 
-        public EvalSub makeEval() {
+        default EvalSub makeEval() {
             return new EvalSub();
         }
     }
-    
+    private static class ActualTest implements M1Test.TestTemplate {}
+
     @Test
-    public void testTest() { new TestTemplate().test(); }
+    public void testTest() { new ActualTest().test(); }
 }
