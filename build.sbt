@@ -28,5 +28,12 @@ lazy val benchmarks = Project("benchmarks", file("benchmarks"))
     logBuffered := false,
     Test / parallelExecution := false,
     Test / classLoaderLayeringStrategy := ClassLoaderLayeringStrategy.Flat
-  ).dependsOn(coco, extensible_visitor, oo, trivially, interpreter)
+  ).dependsOn(coco_scala, coco, extensible_visitor, oo, trivially, interpreter)
 
+lazy val coco_scala = Project("coco_scala", file("coco_scala"))
+  .settings(
+    scalaVersion := "2.13.5",
+    libraryDependencies ++= Seq(
+      "org.scalatest" %% "scalatest" % "3.0.8" % Test
+    ),
+  )

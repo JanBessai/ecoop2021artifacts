@@ -1,23 +1,34 @@
 package trivially.ep.m6;
 
-public interface Neg<V> extends trivially.ep.m5.Neg<V>, Exp<V> {
+import trivially.ep.m6.finalized.Lit;
 
-    Exp<V> getInner();
+public interface Neg extends Exp, trivially.ep.m5.Neg {
 
-    default Boolean equals(trivially.ep.Exp<V> other) {
-        return this.astree().equals(convert(other).astree());
+    Exp getInner();
+
+    default Boolean equals(Exp other) {
+        return this.astree().equals(((Exp) other).astree());
     }
 
-    @Override
-    default Boolean isNeg(trivially.ep.Exp<V> inner) {
-        return convert(inner).eql(getInner());
+    default Exp simplify() {
+        if (this.getInner().eval().equals(0.0)) {
+            return new Lit(0.0);
+        } else {
+            return new trivially.ep.m6.finalized.Neg(this.getInner().simplify());
+        }
     }
 
-    default Boolean eql(trivially.ep.Exp<V> that) {
-        return convert(that).isNeg(getInner());
+    default Boolean isNeg(Exp inner) {
+        return inner.eql(getInner());
     }
 
-    default Exp<V> simplify() {
-        return convert(trivially.ep.m5.Neg.super.simplify());
+    default Boolean eql(Exp that) { return that.isNeg(getInner()); }
+
+    default void truncate (int level) {
+        if (level > 1) {
+            getInner().truncate(level-1);
+        } else {
+            setInner(new trivially.ep.m5.finalized.Lit(getInner().eval()));
+        }
     }
 }

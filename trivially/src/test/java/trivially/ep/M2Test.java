@@ -1,29 +1,35 @@
 package trivially.ep;
 
 import org.junit.Assert;
-import trivially.ep.m2.Exp;
-import trivially.ep.m2.finalized.Add;
-import trivially.ep.m2.finalized.Lit;
-import trivially.ep.m2.finalized.Sub;
 import org.junit.Test;
+import trivially.ep.m2.Exp;
+
+import trivially.ep.m2.Add;
+import trivially.ep.m2.Lit;
+import trivially.ep.m2.Sub;
 
 public class M2Test {
 
+    public interface TestTemplate extends M1Test.TestTemplate {
+        default void test() {
+            M1Test.TestTemplate.super.test();
+
+            Exp expr1 = add(lit(1.0), lit(2.0));
+            Assert.assertEquals("(1.0+2.0)", expr1.prettyp());
+
+            Exp expr2 = lit(2.0);
+            Assert.assertEquals("2.0", expr2.prettyp());
+
+            Assert.assertEquals("(1.0-2.0)", sub(lit(1.0), lit(2.0)).prettyp());
+            Assert.assertEquals("((1.0-2.0)+(5.0+6.0))", add(sub(lit(1.0), lit(2.0)), add(lit(5.0), lit(6.0))).prettyp());
+        }
+
+        default Lit lit(Double d) { return new trivially.ep.m2.finalized.Lit(d); }
+        default Add add(Exp left, Exp right) { return new trivially.ep.m2.finalized.Add(left, right); }
+        default Sub sub(Exp left, Exp right) { return new trivially.ep.m2.finalized.Sub(left, right); }
+    }
+    private static class ActualTest implements TestTemplate {}
+
     @Test
-    public void testTest() {
-        Assert.assertEquals("(1.0-2.0)", this.sub(this.lit(1.0), this.lit(2.0)).prettyp());
-        Assert.assertEquals("((1.0-2.0)+(5.0+6.0))", this.add(this.sub(this.lit(1.0), this.lit(2.0)), this.add(this.lit(5.0), this.lit(6.0))).prettyp());
-    }
-
-    public Sub sub(Exp<trivially.ep.m2.finalized.Visitor> left, Exp<trivially.ep.m2.finalized.Visitor> right) {
-        return new Sub(left, right);
-    }
-
-    public Lit lit(Double value) {
-        return new Lit(value);
-    }
-
-    public Add add(Exp<trivially.ep.m2.finalized.Visitor> left, Exp<trivially.ep.m2.finalized.Visitor> right) {
-        return new Add(left, right);
-    }
+    public void testTest() { new ActualTest().test(); }
 }

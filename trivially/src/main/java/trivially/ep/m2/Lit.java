@@ -1,6 +1,6 @@
 package trivially.ep.m2;
 
-public interface Lit<V> extends trivially.ep.m1.Lit<V>, Exp<V> {
+public interface Lit extends Exp, trivially.ep.m0.Lit {
 
     Double getValue();
 

@@ -4,7 +4,7 @@ import util.Leaf;
 import util.Node;
 import util.Tree;
 
-public interface Lit<V> extends trivially.ep.m4.Lit<V>, Exp<V> {
+public interface Lit extends Exp, trivially.ep.m4.Lit {
 
     Double getValue();
 
@@ -16,7 +16,7 @@ public interface Lit<V> extends trivially.ep.m4.Lit<V>, Exp<V> {
         return 76407;
     }
 
-    default Exp<V> simplify() {
-        return convert(trivially.ep.m4.Lit.super.simplify());
+    default Exp simplify() {
+        return this;
     }
 }

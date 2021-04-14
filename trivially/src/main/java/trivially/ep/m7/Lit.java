@@ -1,25 +1,27 @@
 package trivially.ep.m7;
 
-public interface Lit<V> extends trivially.ep.m6.Lit<V>, Exp<V> {
+import trivially.ep.m7.finalized.Divd;
+import trivially.ep.m7.finalized.Mult;
+
+public interface Lit extends Exp, trivially.ep.m6.Lit {
 
     Double getValue();
 
-    default Exp<V> powby(trivially.ep.Exp<V> other) {
-        Double exponentValue = convert(other).eval();
-        Exp<V> result = this;
+    default Exp powby(Exp other) {
+        Double exponentValue = ((Exp) other).eval();
+        Exp result = this;
         Double counter = Math.floor(Math.abs(exponentValue));
         while (1.0 < counter) {
-            result = this.mult(result, this);
+            result = new Mult(result, this);
             counter = counter - 1.0;
         }
         if (this.getValue() < 0.0) {
-            result = this.divd(this.lit(1.0), result);
+            result = new Divd(new trivially.ep.m7.finalized.Lit(1.0), result);
         }
         return result;
     }
 
-    default Exp<V> simplify() {
-        return convert(trivially.ep.m6.Lit.super.simplify());
+    default Exp simplify() {
+        return this;
     }
-
 }

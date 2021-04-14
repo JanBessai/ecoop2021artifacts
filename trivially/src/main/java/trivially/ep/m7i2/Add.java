@@ -1,19 +1,36 @@
 package trivially.ep.m7i2;
 
-public interface Add<V> extends trivially.ep.m7.Add<V>, trivially.ep.i2.Add<V>, Exp<V> {
+import trivially.ep.m7i2.finalized.Lit;
 
-    Exp<V> getLeft();
-    Exp<V> getRight();
+public interface Add extends Exp, trivially.ep.m7.Add, trivially.ep.i1.Add {
 
-    default Exp<V> simplify() {
-        return convert(trivially.ep.m7.Add.super.simplify());
+    Exp getLeft();
+
+    Exp getRight();
+
+    // unsafe casts
+    default Exp powby(trivially.ep.m7.Exp other) { return new trivially.ep.m7i2.finalized.Power(this, (trivially.ep.m7i2.Exp)other); }
+    default Exp multby(trivially.ep.i1.Exp other) { return  new trivially.ep.m7i2.finalized.Mult(this, (trivially.ep.m7i2.Exp)other); }
+
+    default Exp simplify() {
+        if (Double.valueOf(this.getLeft().eval() + this.getRight().eval()).equals(0.0)) {
+            return new Lit(0.0);
+        } else if (this.getLeft().eval().equals(0.0)) {
+            return this.getRight().simplify();
+        } else if (this.getRight().eval().equals(0.0)) {
+            return this.getLeft().simplify();
+        } else {
+            return new trivially.ep.m7i2.finalized.Add(this.getLeft().simplify(), this.getRight().simplify());
+        }
     }
 
-    default Exp<V> multby(trivially.ep.Exp<V> other) {
-        return this.mult(this, convert(other));
-    }
-
-    default Exp<V> powby(trivially.ep.Exp<V> other) {
-        return this.power(this, convert(other));
+    default void truncate (int level) {
+        if (level > 1) {
+            getLeft().truncate(level-1);
+            getRight().truncate(level-1);
+        } else {
+            setLeft(new trivially.ep.m7i2.finalized.Lit(getLeft().eval()));
+            setRight(new trivially.ep.m7i2.finalized.Lit(getRight().eval()));
+        }
     }
 }

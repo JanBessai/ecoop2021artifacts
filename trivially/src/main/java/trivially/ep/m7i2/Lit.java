@@ -1,18 +1,14 @@
 package trivially.ep.m7i2;
 
-public interface Lit<V> extends trivially.ep.m7.Lit<V>, trivially.ep.i2.Lit<V>, Exp<V> {
+public interface Lit extends Exp, trivially.ep.m7.Lit, trivially.ep.i1.Lit {
 
     Double getValue();
 
-    default Exp<V> simplify() {
-        return convert(trivially.ep.m7.Lit.super.simplify());
-    }
+    // unsafe casts
+    default Exp powby(trivially.ep.m7.Exp other) { return new trivially.ep.m7i2.finalized.Power(this, (trivially.ep.m7i2.Exp)other); }
+    default Exp multby(trivially.ep.i1.Exp other) { return  new trivially.ep.m7i2.finalized.Mult(this, (trivially.ep.m7i2.Exp)other); }
 
-    default Exp<V> multby(trivially.ep.Exp<V> other) {
-        return this.mult(this, convert(other));
-    }
-
-    default Exp<V> powby(trivially.ep.Exp<V> other) {
-        return this.power(this, convert(other));
+    default Exp simplify() {
+        return this;
     }
 }

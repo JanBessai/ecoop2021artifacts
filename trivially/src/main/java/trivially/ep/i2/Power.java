@@ -1,21 +1,26 @@
 package trivially.ep.i2;
 
-public interface Power<V> extends Exp<V> {
+import trivially.ep.i1.Exp;
+import trivially.ep.i1.finalized.Add;
+import trivially.ep.i1.finalized.Lit;
 
-    Exp<V> getLeft();
-    Exp<V> getRight();
+public interface Power extends Exp {
+
+    Exp getLeft();
+
+    Exp getRight();
 
     default String prettyp() {
         return "(" + this.getLeft().prettyp() + "^" + this.getRight().prettyp() + ")";
     }
 
-    default Double eval() {
-        return Math.pow(this.getLeft().eval(), this.getRight().eval());
+    default Exp multby(Exp other) {
+        double leftEval =this.getLeft().eval();
+        double added = Math.log(other.eval()) / Math.log(leftEval);
+        return new trivially.ep.i2.finalized.Power(this.getLeft(), new Add(this.getRight(), new Lit(added)));
     }
 
-    default trivially.ep.i2.Exp<V> multby(trivially.ep.Exp<V> other) {
-        double leftEval = convert(this.getLeft()).eval();
-        double added = Math.log(convert(other).eval()) / Math.log(leftEval);
-        return this.power(this.getLeft(), this.add(this.getRight(), this.lit(added)));
+    default Double eval() {
+        return Math.pow(this.getLeft().eval(), this.getRight().eval());
     }
 }

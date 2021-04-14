@@ -2,6 +2,7 @@ package ep
 
 import coco.ep.m7i2.finalized
 import ev.ep.m7i2.{EvalMerged, SimplifyMerged}
+import exp.m7alt2.finalized
 import org.scalameter.KeyValue
 import org.scalameter.api._
 
@@ -16,12 +17,20 @@ object Benchmark extends Bench.OfflineReport {
   val evalBase = 1.0
   val evalExponent = 1.0001
 
+  object cocoScalaObjects extends exp.m7alt2.finalized.Factory {
+    import exp._
+    val startEval: Exp[m7alt2.finalized.Exp] = this.power(this.lit(evalBase), this.lit(evalExponent))
+    val evalExps: Gen[Exp[m7alt2.finalized.Exp]] = sizes.map(size => (0 until size).foldLeft(startEval)((current, _) => this.power(current, current)))
+    val startSimplify: Exp[m7alt2.finalized.Exp] = sub(lit(5.0), lit(0.0))
+    val simplifyExps: Gen[Exp[m7alt2.finalized.Exp]] = sizes.map(size => (0 until size).foldLeft(startSimplify)((current, _) => power(current, current)))
+  }
+
   object cocoObjects extends coco.ep.m7i2.finalized.Factory {
     import coco.ep._
     val startEval: Exp[m7i2.finalized.Exp] = this.power(this.lit(evalBase), this.lit(evalExponent))
-    val evalExps: Gen[Exp[finalized.Exp]] = sizes.map(size => (0 until size).foldLeft(startEval)((current, _) => this.power(current, current)))
+    val evalExps: Gen[Exp[m7i2.finalized.Exp]] = sizes.map(size => (0 until size).foldLeft(startEval)((current, _) => this.power(current, current)))
     val startSimplify: Exp[m7i2.finalized.Exp] = sub(lit(5.0), lit(0.0))
-    val simplifyExps: Gen[Exp[finalized.Exp]] = sizes.map(size => (0 until size).foldLeft(startSimplify)((current, _) => power(current, current)))
+    val simplifyExps: Gen[Exp[m7i2.finalized.Exp]] = sizes.map(size => (0 until size).foldLeft(startSimplify)((current, _) => power(current, current)))
   }
   object ooObjects {
     import oo.ep._
@@ -32,9 +41,9 @@ object Benchmark extends Bench.OfflineReport {
   }
   object evObjects {
     import ev.ep._
-    import ev.ep.m7i2.Power
-    import ev.ep.m7i2.Lit
-    import ev.ep.m7i2.Sub
+    import ev.ep.i2.Power
+    import ev.ep.m0.Lit
+    import ev.ep.m1.Sub
 
     val startEval: Exp = new Power(new Lit(evalBase), new Lit(evalExponent))
     val evalExps: Gen[Exp] = sizes.map(size => (0 until size).foldLeft(startEval)((current, _) => new Power(current, current)))
@@ -51,13 +60,18 @@ object interpreterObjects {
   object triviallyObjects  {
     import trivially.ep.m7i2.Exp
     import trivially.ep.m7i2.finalized._
-    val startEval: Exp[Visitor] = new Power(new Lit(1.0), new Lit(evalExponent))
-    val evalExps:Gen[trivially.ep.m7i2.Exp[trivially.ep.m7i2.finalized.Visitor]] = sizes.map(size => (0 until size).foldLeft(startEval)((current, _) => new Power(current, current)))
-    val startSimplify: Exp[Visitor] = new Sub(new Lit(5.0), new Lit(0.0))
-    val simplifyExps: Gen[Exp[Visitor]] = sizes.map(size => (0 until size).foldLeft(startSimplify)((current, _) => new Power(current, current)))
+    val startEval: Exp = new Power(new Lit(1.0), new Lit(evalExponent))
+    val evalExps:Gen[trivially.ep.m7i2.Exp] = sizes.map(size => (0 until size).foldLeft(startEval)((current, _) => new Power(current, current)))
+    val startSimplify: Exp = new Sub(new Lit(5.0), new Lit(0.0))
+    val simplifyExps: Gen[Exp] = sizes.map(size => (0 until size).foldLeft(startSimplify)((current, _) => new Power(current, current)))
   }
 
   performance of "eval" config(testConfig:_*) in {
+    measure method "coco_scala" in {
+      using(cocoScalaObjects.evalExps) in { exp =>
+        cocoScalaObjects.convert(exp).eval
+      }
+    }
     measure method "coco" in {
       using(cocoObjects.evalExps) in { exp =>
         cocoObjects.convert(exp).eval()
@@ -86,6 +100,11 @@ object interpreterObjects {
   }
 
   performance of "simplify" config(testConfig:_*) in {
+    measure method "coco_scala" in {
+      using(cocoScalaObjects.simplifyExps) in { exp =>
+        cocoScalaObjects.convert(exp).simplify
+      }
+    }
     measure method "coco" in {
       using(cocoObjects.simplifyExps) in { exp =>
         cocoObjects.convert(exp).simplify()

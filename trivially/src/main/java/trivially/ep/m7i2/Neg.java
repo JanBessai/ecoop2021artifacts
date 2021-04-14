@@ -1,18 +1,21 @@
 package trivially.ep.m7i2;
 
-public interface Neg<V> extends trivially.ep.m7.Neg<V>, Exp<V> {
+import trivially.ep.m7i2.finalized.Lit;
+import trivially.ep.m7i2.finalized.Mult;
 
-    Exp<V> getInner();
+public interface Neg extends Exp, trivially.ep.m7.Neg {
 
-    default Exp<V> simplify() {
-        return convert(trivially.ep.m7.Neg.super.simplify());
-    }
+    Exp getInner();
 
-    default Exp<V> multby(trivially.ep.Exp<V> other) {
-        return this.mult(this, convert(other));
-    }
+    // unsafe casts
+    default Exp powby(trivially.ep.m7.Exp other) { return new trivially.ep.m7i2.finalized.Power(this, (trivially.ep.m7i2.Exp)other); }
+    default Exp multby(trivially.ep.i1.Exp other) { return  new trivially.ep.m7i2.finalized.Mult(this, (trivially.ep.m7i2.Exp)other); }
 
-    default Exp<V> powby(trivially.ep.Exp<V> other) {
-        return this.power(this, convert(other));
+    default Exp simplify() {
+        if (Double.valueOf(this.getInner().eval()).equals(0.0)) {
+            return new Lit(0.0);
+        } else {
+            return new trivially.ep.m7i2.finalized.Neg(this.getInner().simplify());
+        }
     }
 }

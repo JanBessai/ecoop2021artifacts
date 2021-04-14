@@ -1,25 +1,38 @@
 package trivially.ep.m6;
 
-public interface Sub<V> extends trivially.ep.m5.Sub<V>, Exp<V> {
+import trivially.ep.m6.finalized.Lit;
 
-    Exp<V> getLeft();
+public interface Sub extends Exp, trivially.ep.m5.Sub {
 
-    Exp<V> getRight();
+    Exp getLeft();
 
-    default Boolean equals(trivially.ep.Exp<V> other) {
-        return this.astree().equals(convert(other).astree());
+    Exp getRight();
+
+    default Boolean equals(Exp other) {
+        return this.astree().equals(((Exp) other).astree());
     }
 
-    @Override
-    default Boolean isSub(trivially.ep.Exp<V> left, trivially.ep.Exp<V> right) {
-        return convert(left).eql(getLeft()) && convert(right).eql(getRight());
+    default Exp simplify() {
+        if (this.getLeft().eval().equals(this.getRight().eval())) {
+            return new Lit(0.0);
+        } else {
+            return new trivially.ep.m6.finalized.Sub(this.getLeft().simplify(), this.getRight().simplify());
+        }
     }
 
-    default Boolean eql(trivially.ep.Exp<V> that) {
-        return convert(that).isSub(getLeft(), getRight());
+    default Boolean isSub(Exp left, Exp right) {
+        return left.eql(getLeft()) && right.eql(getRight());
     }
 
-    default Exp<V> simplify() {
-        return convert(trivially.ep.m5.Sub.super.simplify());
+    default Boolean eql(Exp that) { return that.isSub(getLeft(), getRight()); }
+
+    default void truncate (int level) {
+        if (level > 1) {
+            getLeft().truncate(level-1);
+            getRight().truncate(level-1);
+        } else {
+            setLeft(new trivially.ep.m5.finalized.Lit(getLeft().eval()));
+            setRight(new trivially.ep.m5.finalized.Lit(getRight().eval()));
+        }
     }
 }

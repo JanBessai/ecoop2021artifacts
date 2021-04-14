@@ -1,8 +1,10 @@
 package trivially.ep.m3;
 
-public interface Neg<V> extends Exp<V> {
+import trivially.ep.m2.Exp;
 
-    Exp<V> getInner();
+public interface Neg extends trivially.ep.m2.Exp {
+
+    Exp getInner();
 
     default String prettyp() {
         return "(-" + this.getInner().prettyp() + ")";

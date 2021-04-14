@@ -1,10 +1,12 @@
 package trivially.ep.m1;
 
-public interface Sub<V> extends Exp<V> {
+import trivially.ep.m0.Exp;
 
-    Exp<V> getLeft();
+public interface Sub extends trivially.ep.m0.Exp {
 
-    Exp<V> getRight();
+    Exp getLeft();
+
+    Exp getRight();
 
     default Double eval() {
         return this.getLeft().eval() - this.getRight().eval();

@@ -1,11 +1,12 @@
 package trivially.ep.i1;
 
-public interface Add<V> extends trivially.ep.m2.Add<V>, Exp<V> {
+public interface Add extends Exp, trivially.ep.m2.Add {
 
-    Exp<V> getLeft();
-    Exp<V> getRight();
+    Exp getLeft();
 
-    default Exp<V> multby(trivially.ep.Exp<V> other) {
-        return this.add(convert(this.getLeft()).multby(convert(other)), convert(this.getRight()).multby(convert(other)));
+    Exp getRight();
+
+    default Exp multby(Exp other) {
+        return new trivially.ep.i1.finalized.Add(this.getLeft().multby(((Exp) other)), this.getRight().multby(((Exp) other)));
     }
 }

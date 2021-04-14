@@ -1,24 +1,30 @@
 package trivially.ep;
 
 import org.junit.Assert;
-import trivially.ep.m0.Exp;
-import trivially.ep.m0.finalized.Add;
-import trivially.ep.m0.finalized.Lit;
 import org.junit.Test;
+import trivially.ep.m0.Add;
+import trivially.ep.m0.Exp;
+import trivially.ep.m0.Lit;
 
 public class M0Test {
+    public interface TestTemplate  {
+        default void test() {
+            Exp expr1 = add(lit(1.0), lit(2.0));
+            Assert.assertEquals(3.0, expr1.eval(), 0.0);
+
+            Exp expr2 = lit(2.0);
+            Assert.assertEquals(2.0, expr2.eval(), 0.0);
+
+            Assert.assertEquals(3.0, add(lit(1.0), lit(2.0)).eval(), 0.0);
+            Assert.assertEquals(5.0, lit(5.0).eval(), 0.0);
+        }
+        
+        default Lit lit(Double d) { return new trivially.ep.m0.finalized.Lit(d); }
+        default Add add(Exp left, Exp right) { return new trivially.ep.m0.finalized.Add(left, right); }
+    }
+
+    private static class ActualTest implements TestTemplate {}
 
     @Test
-    public void testTest() {
-        Assert.assertEquals(3.0, this.add(this.lit(1.0), this.lit(2.0)).eval(), 0.0);
-        Assert.assertEquals(5.0, this.lit(5.0).eval(), 0.0);
-    }
-
-    public Lit lit(Double value) {
-        return new Lit(value);
-    }
-
-    public Add add(Exp<trivially.ep.m0.finalized.Visitor> left, Exp<trivially.ep.m0.finalized.Visitor> right) {
-        return new Add(left, right);
-    }
+    public void testTest() { new ActualTest().test(); }
 }

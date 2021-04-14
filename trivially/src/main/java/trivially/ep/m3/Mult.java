@@ -1,10 +1,12 @@
 package trivially.ep.m3;
 
-public interface Mult<V> extends Exp<V> {
+import trivially.ep.m2.Exp;
 
-    Exp<V> getLeft();
+public interface Mult extends trivially.ep.m2.Exp {
 
-    Exp<V> getRight();
+    Exp getLeft();
+
+    Exp getRight();
 
     default String prettyp() {
         return "(" + this.getLeft().prettyp() + "*" + this.getRight().prettyp() + ")";

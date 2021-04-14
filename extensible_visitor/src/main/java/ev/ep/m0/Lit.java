@@ -16,7 +16,5 @@ public class Lit extends Exp {
     }
     public void setValue(Double d) { this.value = d; }
 
-    public <R> R accept(Visitor<R> v) {
-        return v.visit(this);
-    }
+    public <R> R accept(Visitor<R> v) { return ((VisitorAddLit<R>)v).visit(this);  }
 }

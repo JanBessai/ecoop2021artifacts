@@ -2,15 +2,17 @@ package trivially.ep.m4;
 
 import java.util.List;
 
-public interface Lit<V> extends trivially.ep.m3.Lit<V>, Exp<V> {
+public interface Lit extends Exp, trivially.ep.m2.Lit {
 
     Double getValue();
 
-    default Exp<V> simplify() {
+    default Exp simplify() {
         return this;
     }
 
     default List<Double> collect() {
         return java.util.Arrays.asList(this.getValue());
     }
+
+    default void truncate(int level) { }
 }

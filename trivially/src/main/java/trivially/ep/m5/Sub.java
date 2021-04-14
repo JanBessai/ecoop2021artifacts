@@ -1,13 +1,14 @@
 package trivially.ep.m5;
 
+import trivially.ep.m5.finalized.Lit;
 import util.Node;
 import util.Tree;
 
-public interface Sub<V> extends trivially.ep.m4.Sub<V>, Exp<V> {
+public interface Sub extends Exp, trivially.ep.m4.Sub {
 
-    Exp<V> getLeft();
+    Exp getLeft();
 
-    Exp<V> getRight();
+    Exp getRight();
 
     default Tree astree() {
         return new Node(this.id(), this.getLeft().astree(), this.getRight().astree());
@@ -17,7 +18,21 @@ public interface Sub<V> extends trivially.ep.m4.Sub<V>, Exp<V> {
         return 83488;
     }
 
-    default Exp<V> simplify() {
-        return convert(trivially.ep.m4.Sub.super.simplify());
+    default Exp simplify() {
+        if (Double.valueOf(this.getLeft().eval()).equals(this.getRight().eval())) {
+            return new Lit(0.0);
+        } else {
+            return new trivially.ep.m5.finalized.Sub(this.getLeft().simplify(), this.getRight().simplify());
+        }
+    }
+
+    default void truncate (int level) {
+        if (level > 1) {
+            getLeft().truncate(level-1);
+            getRight().truncate(level-1);
+        } else {
+            setLeft(new trivially.ep.m5.finalized.Lit(getLeft().eval()));
+            setRight(new trivially.ep.m5.finalized.Lit(getRight().eval()));
+        }
     }
 }

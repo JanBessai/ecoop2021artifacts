@@ -2,30 +2,25 @@ package trivially.ep.m7i2.finalized;
 
 import trivially.ep.m7i2.Exp;
 
-public class Power implements trivially.ep.m7i2.Power<Visitor>, Factory {
+public class Power implements trivially.ep.m7i2.Power {
 
-    protected Exp<Visitor> left;
-    protected Exp<Visitor> right;
+    protected Exp left;
 
-    public Power(Exp<Visitor> _left, Exp<Visitor> _right) {
-        this.left = _left;
-        this.right = _right;
-    }
-
-    public Exp<Visitor> getLeft() {
+    public Exp getLeft() {
         return this.left;
     }
-    public Exp<Visitor> getRight() {
+
+    protected Exp right;
+
+    public Exp getRight() {
         return this.right;
     }
 
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
-    }
+    public void setLeft(Exp left) { this.left = left; }
+    public void setRight(Exp right) { this.right = right; }
 
-    public Exp<Visitor> convert(trivially.ep.Exp<Visitor> other) {
-        Visitor visitor = new Visitor();
-        other.accept(visitor);
-        return visitor.getResult();
+    public Power(Exp left, Exp right) {
+        this.left = left;
+        this.right = right;
     }
 }

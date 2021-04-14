@@ -1,10 +1,10 @@
 package trivially.ep.m2;
 
-public interface Sub<V> extends trivially.ep.m1.Sub<V>, Exp<V> {
+public interface Sub extends Exp, trivially.ep.m1.Sub {
 
-    Exp<V> getLeft();
+    Exp getLeft();
 
-    Exp<V> getRight();
+    Exp getRight();
 
     default String prettyp() {
         return "(" + this.getLeft().prettyp() + "-" + this.getRight().prettyp() + ")";

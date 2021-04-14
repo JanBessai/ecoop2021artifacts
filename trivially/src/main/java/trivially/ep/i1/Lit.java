@@ -1,18 +1,21 @@
 package trivially.ep.i1;
 
-public interface Lit<V> extends trivially.ep.m2.Lit<V>, Exp<V> {
+import trivially.ep.i1.finalized.Add;
+import trivially.ep.i1.finalized.Sub;
+
+public interface Lit extends Exp, trivially.ep.m2.Lit {
 
     Double getValue();
 
-    default Exp<V> multby(trivially.ep.Exp<V> other) {
-        Exp<V> result = convert(other);
+    default Exp multby(Exp other) {
+        Exp result = ((Exp) other);
         Double counter = Math.floor(Math.abs(this.getValue()));
         while (1.0 < counter) {
-            result = this.add(result, convert(other));
+            result = new Add(result, ((Exp) other));
             counter = counter - 1.0;
         }
         if (this.getValue() < 0.0) {
-            result = this.sub(this.lit(0.0), result);
+            result = new Sub(new trivially.ep.i1.finalized.Lit(0.0), result);
         }
         return result;
     }

@@ -23,7 +23,5 @@ public class Add extends Exp {
     public void setLeft(Exp _left) { this.left = _left; }
     public void setRight(Exp _right) { this.right = _right; }
 
-    public <R> R accept(Visitor<R> v) {
-        return v.visit(this);
-    }
+    public <R> R accept(Visitor<R> v) { return ((VisitorAddLit<R>)v).visit(this);  }
 }

@@ -1,9 +1,10 @@
 package trivially.ep.m0;
 
-public interface Add<V> extends Exp<V> {
+public interface Add extends Exp {
 
-    Exp<V> getLeft();
-    Exp<V> getRight();
+    Exp getLeft();
+
+    Exp getRight();
 
     default Double eval() {
         return this.getLeft().eval() + this.getRight().eval();

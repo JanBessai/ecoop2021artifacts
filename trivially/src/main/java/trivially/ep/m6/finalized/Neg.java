@@ -2,25 +2,18 @@ package trivially.ep.m6.finalized;
 
 import trivially.ep.m6.Exp;
 
-public class Neg implements trivially.ep.m6.Neg<Visitor>, Factory {
+public class Neg implements trivially.ep.m6.Neg {
 
-    protected Exp<Visitor> inner;
+    protected Exp inner;
 
-    public Neg(Exp<Visitor> _inner) {
-        this.inner = _inner;
-    }
-
-    public Exp<Visitor> getInner() {
+    public Exp getInner() {
         return this.inner;
     }
 
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
-    }
+    // Warning: Unsafe casts
+    public void setInner(trivially.ep.m4.Exp inner) { this.inner = (trivially.ep.m6.Exp) inner; }
 
-    public Exp<Visitor> convert(trivially.ep.Exp<Visitor> other) {
-        Visitor visitor = new Visitor();
-        other.accept(visitor);
-        return visitor.getResult();
+    public Neg(Exp inner) {
+        this.inner = inner;
     }
 }

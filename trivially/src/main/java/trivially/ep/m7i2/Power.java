@@ -1,51 +1,66 @@
 package trivially.ep.m7i2;
 
-public interface Power<V> extends Exp<V>, trivially.ep.i2.Power<V> {
+import trivially.ep.m7i2.finalized.Add;
+import trivially.ep.m7i2.finalized.Lit;
+import java.util.List;
+import util.Node;
+import util.Tree;
 
-    Exp<V> getLeft();
-    Exp<V> getRight();
+public interface Power extends Exp, trivially.ep.i2.Power {
 
-    default Exp<V> simplify() {
-        if (this.getRight().eval().equals(0.0)) {
-            return this.lit(1.0);
-        } else if (this.getLeft().eval().equals(1.0)) {
-            return this.lit(1.0);
-        } else if (convert(getRight()).eval().equals(1.0)) {
-            return convert(getLeft()).simplify();
-        } else {
-            return this.power(this.getLeft().simplify(), this.getRight().simplify());
-        }
+    Exp getLeft();
+
+    Exp getRight();
+
+    void setLeft(Exp left);
+    void setRight(Exp right);
+
+    default Tree astree() {
+        return new Node(this.id(), this.getLeft().astree(), this.getRight().astree());
     }
 
-    default Exp<V> multby(trivially.ep.Exp<V> other) {
-        return this.power(this.getLeft(), this.add(this.getRight(), this.lit(Math.log(2.718281828459045) / Math.log(this.getRight().eval()) / Math.log(2.718281828459045) / Math.log(this.getLeft().eval()))));
+    // unsafe casts
+    default Exp powby(trivially.ep.m7.Exp other) { return new trivially.ep.m7i2.finalized.Power(this, (trivially.ep.m7i2.Exp)other); }
+    default Exp multby(trivially.ep.i1.Exp other) { return  new trivially.ep.m7i2.finalized.Mult(this, (trivially.ep.m7i2.Exp)other); }
+
+    default Boolean equals(trivially.ep.m6.Exp other) {
+        return this.astree().equals(( other).astree());
     }
 
-    default Exp<V> powby(trivially.ep.Exp<V> other) {
-        return this.power(this, convert(other));
+    default Boolean isPower(trivially.ep.m7i2.Exp left, trivially.ep.m7i2.Exp right) {
+        return left.eql(getLeft()) && right.eql(getRight());
     }
 
-    default Boolean isPower(trivially.ep.Exp<V> left, trivially.ep.Exp<V> right) {
-        return convert(left).eql(getLeft()) && convert(right).eql(getRight());
-    }
-
-    default java.util.List<Double> collect() {
-        return java.util.stream.Stream.concat(this.getLeft().collect().stream(), this.getRight().collect().stream()).collect(java.util.stream.Collectors.toList());
-    }
-
-    default util.Tree astree() {
-        return new util.Node(this.id(), this.getLeft().astree(), this.getRight().astree());
-    }
+    // Unsafe cast
+    default Boolean eql(trivially.ep.m6.Exp that) { return ((trivially.ep.m7i2.Exp)that).isPower(getLeft(), getRight()); }
 
     default Integer id() {
         return 77306085;
     }
 
-    default Boolean equals(trivially.ep.Exp<V> other) {
-        return this.astree().equals(convert(other).astree());
+    default List<Double> collect() {
+        return java.util.stream.Stream.concat(this.getLeft().collect().stream(), this.getRight().collect().stream()).collect(java.util.stream.Collectors.toList());
     }
 
-    default Boolean eql(trivially.ep.Exp<V> that) {
-        return convert(that).isPower(getLeft(), getRight());
+    default Exp simplify() {
+        if (this.getRight().eval().equals(0.0)) {
+            return new Lit(1.0);
+        } else if (this.getLeft().eval().equals(1.0)) {
+            return new Lit(1.0);
+        } else if (getRight().eval().equals(1.0)) {
+            return getLeft().simplify();
+        } else {
+            return new trivially.ep.m7i2.finalized.Power(this.getLeft().simplify(), this.getRight().simplify());
+        }
+    }
+
+    default void truncate (int level) {
+        if (level > 1) {
+            getLeft().truncate(level-1);
+            getRight().truncate(level-1);
+        } else {
+            setLeft(new trivially.ep.m7i2.finalized.Lit(getLeft().eval()));
+            setRight(new trivially.ep.m7i2.finalized.Lit(getRight().eval()));
+        }
     }
 }
