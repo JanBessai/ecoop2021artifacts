@@ -7,7 +7,6 @@ import util.Tree;
 public class Mult extends Exp {
 
     protected Exp left;
-
     protected Exp right;
 
     public Mult(Exp _left, Exp _right) {
@@ -65,13 +64,13 @@ public class Mult extends Exp {
         return that.isMult(this.left, this.right);
     }
 
+    // simplified because of merge
     public Exp multby(Exp other) {
-        return new oo.ep.Mult(this, other);
+        return new Mult(this, other);
     }
 
-    public Exp powby(Exp other) {
-        return new oo.ep.Mult(this.left.powby(other), this.right.powby(other));
-    }
+    // simplified because of merge
+    public Exp powby(Exp other) { return new Power(this, other); }
 
     public Double eval() {
         return this.left.eval() * this.right.eval();

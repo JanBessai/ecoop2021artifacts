@@ -7,7 +7,6 @@ import util.Tree;
 public class Divd extends Exp {
 
     protected Exp left;
-
     protected Exp right;
 
     public Divd(Exp _left, Exp _right) {
@@ -67,14 +66,12 @@ public class Divd extends Exp {
         return that.isDivd(this.left, this.right);
     }
 
+    // simplified because of merge
     public Exp multby(Exp other) {
         return new Mult(this, other);
     }
 
-    public Exp powby(Exp other) {
-        return new oo.ep.Divd(this.left.powby(other), this.right.powby(other));
-    }
-
+    public Exp powby(Exp other) { return new Power(this, other); }
     public Double eval() {
         return this.left.eval() / this.right.eval();
     }

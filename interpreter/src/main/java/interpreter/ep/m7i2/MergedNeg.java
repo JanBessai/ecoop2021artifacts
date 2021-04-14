@@ -29,7 +29,7 @@ public class MergedNeg extends PowByNeg implements MergedExp {
     }
 	
 	public MergedExp simplify() {
-		if (getInner().eval() == 0) {
+		if (getInner().eval().equals(0.0)) {
 			return lit(0.0);
 		} else {
 			return neg(getInner().simplify());

@@ -7,7 +7,6 @@ import util.Tree;
 public class Power extends Exp {
 
     protected Exp left;
-
     protected Exp right;
 
     public Power(Exp _left, Exp _right) {
@@ -65,14 +64,10 @@ public class Power extends Exp {
         return that.isPower(this.left, this.right);
     }
 
-    public Exp multby(Exp other) {
-        double base = left.eval();
-        double addedExp = Math.log(other.eval())/Math.log(base);
-        return new oo.ep.Power(this.left, new Add(this.right, new Lit(addedExp)));
-    }
+    public Exp multby(Exp other) { return new Mult(this, other); }
 
     public Exp powby(Exp other) {
-        return new oo.ep.Power(this, other);
+        return new Power(this, other);
     }
 
     public Double eval() {
