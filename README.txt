@@ -15,7 +15,6 @@
 12	0.23	0.23	0.24		0.24	0.23	0.24		0.21	0.21	0.21		0.22	0.22	0.22		    0.21	0.21	0.21
 13	0.61	0.57	0.65		0.57	0.53	0.61		0.61	0.57	0.64		0.71	0.65	0.77		    0.4	    0.4	    0.41
 
-
 	Simplify:Cococ				Simplify:Trivially			Simplify:OO				    Simplify: Extensible Visitor	Simplify:Interpreter
 #	Mean	Low	High    		Mean	Low	High		    Mean	Low	High		    Mean	Low	    High		    Mean	Low	    High
 0	0	    0	    0		    0	    0	    0	    	0	    0	    0		    0	    0   	0	    	    0      	0	    0
