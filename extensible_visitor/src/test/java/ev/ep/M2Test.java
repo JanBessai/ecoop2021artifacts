@@ -15,23 +15,23 @@ public class M2Test {
             M1Test.TestTemplate.super.test();
             Add expr1 = new Add(new Lit(1.0), new Lit(2.0));
             
-            Assert.assertEquals("(1.0+2.0)", expr1.accept(this.makePrettyp()));
+            Assert.assertEquals("(1.0+2.0)", expr1.accept(makePrettyp()));
 
             Lit expr2 = new Lit(2.0);
-            Assert.assertEquals("2.0", expr2.accept(this.makePrettyp()));
+            Assert.assertEquals("2.0", expr2.accept(makePrettyp()));
 
-            Assert.assertEquals("(1.0-2.0)", new Sub(new Lit(1.0), new Lit(2.0)).accept(this.makePrettyp()));
-            Assert.assertEquals("((1.0-2.0)+(5.0+6.0))", new Add(new Sub(new Lit(1.0), new Lit(2.0)), new Add(new Lit(5.0), new Lit(6.0))).accept(this.makePrettyp()));
-        }
-
-        default EvalSub makeEval() {
-            return new EvalSub();
-        }
-
-        default Prettyp makePrettyp() {
-            return new Prettyp();
+            Assert.assertEquals("(1.0-2.0)", new Sub(new Lit(1.0), new Lit(2.0)).accept(makePrettyp()));
+            Assert.assertEquals("((1.0-2.0)+(5.0+6.0))", new Add(new Sub(new Lit(1.0), new Lit(2.0)), new Add(new Lit(5.0), new Lit(6.0))).accept(makePrettyp()));
         }
     }
+
+    static EvalSub makeEval() {
+        return new EvalSub();
+    }
+    static Prettyp makePrettyp() {
+        return new Prettyp();
+    }
+
     private static class ActualTest implements M2Test.TestTemplate {}
 
     @Test

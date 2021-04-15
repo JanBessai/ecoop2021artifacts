@@ -18,11 +18,13 @@ public class I1Test extends M0Test {
             Assert.assertEquals(9.0, new Add(new Lit(1.0), new Lit(2.0)).accept(makeMultBy(new Lit(3.0))).accept(makeEval()), 0.0);
         }
 
-        default EvalSub makeEval() { return new EvalSub();}
-        default MultBy makeMultBy (Exp other) {
-            return new MultBy(other);
-        }
     }
+
+    static EvalSub makeEval() { return new EvalSub();}
+    static MultBy makeMultBy (Exp other) {
+        return new MultBy(other);
+    }
+
     private static class ActualTest implements I1Test.TestTemplate {}
 
     @Test

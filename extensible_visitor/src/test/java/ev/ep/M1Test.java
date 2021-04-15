@@ -13,17 +13,19 @@ public class M1Test extends M0Test {
             M0Test.TestTemplate.super.test();
 
             Sub expr1 = new Sub(new Lit(1.0), new Lit(2.0));
-            Assert.assertEquals(-1.0, expr1.<Double>accept(this.makeEval()), 0.0);
+            Assert.assertEquals(-1.0, expr1.<Double>accept(makeEval()), 0.0);
 
             Lit expr2 = new Lit(2.0);
-            Assert.assertEquals(2.0, expr2.<Double>accept(this.makeEval()), 0.0);
-            Assert.assertEquals(new Sub(new Lit(1.0), new Lit(2.0)).<Double>accept(this.makeEval()), -1.0, 0.0);
+            Assert.assertEquals(2.0, expr2.<Double>accept(makeEval()), 0.0);
+            Assert.assertEquals(new Sub(new Lit(1.0), new Lit(2.0)).<Double>accept(makeEval()), -1.0, 0.0);
         }
 
-        default EvalSub makeEval() {
-            return new EvalSub();
-        }
     }
+
+    static EvalSub makeEval() {
+        return new EvalSub();
+    }
+
     private static class ActualTest implements M1Test.TestTemplate {}
 
     @Test

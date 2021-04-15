@@ -24,16 +24,18 @@ public class I2Test  {
                             "((2.0^5.0)*4.0)".equals(mb.accept(makePrettyp())));
         }
 
-        default EvalPower makeEval() {
-            return new EvalPower();
-        }
-        default PrettypPower makePrettyp () {
-            return new PrettypPower();
-        }
-        default MultByPower makeMultBy (Exp other) {
-            return new MultByPower(other);
-        }
     }
+
+    static EvalPower makeEval() {
+        return new EvalPower();
+    }
+    static PrettypPower makePrettyp () {
+        return new PrettypPower();
+    }
+    static MultByPower makeMultBy (Exp other) {
+        return new MultByPower(other);
+    }
+
     private static class ActualTest implements I2Test.TestTemplate {}
 
     @Test

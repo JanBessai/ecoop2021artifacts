@@ -33,12 +33,12 @@ public class M7Test {
 
             Assert.assertEquals(28561.0, new Add(new Lit(1.0), new Lit(12.0)).accept(makePowby(new Lit(4.0))).accept(makeEval()), 0.0);
         }
-
-        default EvalDivdMultNeg makeEval() {
-            return new EvalDivdMultNeg();
-        }
-        default PowBy makePowby(Exp exp) { return new PowBy(exp); }
     }
+
+    static EvalDivdMultNeg makeEval() {
+        return new EvalDivdMultNeg();
+    }
+    static PowBy makePowby(Exp exp) { return new PowBy(exp); }
 
     private static class ActualTest implements M7Test.TestTemplate {}
 

@@ -66,20 +66,24 @@ public class M7i2Test {
             Exp pwr4 = pwr3.accept(makePowby(new Lit(4.0)));
             Assert.assertEquals("((2.0^3.0)^4.0)", pwr4.accept(makePrettyp()));
         }
-
-        default SimplifyMerged makeSimplify() {
-            return new SimplifyMerged();
-        }
-
-        default EqlMerged makeEql(Exp exp) { return new EqlMerged(exp); }
-        default MultByMerged makeMultBy (Exp other) {
-            return new MultByMerged(other);
-        }
-        default PowByMerged makePowby(Exp exp) { return new PowByMerged(exp); }
-        default CollectMerged makeCollect() { return new CollectMerged(); }
-        default TruncateMerged makeTruncate(int level) { return new TruncateMerged(level); }
     }
 
+    static EvalMerged makeEval() {
+        return new EvalMerged();
+    }
+    static SimplifyMerged makeSimplify() {
+        return new SimplifyMerged();
+    }
+    static PrettypMerged makePrettyp() {
+        return new PrettypMerged();
+    }
+    static EqlMerged makeEql(Exp exp) { return new EqlMerged(exp); }
+    static MultByMerged makeMultBy (Exp other) {
+        return new MultByMerged(other);
+    }
+    static PowByMerged makePowby(Exp exp) { return new PowByMerged(exp); }
+    static CollectMerged makeCollect() { return new CollectMerged(); }
+    static TruncateMerged makeTruncate(int level) { return new TruncateMerged(level); }
 
     private static class ActualTest implements M7i2Test.TestTemplate {}
 

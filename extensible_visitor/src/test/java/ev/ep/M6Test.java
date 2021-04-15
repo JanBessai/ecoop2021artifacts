@@ -60,9 +60,9 @@ public class M6Test {
             org.junit.Assert.assertTrue(new Add(new Lit(5.0), new Lit(3.0)).accept(makeEql(new Add(new Lit(5.0), new Lit(3.0)))));
             org.junit.Assert.assertFalse(new Add(new Lit(5.0), new Lit(3.0)).accept(makeEql(new Mult(new Divd(new Lit(5.0), new Lit(2.0)), new Lit(3.0)))));
         }
-
-        default Eql makeEql(Exp exp) { return new Eql(exp); }
     }
+
+    static Eql makeEql(Exp exp) { return new Eql(exp); }
 
     private static class ActualTest implements M5Test.TestTemplate {}
 
