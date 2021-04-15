@@ -7,8 +7,7 @@ import ev.ep.m1.Sub;
 
 public class Prettyp implements VisitorSub<String> {
 
-    public Prettyp() {
-    }
+    public Prettyp() { }
 
     public String visit(Sub exp) {
         return "(" + exp.getLeft().accept(this) + "-" + exp.getRight().accept(this) + ")";
@@ -21,8 +20,4 @@ public class Prettyp implements VisitorSub<String> {
     public String visit(Add exp) {
         return "(" + exp.getLeft().accept(this) + "+" + exp.getRight().accept(this) + ")";
     }
-
-//    public Prettyp makePrettyp() {
-//        return new Prettyp();
-//    }
 }

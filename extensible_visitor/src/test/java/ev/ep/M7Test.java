@@ -7,15 +7,15 @@ import ev.ep.m3.Divd;
 import ev.ep.m3.EvalDivdMultNeg;
 import ev.ep.m3.Mult;
 import ev.ep.m3.Neg;
-import ev.ep.m6.*;
 import ev.ep.m7.PowBy;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class M7Test {
 
-    public static class TestTemplate {
-        void test() {
+    public interface TestTemplate extends M6Test.TestTemplate {
+        default void test() {
+            M6Test.TestTemplate.super.test();
 
             Exp pby = new Lit(3.0).accept(makePowby(new Lit(2.0)));
             Exp d1 = new Divd(new Lit(5.0), new Lit(2.0)).accept(makePowby(new Lit(2.0)));
@@ -34,12 +34,14 @@ public class M7Test {
             Assert.assertEquals(28561.0, new Add(new Lit(1.0), new Lit(12.0)).accept(makePowby(new Lit(4.0))).accept(makeEval()), 0.0);
         }
 
-        public EvalDivdMultNeg makeEval() {
+        default EvalDivdMultNeg makeEval() {
             return new EvalDivdMultNeg();
         }
-        public PowBy makePowby(Exp exp) { return new PowBy(exp); }
+        default PowBy makePowby(Exp exp) { return new PowBy(exp); }
     }
 
+    private static class ActualTest implements M7Test.TestTemplate {}
+
     @Test
-    public void testTest() { new TestTemplate().test(); }
+    public void testTest() { new ActualTest().test(); }
 }

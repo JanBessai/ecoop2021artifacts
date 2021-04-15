@@ -18,8 +18,10 @@ import util.Node;
 
 public class M5Test {
 
-    public static class TestTemplate {
-        void test() {
+    public interface TestTemplate extends M4Test.TestTemplate {
+        default void test() {
+            M4Test.TestTemplate.super.test();
+
             Lit lit1 = new Lit(1.0);
             Lit lit2 = new Lit(2.0);
             Mult mult1 = new Mult(lit1, lit2);
@@ -59,17 +61,14 @@ public class M5Test {
             org.junit.Assert.assertEquals(tree, tree2);
         }
 
-        public PrettypDivdMultNeg makePrettyp() {
-            return new PrettypDivdMultNeg();
-        }
-
-        public Simplify makeSimplify() { return new Simplify();}
-
-        public Id makeId() { return new Id(); }
-
-        public Astree makeAstree() { return new Astree(); }
+        default PrettypDivdMultNeg makePrettyp() { return new PrettypDivdMultNeg(); }
+        default Simplify makeSimplify() { return new Simplify();}
+        default Id makeId() { return new Id(); }
+        default Astree makeAstree() { return new Astree(); }
     }
 
+    private static class ActualTest implements M5Test.TestTemplate {}
+
     @Test
-    public void testTest() { new TestTemplate().test(); }
+    public void testTest() { new ActualTest().test(); }
 }

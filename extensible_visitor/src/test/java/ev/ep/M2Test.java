@@ -35,5 +35,5 @@ public class M2Test {
     private static class ActualTest implements M2Test.TestTemplate {}
 
     @Test
-    public void testTest() { new M2Test.ActualTest().test(); }
+    public void testTest() { new ActualTest().test(); }
 }

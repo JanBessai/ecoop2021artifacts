@@ -12,9 +12,9 @@ import org.junit.Test;
 
 public class M6Test {
 
-    public static class TestTemplate {
-        void test() {
-
+    public interface TestTemplate extends M5Test.TestTemplate {
+        default void test() {
+            M5Test.TestTemplate.super.test();
             Lit lit1 = new Lit(1.0);
             Lit lit2 = new Lit(2.0);
             Mult mult1 = new Mult(lit1, lit2);
@@ -61,9 +61,11 @@ public class M6Test {
             org.junit.Assert.assertFalse(new Add(new Lit(5.0), new Lit(3.0)).accept(makeEql(new Mult(new Divd(new Lit(5.0), new Lit(2.0)), new Lit(3.0)))));
         }
 
-        public Eql makeEql(Exp exp) { return new Eql(exp); }
+        default Eql makeEql(Exp exp) { return new Eql(exp); }
     }
 
+    private static class ActualTest implements M5Test.TestTemplate {}
+
     @Test
-    public void testTest() { new TestTemplate().test(); }
+    public void testTest() { new ActualTest().test(); }
 }

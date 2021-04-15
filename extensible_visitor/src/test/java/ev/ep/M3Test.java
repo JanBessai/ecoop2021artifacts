@@ -7,9 +7,9 @@ import org.junit.Test;
 
 public class M3Test {
 
-    public static class TestTemplate {
-        void test() {
-
+    public interface TestTemplate extends M2Test.TestTemplate {
+        default void test() {
+            M2Test.TestTemplate.super.test();
             Mult expr1 = new Mult(new Lit(3.0), new Lit(2.0));
             Assert.assertEquals("(3.0*2.0)", expr1.accept(this.makePrettyp()));
 
@@ -30,14 +30,12 @@ public class M3Test {
             Assert.assertEquals("(-(2.0*3.0))", new Neg(new Mult(new Lit(2.0), new Lit(3.0))).accept(this.makePrettyp()));
         }
 
-        public EvalDivdMultNeg makeEval() {
-            return new EvalDivdMultNeg();
-        }
+        default EvalDivdMultNeg makeEval() { return new EvalDivdMultNeg(); }
 
-        public PrettypDivdMultNeg makePrettyp() {
-            return new PrettypDivdMultNeg();
-        }
+        default PrettypDivdMultNeg makePrettyp() { return new PrettypDivdMultNeg(); }
     }
+    private static class ActualTest implements M3Test.TestTemplate {}
+
     @Test
-    public void testTest() { new TestTemplate().test(); }
+    public void testTest() { new ActualTest().test(); }
 }

@@ -13,15 +13,15 @@ import java.util.Arrays;
 
 public class M7i2Test {
 
-    public static class TestTemplate {
-        void test() {
+    // clash when attempting to extend both I2Test.TestTemplate and M7TestTemplate
+    public interface TestTemplate extends M7Test.TestTemplate {
+        default void test() {
 
             Mult m = new Mult(new Lit(2.0), new Lit(5.0));
             Exp mb = m.accept(makeMultBy(new Lit(4.0)));
 
             Exp pwr = new Power(new Lit(2.0), new Lit(5.0));
-            Exp sss = new Lit(2.0).accept(makePowby(new Lit(5.0)));
-            Exp pwr2 = sss;
+            Exp pwr2 = new Lit(2.0).accept(makePowby(new Lit(5.0)));
 
             Assert.assertFalse(pwr.accept(makeEql(mb)));
             Assert.assertFalse(mb.accept(makeEql(pwr)));
@@ -67,26 +67,22 @@ public class M7i2Test {
             Assert.assertEquals("((2.0^3.0)^4.0)", pwr4.accept(makePrettyp()));
         }
 
-        public SimplifyMerged makeSimplify() {
+        default SimplifyMerged makeSimplify() {
             return new SimplifyMerged();
         }
 
-        public EqlMerged makeEql(Exp exp) { return new EqlMerged(exp); }
-        public PrettypMerged makePrettyp () {
-            return new PrettypMerged();
-        }
-        public MultByMerged makeMultBy (Exp other) {
+        default EqlMerged makeEql(Exp exp) { return new EqlMerged(exp); }
+        default MultByMerged makeMultBy (Exp other) {
             return new MultByMerged(other);
         }
-        public EvalMerged makeEval() {
-            return new EvalMerged();
-        }
-        public PowByMerged makePowby(Exp exp) { return new PowByMerged(exp); }
-        public CollectMerged makeCollect() { return new CollectMerged(); }
-        public TruncateMerged makeTruncate(int level) {
-            return new TruncateMerged(level);
-        }
+        default PowByMerged makePowby(Exp exp) { return new PowByMerged(exp); }
+        default CollectMerged makeCollect() { return new CollectMerged(); }
+        default TruncateMerged makeTruncate(int level) { return new TruncateMerged(level); }
     }
+
+
+    private static class ActualTest implements M7i2Test.TestTemplate {}
+
     @Test
-    public void testTest() { new TestTemplate().test(); }
+    public void testTest() { new ActualTest().test(); }
 }

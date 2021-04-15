@@ -16,9 +16,9 @@ import java.util.Collections;
 
 public class M4Test {
 
-    public static class TestTemplate {
-        void test() {
-
+    public interface TestTemplate extends M3Test.TestTemplate {
+        default void test() {
+            M3Test.TestTemplate.super.test();
             Divd expr1 = new Divd(new Lit(3.0), new Lit(1.0));
             Assert.assertEquals("3.0", expr1.accept(this.makeSimplify()).accept(this.makePrettyp()));
 
@@ -82,12 +82,12 @@ public class M4Test {
             Mult base = new Mult(new Add(new Lit(3.0), new Lit(7.0)), new Lit(3.0));
             String baseBeforeTrunc = base.accept(this.makePrettyp());
             base.accept(this.makeTruncate(3));
-            Assert.assertTrue("", base.accept(this.makePrettyp()).equals(baseBeforeTrunc));
+            Assert.assertTrue(base.accept(this.makePrettyp()).equals(baseBeforeTrunc));
 
             Sub larger = new Sub(base, new Divd(base, new Lit(1.0)));
             String largerBeforeTrunc = larger.accept(this.makePrettyp());
             larger.accept(this.makeTruncate(4));
-            Assert.assertTrue("", larger.accept(this.makePrettyp()).equals(largerBeforeTrunc));
+            Assert.assertTrue(larger.accept(this.makePrettyp()).equals(largerBeforeTrunc));
 
             Neg nd1 = new Neg(new Lit(1.0));
             Neg nd2 = new Neg(nd1);
@@ -105,27 +105,24 @@ public class M4Test {
             Assert.assertEquals(larger.accept(this.makePrettyp()), largerTrunc.accept(this.makePrettyp()));
         }
 
-        public EvalDivdMultNeg makeEval() {
+        default EvalDivdMultNeg makeEval() {
             return new EvalDivdMultNeg();
         }
-
-        public PrettypDivdMultNeg makePrettyp() {
+        default PrettypDivdMultNeg makePrettyp() {
             return new PrettypDivdMultNeg();
         }
-
-        public Simplify makeSimplify() {
+        default Simplify makeSimplify() {
             return new Simplify();
         }
-
-        public Truncate makeTruncate(int level) {
+        default Truncate makeTruncate(int level) {
             return new Truncate(level);
         }
-
-        public Collect makeCollect() {
+        default Collect makeCollect() {
             return new Collect();
         }
     }
-    @Test
-    public void testTest() { new TestTemplate().test(); }
-}
+    private static class ActualTest implements M1Test.TestTemplate {}
 
+    @Test
+    public void testTest() { new ActualTest().test(); }
+}

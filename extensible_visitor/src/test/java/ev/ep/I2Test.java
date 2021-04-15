@@ -8,11 +8,11 @@ import ev.ep.m0.Lit;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class I2Test extends M0Test {
+public class I2Test  {
 
-    public static class TestTemplate {
-        void test() {
-
+    public interface TestTemplate extends I1Test.TestTemplate {
+        default void test() {
+            I1Test.TestTemplate.super.test();
             Power pwr = new Power(new Lit(2.0), new Lit(5.0));
             Exp mb = pwr.accept(makeMultBy(new Lit(4.0))); //mult by 4 just like raising by additional 2
 
@@ -24,17 +24,18 @@ public class I2Test extends M0Test {
                             "((2.0^5.0)*4.0)".equals(mb.accept(makePrettyp())));
         }
 
-        public EvalPower makeEval() {
+        default EvalPower makeEval() {
             return new EvalPower();
         }
-        public PrettypPower makePrettyp () {
+        default PrettypPower makePrettyp () {
             return new PrettypPower();
         }
-        public MultByPower makeMultBy (Exp other) {
+        default MultByPower makeMultBy (Exp other) {
             return new MultByPower(other);
         }
     }
+    private static class ActualTest implements I2Test.TestTemplate {}
 
     @Test
-    public void testTest() { new TestTemplate().test(); }
+    public void testTest() { new ActualTest().test(); }
 }

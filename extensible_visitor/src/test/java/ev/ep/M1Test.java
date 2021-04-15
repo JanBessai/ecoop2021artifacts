@@ -11,6 +11,7 @@ public class M1Test extends M0Test {
     public interface TestTemplate extends M0Test.TestTemplate {
         default void test() {
             M0Test.TestTemplate.super.test();
+
             Sub expr1 = new Sub(new Lit(1.0), new Lit(2.0));
             Assert.assertEquals(-1.0, expr1.<Double>accept(this.makeEval()), 0.0);
 

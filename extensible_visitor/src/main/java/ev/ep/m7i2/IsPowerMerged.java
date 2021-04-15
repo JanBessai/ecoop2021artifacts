@@ -1,7 +1,6 @@
 package ev.ep.m7i2;
 
 import ev.ep.Exp;
-import ev.ep.m6.IsDataType;
 
 public class IsPowerMerged implements IsDataTypeMerged {
     Exp left;

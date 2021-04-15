@@ -3,8 +3,6 @@ package ev.ep.m6;
 import ev.ep.Exp;
 import ev.ep.m3.VisitorDivdMultNeg;
 
-import java.util.List;
-
 /** USe an interface because future evolutions will need to augment with their own visit methods. */
 public interface IsDataType extends VisitorDivdMultNeg<Boolean> {
 

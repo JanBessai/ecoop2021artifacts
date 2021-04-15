@@ -4,8 +4,7 @@ import ev.ep.m2.Prettyp;
 
 public class PrettypDivdMultNeg extends Prettyp implements VisitorDivdMultNeg<String> {
 
-    public PrettypDivdMultNeg() {
-    }
+    public PrettypDivdMultNeg() { }
 
     public String visit(Neg exp) {
         return "(-" + exp.getInner().accept(this) + ")";
@@ -19,7 +18,4 @@ public class PrettypDivdMultNeg extends Prettyp implements VisitorDivdMultNeg<St
         return "(" + exp.getLeft().accept(this) + "/" + exp.getRight().accept(this) + ")";
     }
 
-//    public PrettypDivdMultNeg makePrettyp() {
-//        return new PrettypDivdMultNeg();
-//    }
 }
