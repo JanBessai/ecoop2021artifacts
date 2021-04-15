@@ -10,15 +10,11 @@ public class PrettypNeg implements PrettypExp {
 
     protected PrettypExp inner;
 
-    public PrettypExp getInner() {
-        return this.inner;
-    }
-
     public Double eval() {
-        return -getInner().eval();
+        return - inner.eval();
     }
 
     public String prettyp() {
-        return "(-" + getInner().prettyp() + ")";
+        return "(-" + inner.prettyp() + ")";
     }
 }

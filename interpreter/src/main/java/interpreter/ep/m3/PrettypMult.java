@@ -10,22 +10,13 @@ public class PrettypMult implements PrettypExp {
     }
 
     protected PrettypExp left;
-
     protected PrettypExp right;
     
-    public PrettypExp getLeft() {
-        return this.left;
-    }
-
-    public PrettypExp getRight() {
-        return this.right;
-    }
-
     public Double eval() {
-        return getLeft().eval() * getRight().eval();
+        return left.eval() * right.eval();
     }
 
     public String prettyp() {
-        return "(" + getLeft().prettyp() + "*" + getRight().prettyp() + ")";
+        return "(" +left.prettyp() + "*" + right.prettyp() + ")";
     }
 }

@@ -1,21 +1,23 @@
 package interpreter.ep;
 
 import interpreter.ep.m7i2.MergedExp;
-import interpreter.ep.m7i2.MergedExpFactory;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
 
-public class M7i2Test {
-    public static class TestTemplate extends MergedExpFactory {
-        void test() {
+// Pick one of the past branches to extend
+public class M7i2Test extends M7Test {
+    public interface TestTemplate extends M7Test.TestTemplate, I2Test.TestTemplate {
+        default void test() {
+            M7Test.TestTemplate.super.test();
+            I2Test.TestTemplate.super.test();
 
             MergedExp m = mult(lit(2.0), lit(5.0));
-            MergedExp mb = m.multby(lit(4.0));
+            MergedExp mb = (MergedExp) m.multby(lit(4.0));
 
             MergedExp pwr = power(lit(2.0), lit(5.0));
-            MergedExp pwr2 = lit(2.0).powby(lit(5.0));
+            MergedExp pwr2 = (MergedExp) lit(2.0).powby(lit(5.0));
 
             Assert.assertFalse(pwr.eql(mb));
             Assert.assertFalse(mb.eql(pwr));
@@ -25,13 +27,13 @@ public class M7i2Test {
             Assert.assertTrue(pwr2.eql(pwr));
 
             MergedExp neg = neg(lit(2.0));
-            MergedExp neg2 = neg.powby(lit(5.0));
+            MergedExp neg2 = (MergedExp) neg.powby(lit(5.0));
             Assert.assertEquals(-32.0, neg2.eval(), 0.0);
 
-            MergedExp neg3 = neg.multby(lit(5.0));
+            MergedExp neg3 = (MergedExp) neg.multby(lit(5.0));
             Assert.assertEquals(-10.0, neg3.eval(), 0.0);
 
-            MergedExp divd2 = divd(lit(6.0), lit(2.0)).multby(lit(5.0));
+            MergedExp divd2 = (MergedExp) divd(lit(6.0), lit(2.0)).multby(lit(5.0));
             Assert.assertEquals(15.0, divd2.eval(), 0.0);
 
             Assert.assertEquals(40.0, mb.eval(), 0.0);
@@ -58,15 +60,20 @@ public class M7i2Test {
             Assert.assertEquals(power(lit(1.0), lit(12.0)).collect(), Arrays.asList(1.0, 12.0));
 
             MergedExp pwr3 = power(lit(2.0), lit(3.0));
-            MergedExp pwr4 = pwr3.powby(lit(4.0));
+            MergedExp pwr4 = (MergedExp) pwr3.powby(lit(4.0));
             Assert.assertEquals("((2.0^3.0)^4.0)", pwr4.prettyp());
         }
     }
 
+    static MergedExp lit(Double d) { return new interpreter.ep.m7i2.MergedLit(d); }
+    static MergedExp add(MergedExp left, MergedExp right) { return new interpreter.ep.m7i2.MergedAdd(left, right); }
+    static MergedExp sub(MergedExp left, MergedExp right) { return new interpreter.ep.m7i2.MergedSub(left, right); }
+    static MergedExp mult(MergedExp left, MergedExp right) { return new interpreter.ep.m7i2.MergedMult(left, right); }
+    static MergedExp neg(MergedExp inner) { return new interpreter.ep.m7i2.MergedNeg(inner); }
+    static MergedExp divd(MergedExp left, MergedExp right) { return new interpreter.ep.m7i2.MergedDivd(left, right); }
+    static MergedExp power(MergedExp left, MergedExp right) { return new interpreter.ep.m7i2.MergedPower(left, right); }
+    private static class ActualTest implements M7i2Test.TestTemplate {}
+
     @Test
-    public void testTest() {
-        new M7Test().testTest();
-        new I2Test().testTest();
-        new TestTemplate().test();
-    }
+    public void testTest() { new M7i2Test.ActualTest().test(); }
 }

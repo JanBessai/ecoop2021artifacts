@@ -19,7 +19,6 @@ public class I2Test extends M0Test {
             Assert.assertEquals(32.0, pwr.accept(makeEval()), 0.0);
             Assert.assertEquals("(2.0^5.0)", pwr.accept(makePrettyp()));
 
-            System.out.println(mb.accept(makePrettyp()));
             //based upon the CONTEXT (M7I2 or I2) you might get different results for mb
             Assert.assertTrue("(2.0^(5.0+2.0))".equals(mb.accept(makePrettyp())) ||
                             "((2.0^5.0)*4.0)".equals(mb.accept(makePrettyp())));

@@ -8,23 +8,40 @@ public class EqualsAdd extends AstreeIdzAdd implements EqualsExp {
 		super(left, right);
 	}
 
-	public EqualsExp getLeft() {
-		return (EqualsExp) this.left;
-	}
-
-	public EqualsExp getRight() {
-		return (EqualsExp) this.right;
-	}
-
 	public Boolean equals(EqualsExp that) {
 		return this.astree().equals(that.astree());
 	}
 
 	public Boolean isAdd(EqualsExp left, EqualsExp right) { 
-		return left.eql(getLeft()) && right.eql(getRight()); 
+		return left.eql(left) && right.eql(right);
 	}
 
 	public Boolean eql(EqualsExp that) {
-		return that.isAdd(getLeft(), getRight());
+		return that.isAdd((EqualsExp)left, (EqualsExp)right);
+	}
+
+	public EqualsExp simplify() {
+		double leftVal = left.eval();
+		double rightVal = right.eval();
+		if ((leftVal == 0 && rightVal == 0) || (leftVal + rightVal == 0)) {
+			return new EqualsLit(0.0);
+		} else if (leftVal == 0) {
+			return (EqualsExp) ((EqualsExp)right).simplify();
+		} else if (rightVal == 0) {
+			return (EqualsExp) ((EqualsExp)left).simplify();
+		} else {
+			return new EqualsAdd((EqualsExp) ((EqualsExp)left).simplify(),
+					(EqualsExp) ((EqualsExp)right).simplify());
+		}
+	}
+
+	public void truncate (int level) {
+		if (level > 1) {
+			((EqualsExp)left).truncate(level-1);
+			((EqualsExp)right).truncate(level-1);
+		} else {
+			left = new EqualsLit(left.eval());
+			right = new EqualsLit(right.eval());
+		}
 	}
 }

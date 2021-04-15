@@ -1,7 +1,5 @@
 package interpreter.ep.m4;
 
-import static interpreter.ep.m4.CollectSimplifyExpFactory.*;
-
 import interpreter.ep.m3.PrettypNeg;
 
 public class CollectSimplifyNeg extends PrettypNeg implements CollectSimplifyExp {
@@ -10,33 +8,25 @@ public class CollectSimplifyNeg extends PrettypNeg implements CollectSimplifyExp
         super(inner);
     }
 
-    public CollectSimplifyExp getInner() {
-        return (CollectSimplifyExp) this.inner;
+	public CollectSimplifyExp simplify() {
+        if (inner.eval().equals(0.0)) {
+            return new CollectSimplifyLit(0.0);
+        } else {
+            return new CollectSimplifyNeg(((CollectSimplifyExp)inner).simplify());
+        }
     }
 
-    void setInner(CollectSimplifyExp inner) { 
-    	this.inner = inner; 
-    }
-    
-	public void truncate (int level) {
-		if (level > 1) {
-			getInner().truncate(level-1);
-		} else {
-			setInner(lit(getInner().eval()));
-		}
-	}
-    
-    public CollectSimplifyExp simplify() {
-        if (getInner().eval() == 0) {
-            return lit(0.0);
+    public void truncate (int level) {
+        if (level > 1) {
+            ((CollectSimplifyExp)inner).truncate(level-1);
         } else {
-            return neg(getInner().simplify());
+            inner = new CollectSimplifyLit(inner.eval());
         }
     }
 
     public java.util.List<Double> collect() {
         java.util.List<Double> tmpList2 = new java.util.ArrayList<>();
-        tmpList2.addAll(getInner().collect());
+        tmpList2.addAll(((CollectSimplifyExp)inner).collect());
         return tmpList2;
     }
 }

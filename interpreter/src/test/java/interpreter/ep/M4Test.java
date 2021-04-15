@@ -1,16 +1,17 @@
 package interpreter.ep;
 
 import interpreter.ep.m4.CollectSimplifyExp;
-import interpreter.ep.m4.CollectSimplifyExpFactory;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Collections;
 
-public class M4Test {
-    public static class TestTemplate extends CollectSimplifyExpFactory {
-        void test() {
+public class M4Test extends M3Test {
+    public interface TestTemplate extends M3Test.TestTemplate {
+        default void test() {
+            M3Test.TestTemplate.super.test();
+
             CollectSimplifyExp expr1 = divd(lit(3.0), lit(1.0));
             Assert.assertEquals("3.0", expr1.simplify().prettyp());
 
@@ -33,7 +34,6 @@ public class M4Test {
             Assert.assertEquals("(-2.0+-5.0)", expr8.simplify().prettyp());
 
             CollectSimplifyExp sub2 = sub(lit(3.0), lit(3.0));
-            CollectSimplifyExp ss = sub2.simplify();
             Assert.assertEquals("0.0", sub2.simplify().prettyp());
 
             CollectSimplifyExp neg2 = neg(lit(0.0));
@@ -75,12 +75,12 @@ public class M4Test {
             CollectSimplifyExp base = mult(add(lit(3.0), lit(7.0)), lit(3.0));
             String baseBeforeTrunc = base.prettyp();
             base.truncate(3);
-            Assert.assertTrue("", base.prettyp().equals(baseBeforeTrunc));
+            Assert.assertTrue(base.prettyp().equals(baseBeforeTrunc));
 
             CollectSimplifyExp larger = sub(base, divd(base, lit(1.0)));
             String largerBeforeTrunc = larger.prettyp();
             larger.truncate(4);
-            Assert.assertTrue("", larger.prettyp().equals(largerBeforeTrunc));
+            Assert.assertTrue(larger.prettyp().equals(largerBeforeTrunc));
 
             CollectSimplifyExp nd1 = neg(lit(1.0));
             CollectSimplifyExp nd2 = neg(nd1);
@@ -99,8 +99,15 @@ public class M4Test {
         }
     }
 
+    static CollectSimplifyExp lit(Double d) { return new interpreter.ep.m4.CollectSimplifyLit(d); }
+    static CollectSimplifyExp add(CollectSimplifyExp left, CollectSimplifyExp right) { return new interpreter.ep.m4.CollectSimplifyAdd(left, right); }
+    static CollectSimplifyExp sub(CollectSimplifyExp left, CollectSimplifyExp right) { return new interpreter.ep.m4.CollectSimplifySub(left, right); }
+    static CollectSimplifyExp mult(CollectSimplifyExp left, CollectSimplifyExp right) { return new interpreter.ep.m4.CollectSimplifyMult(left, right); }
+    static CollectSimplifyExp neg(CollectSimplifyExp inner) { return new interpreter.ep.m4.CollectSimplifyNeg(inner); }
+    static CollectSimplifyExp divd(CollectSimplifyExp left, CollectSimplifyExp right) { return new interpreter.ep.m4.CollectSimplifyDivd(left, right); }
+
+    private static class ActualTest implements M4Test.TestTemplate {}
+
     @Test
-    public void testTest() {
-        new M3Test().testTest();
-        new TestTemplate().test(); }
+    public void testTest() { new M4Test.ActualTest().test(); }
 }

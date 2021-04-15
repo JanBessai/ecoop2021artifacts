@@ -1,24 +1,34 @@
 package interpreter.ep.m7;
 
+import interpreter.ep.m4.CollectSimplifyExp;
 import interpreter.ep.m6.EqualsSub;
-
-import static interpreter.ep.m7.PowByExpFactory.*;
 
 public class PowBySub extends EqualsSub implements PowByExp {
 
     public PowBySub(PowByExp left, PowByExp right) {
 		super(left, right);
 	}
-    
-    public PowByExp getLeft() {
-        return (PowByExp) this.left;
-    }
-
-    public PowByExp getRight() {
-        return (PowByExp) this.right;
-    }
 
 	public PowByExp powby(PowByExp other) {
-        return lit(this.eval()).powby(other);
+        return new PowByLit(this.eval()).powby(other);
+    }
+
+    public PowByExp simplify() {
+        if (left.eval().equals(right.eval())) {
+            return new PowByLit(0.0);
+        } else {
+            return new PowBySub((PowByExp) ((CollectSimplifyExp)left).simplify(),
+                                (PowByExp) ((CollectSimplifyExp)right).simplify());
+        }
+    }
+
+    public void truncate (int level) {
+        if (level > 1) {
+            ((PowByExp)left).truncate(level-1);
+            ((PowByExp)right).truncate(level-1);
+        } else {
+            left = new PowByLit(left.eval());
+            right = new PowByLit(right.eval());
+        }
     }
 }

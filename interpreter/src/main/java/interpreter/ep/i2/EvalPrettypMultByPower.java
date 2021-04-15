@@ -1,7 +1,8 @@
 package interpreter.ep.i2;
 
+import interpreter.ep.i1.MultByAdd;
 import interpreter.ep.i1.MultByExp;
-import static interpreter.ep.i2.EvalPrettypMultByExpFactory.*;
+import interpreter.ep.i1.MultByLit;
 
 public class EvalPrettypMultByPower implements MultByExp {
 
@@ -10,30 +11,20 @@ public class EvalPrettypMultByPower implements MultByExp {
         this.right = right;
     }
 
-    public MultByExp getLeft() {
-        return this.left;
-    }
-
-    public MultByExp getRight() {
-        return this.right;
-    }
-
     protected MultByExp left;
-
     protected MultByExp right;
 
     public Double eval() {
-        return Math.pow(getLeft().eval(), getRight().eval());
+        return Math.pow(left.eval(), right.eval());
     }
     
     public String prettyp() {
-    	return "(" + getLeft().prettyp() + "^" + getRight().prettyp() + ")";
+    	return "(" + left.prettyp() + "^" + right.prettyp() + ")";
     }
     
     public MultByExp multby(MultByExp other) {
-    	//return EvalPrettypMultByExpFactory.power(getLeft().multby(other), getRight().multby(other));
-        double leftEval = getLeft().eval();
+    	double leftEval = left.eval();
         double added = Math.log(other.eval()) / Math.log(leftEval);
-        return power(this.getLeft(), add(this.getRight(), lit(added)));
+        return new EvalPrettypMultByPower(left, new MultByAdd(right, new MultByLit(added)));
     }
 }

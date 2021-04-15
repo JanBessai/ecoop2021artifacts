@@ -9,19 +9,10 @@ public class EvalSub implements EvalExp {
         this.right = right;
     }
 
-    public EvalExp getLeft() {
-        return this.left;
-    }
-
-    public EvalExp getRight() {
-        return this.right;
-    }
-
     protected EvalExp left;
-
     protected EvalExp right;
 
     public Double eval() {
-        return getLeft().eval() - getRight().eval();
+        return left.eval() - right.eval();
     }
 }

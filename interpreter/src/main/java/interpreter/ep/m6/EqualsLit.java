@@ -8,10 +8,6 @@ public class EqualsLit extends AstreeIdzLit implements EqualsExp {
         super(value);
     }
 
-    public Double getValue() {
-        return this.value;
-    }
-
     public Boolean equals(EqualsExp that) {
         return this.astree().equals(that.astree());
     }

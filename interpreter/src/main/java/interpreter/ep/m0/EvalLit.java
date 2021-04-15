@@ -6,13 +6,9 @@ public class EvalLit implements EvalExp {
         this.value = value;
     }
 
-    public Double getValue() {
-        return this.value;
-    }
-
     protected Double value;
 
     public Double eval() {
-        return getValue();
+        return value;
     }
 }

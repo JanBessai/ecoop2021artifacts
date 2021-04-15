@@ -1,14 +1,14 @@
 package interpreter.ep;
 
-import interpreter.ep.m2.PrettypExpFactory;
 import interpreter.ep.m2.PrettypExp;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class M2Test {
+public class M2Test extends M1Test {
 
-    public static class TestTemplate extends PrettypExpFactory {
-        void test() {
+    public interface TestTemplate extends M1Test.TestTemplate {
+        default void test() {
+            M1Test.TestTemplate.super.test();
 
             PrettypExp expr1 = add(lit(1.0), lit(2.0));
             Assert.assertEquals("(1.0+2.0)", expr1.prettyp());
@@ -21,9 +21,12 @@ public class M2Test {
         }
     }
 
+    static PrettypExp lit(Double d) { return new interpreter.ep.m2.PrettypLit(d); }
+    static PrettypExp add(PrettypExp left, PrettypExp right) { return new interpreter.ep.m2.PrettypAdd(left, right); }
+    static PrettypExp sub(PrettypExp left, PrettypExp right) { return new interpreter.ep.m2.PrettypSub(left, right); }
+
+    private static class ActualTest implements M2Test.TestTemplate {}
+
     @Test
-    public void testTest() {
-        new M1Test().testTest();
-        new TestTemplate().test();
-    }
+    public void testTest() { new M2Test.ActualTest().test(); }
 }

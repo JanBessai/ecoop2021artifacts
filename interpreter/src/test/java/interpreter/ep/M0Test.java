@@ -1,13 +1,12 @@
 package interpreter.ep;
 
 import interpreter.ep.m0.EvalExp;
-import interpreter.ep.m0.EvalExpFactory;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class M0Test {
-    public static class TestTemplate extends EvalExpFactory {
-        void test() {
+    public interface TestTemplate {
+        default void test() {
             EvalExp expr1 = add(lit(1.0), lit(2.0));
             Assert.assertEquals(3.0, expr1.eval(), 0.0);
 
@@ -17,7 +16,13 @@ public class M0Test {
             Assert.assertEquals(3.0, add(lit(1.0), lit(2.0)).eval(), 0.0);
             Assert.assertEquals(5.0, lit(5.0).eval(), 0.0);
         }
+
     }
+    static EvalExp lit(Double d) { return new interpreter.ep.m0.EvalLit(d); }
+    static EvalExp add(EvalExp left, EvalExp right) { return new interpreter.ep.m0.EvalAdd(left, right); }
+
+    private static class ActualTest implements TestTemplate {}
+
     @Test
-    public void testTest() { new TestTemplate().test(); }
+    public void testTest() { new ActualTest().test(); }
 }

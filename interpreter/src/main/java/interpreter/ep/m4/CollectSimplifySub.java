@@ -1,7 +1,5 @@
 package interpreter.ep.m4;
 
-import static interpreter.ep.m4.CollectSimplifyExpFactory.*;
-
 import interpreter.ep.m2.PrettypSub;
 
 public class CollectSimplifySub extends PrettypSub implements CollectSimplifyExp {
@@ -10,43 +8,28 @@ public class CollectSimplifySub extends PrettypSub implements CollectSimplifyExp
         super(left, right);
     }
 
-    public CollectSimplifyExp getLeft() {
-        return (CollectSimplifyExp) this.left;
-    }
-
-    public CollectSimplifyExp getRight() {
-        return (CollectSimplifyExp) this.right;
-    }
-
-    void setLeft(CollectSimplifyExp left) { 
-    	this.left = left;
-    }
-	void setRight(CollectSimplifyExp right) { 
-		this.right = right;
-	}
-	
-	public void truncate (int level) {
-		if (level > 1) {
-			getLeft().truncate(level-1);
-			getRight().truncate(level-1);
-		} else {
-			setLeft(lit(getLeft().eval()));
-			setRight(lit(getRight().eval()));
-		}
-	}
-    
     public CollectSimplifyExp simplify() {
-        if (getLeft().eval().equals(getRight().eval())) {
-            return lit(0.0);
+        if (left.eval().equals(right.eval())) {
+            return new CollectSimplifyLit(0.0);
         } else {
-            return sub(getLeft().simplify(), getRight().simplify());
+            return new CollectSimplifySub (((CollectSimplifyExp)left).simplify(), ((CollectSimplifyExp)right).simplify());
+        }
+    }
+
+    public void truncate (int level) {
+        if (level > 1) {
+            ((CollectSimplifyExp)left).truncate(level-1);
+            ((CollectSimplifyExp)right).truncate(level-1);
+        } else {
+            left = new CollectSimplifyLit(left.eval());
+            right = new CollectSimplifyLit(right.eval());
         }
     }
 
     public java.util.List<Double> collect() {
         java.util.List<Double> tmpList5 = new java.util.ArrayList<>();
-        tmpList5.addAll(getLeft().collect());
-        tmpList5.addAll(getRight().collect());
+        tmpList5.addAll(((CollectSimplifyExp)left).collect());
+        tmpList5.addAll(((CollectSimplifyExp)right).collect());
         return tmpList5;
     }
 }

@@ -8,15 +8,7 @@ public class PrettypSub extends EvalSub implements PrettypExp {
         super(left, right);
     }
 
-    public PrettypExp getLeft() {
-        return (PrettypExp) this.left;
-    }
-
-    public PrettypExp getRight() {
-        return (PrettypExp) this.right;
-    }
-
     public String prettyp() {
-        return "(" + getLeft().prettyp() + "-" + getRight().prettyp() + ")";
+        return "(" + ((PrettypExp) left).prettyp() + "-" + ((PrettypExp) right).prettyp() + ")";
     }
 }

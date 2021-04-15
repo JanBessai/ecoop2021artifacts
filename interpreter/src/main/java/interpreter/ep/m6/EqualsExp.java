@@ -1,5 +1,6 @@
 package interpreter.ep.m6;
 
+import interpreter.ep.m4.CollectSimplifyExp;
 import interpreter.ep.m5.AstreeIdzExp;
 
 public interface EqualsExp extends AstreeIdzExp {
@@ -14,4 +15,9 @@ public interface EqualsExp extends AstreeIdzExp {
     default Boolean isMult(EqualsExp left, EqualsExp right) { return false; }
     default Boolean isNeg(EqualsExp inner) { return false; }
     default Boolean isDivd(EqualsExp left, EqualsExp right) { return false; }
+
+    // producer methods must be present in all subsequent evolutions
+    CollectSimplifyExp simplify();
+
+    // all subsequent data types involved in Truncate must also duplicate logic to access correct lit() factory method
 }

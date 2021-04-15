@@ -3,8 +3,6 @@ package interpreter.ep.m7i2;
 import interpreter.ep.m7.PowByAdd;
 import interpreter.ep.m7.PowByExp;
 
-import static interpreter.ep.m7i2.MergedExpFactory.*;
-
 import interpreter.ep.i1.MultByExp;
 
 /** This could have chosen either branch to extend, since Add defined before split. */
@@ -14,39 +12,43 @@ public class MergedAdd extends PowByAdd implements MergedExp {
         super(left, right);
     }
 
-    public MergedExp getLeft() {
-        return (MergedExp) this.left;
-    }
-
-    public MergedExp getRight() {
-        return (MergedExp) this.right;
-    }
-    
     @Override
     public MergedExp simplify() {
-        double leftVal = getLeft().eval();
-        double rightVal = getRight().eval();
+        double leftVal = left.eval();
+        double rightVal = right.eval();
         if ((leftVal == 0 && rightVal == 0) || (leftVal + rightVal == 0)) {
-            return lit(0.0);
+            return new MergedLit(0.0);
         } else if (leftVal == 0) {
-            return getRight().simplify();
+            return (MergedExp) ((MergedExp)left).simplify();
         } else if (rightVal == 0) {
-            return getLeft().simplify();
+            return (MergedExp) ((MergedExp)right).simplify();
         } else {
-            return add(getLeft().simplify(), getRight().simplify());
+            MergedExp mleft = (MergedExp) ((MergedExp)left).simplify();
+            MergedExp mright = (MergedExp) ((MergedExp)right).simplify();
+            return new MergedAdd(mleft, mright);
+        }
+    }
+
+    public void truncate (int level) {
+        if (level > 1) {
+            ((MergedExp)left).truncate(level-1);
+            ((MergedExp)right).truncate(level-1);
+        } else {
+            left = new MergedLit(left.eval());
+            right = new MergedLit(right.eval());
         }
     }
 
     /** Take advantage of results from both branches. */
 	@Override
 	public MergedExp powby(PowByExp other) {
-		return power(this, (MergedExp)other);
+		return new MergedPower(this, (MergedExp)other);
 	}
 
 	/** Take advantage of results from both branches. */
 	@Override
 	public MergedExp multby(MultByExp other) {
-        return mult(this, (MergedExp) other);
+        return new MergedMult(this, (MergedExp) other);
     }
 
 }

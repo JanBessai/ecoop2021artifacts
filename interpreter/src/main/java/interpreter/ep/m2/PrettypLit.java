@@ -8,11 +8,7 @@ public class PrettypLit extends EvalLit implements PrettypExp {
         super(value);
     }
 
-    public Double getValue() {
-        return this.value;
-    }
-
     public String prettyp() {
-        return "" + getValue();
+        return "" + value;
     }
 }

@@ -1,15 +1,14 @@
 package interpreter.ep;
 
 import interpreter.ep.m6.EqualsExp;
-import interpreter.ep.m6.EqualsExpFactory;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class M6Test {
+public class M6Test extends M5Test {
 
-    public static class TestTemplate extends EqualsExpFactory {
-        void test() {
-
+    public interface TestTemplate extends M5Test.TestTemplate {
+        default void test() {
+            M5Test.TestTemplate.super.test();
             EqualsExp lit1 = lit(1.0);
             EqualsExp lit2 = lit(2.0);
             EqualsExp mult1 = mult(lit1, lit2);
@@ -57,9 +56,15 @@ public class M6Test {
         }
     }
 
+    static EqualsExp lit(Double d) { return new interpreter.ep.m6.EqualsLit(d); }
+    static EqualsExp add(EqualsExp left, EqualsExp right) { return new interpreter.ep.m6.EqualsAdd(left, right); }
+    static EqualsExp sub(EqualsExp left, EqualsExp right) { return new interpreter.ep.m6.EqualsSub(left, right); }
+    static EqualsExp mult(EqualsExp left, EqualsExp right) { return new interpreter.ep.m6.EqualsMult(left, right); }
+    static EqualsExp neg(EqualsExp inner) { return new interpreter.ep.m6.EqualsNeg(inner); }
+    static EqualsExp divd(EqualsExp left, EqualsExp right) { return new interpreter.ep.m6.EqualsDivd(left, right); }
+
+    private static class ActualTest implements M6Test.TestTemplate {}
+
     @Test
-    public void testTest() {
-        new M5Test().testTest();
-        new TestTemplate().test();
-    }
+    public void testTest() { new M6Test.ActualTest().test(); }
 }

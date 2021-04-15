@@ -1,7 +1,5 @@
 package interpreter.ep.m4;
 
-import static interpreter.ep.m4.CollectSimplifyExpFactory.*;
-
 import interpreter.ep.m3.PrettypDivd;
 
 public class CollectSimplifyDivd extends PrettypDivd implements CollectSimplifyExp {
@@ -10,51 +8,36 @@ public class CollectSimplifyDivd extends PrettypDivd implements CollectSimplifyE
         super(left, right);
     }
 
-    public CollectSimplifyExp getLeft() {
-        return (CollectSimplifyExp) this.left;
-    }
-
-    public CollectSimplifyExp getRight() {
-        return (CollectSimplifyExp) this.right;
-    }
-    
-    void setLeft(CollectSimplifyExp left) { 
-    	this.left = left;
-    }
-	void setRight(CollectSimplifyExp right) { 
-		this.right = right;
-	}
-	
 	public void truncate (int level) {
 		if (level > 1) {
-			getLeft().truncate(level-1);
-			getRight().truncate(level-1);
+            ((CollectSimplifyExp)left).truncate(level-1);
+            ((CollectSimplifyExp)right).truncate(level-1);
 		} else {
-			setLeft(lit(getLeft().eval()));
-			setRight(lit(getRight().eval()));
+			left = new CollectSimplifyLit(left.eval());
+			right = new CollectSimplifyLit(right.eval());
 		}
 	}
     
     public CollectSimplifyExp simplify() {
-        double leftVal = getLeft().eval();
-        double rightVal = getRight().eval();
+        double leftVal = left.eval();
+        double rightVal = right.eval();
         if (leftVal == 0) {
-            return lit(0.0);
+            return new CollectSimplifyLit(0.0);
         } else if (rightVal == 1) {
-            return getLeft().simplify();
+            return ((CollectSimplifyExp)left).simplify();
         } else if (leftVal == rightVal) {
-            return lit(1.0);
+            return new CollectSimplifyLit(1.0);
         } else if (leftVal == -rightVal) {
-            return lit(-1.0);
+            return new CollectSimplifyLit(-1.0);
         } else {
-            return divd(getLeft().simplify(), getRight().simplify());
+            return new CollectSimplifyDivd (((CollectSimplifyExp)left).simplify(), ((CollectSimplifyExp)right).simplify());
         }
     }
 
     public java.util.List<Double> collect() {
         java.util.List<Double> tmpList4 = new java.util.ArrayList<>();
-        tmpList4.addAll(getLeft().collect());
-        tmpList4.addAll(getRight().collect());
+        tmpList4.addAll(((CollectSimplifyExp)left).collect());
+        tmpList4.addAll(((CollectSimplifyExp)right).collect());
         return tmpList4;
     }
 }

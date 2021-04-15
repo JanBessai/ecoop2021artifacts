@@ -1,7 +1,5 @@
 package interpreter.ep.m4;
 
-import static interpreter.ep.m4.CollectSimplifyExpFactory.*;
-
 import interpreter.ep.m2.PrettypLit;
 
 public class CollectSimplifyLit extends PrettypLit implements CollectSimplifyExp {
@@ -10,17 +8,13 @@ public class CollectSimplifyLit extends PrettypLit implements CollectSimplifyExp
         super(value);
     }
 
-    public void truncate (int level) {
-		
-	}
+    public void truncate (int level) { }
     
     public Double getValue() {
         return this.value;
     }
 
-    public CollectSimplifyExp simplify() {
-        return lit(getValue());
-    }
+    public CollectSimplifyExp simplify() { return this; }
 
     public java.util.List<Double> collect() {
         java.util.List<Double> tmpList6 = new java.util.ArrayList<>();

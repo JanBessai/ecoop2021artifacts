@@ -8,10 +8,6 @@ public class AstreeIdzLit extends CollectSimplifyLit implements AstreeIdzExp {
         super(value);
     }
 
-    public Double getValue() {
-        return this.value;
-    }
-
     public util.Tree astree() {
         return new util.Node(idz(), new util.Leaf<Double>(getValue()));
     }

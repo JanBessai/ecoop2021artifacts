@@ -1,7 +1,5 @@
 package interpreter.ep.m7i2;
 
-import static interpreter.ep.m7i2.MergedExpFactory.*;
-
 import interpreter.ep.i1.MultByExp;
 import interpreter.ep.m7.PowByDivd;
 import interpreter.ep.m7.PowByExp;
@@ -12,39 +10,43 @@ public class MergedDivd extends PowByDivd implements MergedExp {
         super(left, right);
     }
 
-    public MergedExp getLeft() {
-        return (MergedExp) this.left;
-    }
-
-    public MergedExp getRight() {
-        return (MergedExp) this.right;
-    }
-
     public MergedExp simplify() {
-        double leftVal = getLeft().eval();
-        double rightVal = getRight().eval();
+        double leftVal = left.eval();
+        double rightVal = right.eval();
         if (leftVal == 0) {
-            return lit(0.0);
+            return new MergedLit(0.0);
         } else if (rightVal == 1) {
-            return getLeft().simplify();
+            return (MergedExp) ((MergedExp)left).simplify();
         } else if (leftVal == rightVal) {
-            return lit(1.0);
+            return new MergedLit(1.0);
         } else if (leftVal == -rightVal) {
-            return lit(-1.0);
+            return new MergedLit(-1.0);
         } else {
-            return divd(getLeft().simplify(), getRight().simplify());
+            MergedExp mleft = (MergedExp) ((MergedExp)left).simplify();
+            MergedExp mright = (MergedExp) ((MergedExp)right).simplify();
+            return new MergedDivd(mleft, mright);
         }
     }
-    
+
+    public void truncate (int level) {
+        if (level > 1) {
+            ((MergedExp)left).truncate(level-1);
+            ((MergedExp)right).truncate(level-1);
+        } else {
+            left = new MergedLit(left.eval());
+            right = new MergedLit(right.eval());
+        }
+    }
+
 	/** Take advantage of results from both branches. */
 	@Override
 	public MergedExp powby(PowByExp other) {
-		return power(this, (MergedExp)other);
+		return new MergedPower(this, (MergedExp)other);
 	}
 
 	/** Take advantage of results from both branches. */
 	@Override
 	public MergedExp multby(MultByExp other) {
-        return mult(this, (MergedExp) other);
+        return new MergedMult(this, (MergedExp) other);
     }
 }
