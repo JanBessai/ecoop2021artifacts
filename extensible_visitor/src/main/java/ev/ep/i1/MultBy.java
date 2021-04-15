@@ -36,7 +36,5 @@ public class MultBy implements VisitorSub<Exp> {
         return new Add(exp.getLeft().accept(this), exp.getRight().accept(this));
     }
 
-    public EvalSub makeEval() {
-        return new EvalSub();
-    }
+    public EvalSub makeEval() { return new EvalSub(); }
 }

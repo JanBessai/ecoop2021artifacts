@@ -1,6 +1,5 @@
 package ev.ep.m4;
 
-import ev.ep.Exp;
 import ev.ep.m3.EvalDivdMultNeg;
 import ev.ep.m3.VisitorDivdMultNeg;
 import ev.ep.m0.Lit;
@@ -22,24 +21,24 @@ import ev.ep.m3.Divd;
  * To support Truncate, each existing data type needs to be subclassed
  * anew to enable setLeft and setRight methods (or setInner)
  */
-public class Truncate implements VisitorDivdMultNeg<Exp> {
+public class Truncate implements VisitorDivdMultNeg<Void> {
     protected int level;
 
     public Truncate(int level) {
         this.level = level;
     }
 
-    public Exp visit(Neg exp) {
+
+    public Void visit(Neg exp) {
         if (level > 1) {
             exp.getInner().accept(this.makeTruncate(level-1));
         } else {
             exp.setInner(new Lit(exp.getInner().accept(this.makeEval())));
         }
-
-        return exp;
+        return null;
     }
 
-    public Exp visit(Mult exp) {
+    public Void visit(Mult exp) {
         if (level > 1) {
             exp.getLeft().accept(this.makeTruncate(level-1));
             exp.getRight().accept(this.makeTruncate(level-1));
@@ -47,11 +46,10 @@ public class Truncate implements VisitorDivdMultNeg<Exp> {
             exp.setLeft(new Lit(exp.getLeft().accept(this.makeEval())));
             exp.setRight(new Lit(exp.getRight().accept(this.makeEval())));
         }
-
-        return exp;
+        return null;
     }
 
-    public Exp visit(Divd exp) {
+    public Void visit(Divd exp) {
         if (level > 1) {
             exp.getLeft().accept(this.makeTruncate(level-1));
             exp.getRight().accept(this.makeTruncate(level-1));
@@ -59,11 +57,10 @@ public class Truncate implements VisitorDivdMultNeg<Exp> {
             exp.setLeft(new Lit(exp.getLeft().accept(this.makeEval())));
             exp.setRight(new Lit(exp.getRight().accept(this.makeEval())));
         }
-
-        return exp;
+        return null;
     }
 
-    public Exp visit(Sub exp) {
+    public Void visit(Sub exp) {
         if (level > 1) {
             exp.getLeft().accept(this.makeTruncate(level-1));
             exp.getRight().accept(this.makeTruncate(level-1));
@@ -71,15 +68,14 @@ public class Truncate implements VisitorDivdMultNeg<Exp> {
             exp.setLeft(new Lit(exp.getLeft().accept(this.makeEval())));
             exp.setRight(new Lit(exp.getRight().accept(this.makeEval())));
         }
-
-        return exp;
+        return null;
     }
 
-    public Exp visit(Lit exp) {
-        return exp;
+    public Void visit(Lit exp) {
+        return null;
     }
 
-    public Exp visit(Add exp) {
+    public Void visit(Add exp) {
         if (level > 1) {
             exp.getLeft().accept(this.makeTruncate(level-1));
             exp.getRight().accept(this.makeTruncate(level-1));
@@ -87,8 +83,7 @@ public class Truncate implements VisitorDivdMultNeg<Exp> {
             exp.setLeft(new Lit(exp.getLeft().accept(this.makeEval())));
             exp.setRight(new Lit(exp.getRight().accept(this.makeEval())));
         }
-
-        return exp;
+        return null;
     }
 
     public EvalDivdMultNeg makeEval() {

@@ -29,10 +29,9 @@ public class M3Test {
             Assert.assertEquals(new Neg(new Lit(5.0)).accept(makeEval()), -5.0, 0.0);
             Assert.assertEquals("(-(2.0*3.0))", new Neg(new Mult(new Lit(2.0), new Lit(3.0))).accept(makePrettyp()));
         }
+        default Visitor<Double> makeEval() { return new EvalDivdMultNeg(); }
+        default Visitor<String> makePrettyp() { return new PrettypDivdMultNeg(); }
     }
-
-    static EvalDivdMultNeg makeEval() { return new EvalDivdMultNeg(); }
-    static PrettypDivdMultNeg makePrettyp() { return new PrettypDivdMultNeg(); }
 
     private static class ActualTest implements M3Test.TestTemplate {}
 

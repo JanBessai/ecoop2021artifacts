@@ -6,7 +6,9 @@ import ev.ep.m1.Sub;
 import ev.ep.m3.Divd;
 import ev.ep.m3.Mult;
 import ev.ep.m3.Neg;
+import ev.ep.m3.VisitorDivdMultNeg;
 import ev.ep.m6.Eql;
+import ev.ep.m6.Equals;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -50,6 +52,19 @@ public class M6Test {
             org.junit.Assert.assertTrue(neg1.accept(makeEql(neg1)));
             org.junit.Assert.assertFalse(neg1.accept(makeEql(mult1)));
 
+            org.junit.Assert.assertTrue(lit1.accept(makeEquals(lit1)));
+            org.junit.Assert.assertFalse(mult1.accept(makeEquals(lit2)));
+            org.junit.Assert.assertTrue(mult1.accept(makeEquals(mult1)));
+            org.junit.Assert.assertFalse(mult1.accept(makeEquals(divd1)));
+            org.junit.Assert.assertTrue(divd1.accept(makeEquals(divd1)));
+            org.junit.Assert.assertFalse(divd1.accept(makeEquals(add1)));
+            org.junit.Assert.assertTrue(add1.accept(makeEquals(add1)));
+            org.junit.Assert.assertFalse(add1.accept(makeEquals(sub1)));
+            org.junit.Assert.assertTrue(sub1.accept(makeEquals(sub1)));
+            org.junit.Assert.assertFalse(sub1.accept(makeEquals(neg1)));
+            org.junit.Assert.assertTrue(neg1.accept(makeEquals(neg1)));
+            org.junit.Assert.assertFalse(neg1.accept(makeEquals(mult1)));
+
             org.junit.Assert.assertTrue(new Sub(new Lit(1.0), new Lit(73.0)).accept(makeEql(new Sub(new Lit(1.0), new Lit(73.0)))));
             org.junit.Assert.assertFalse(new Mult(new Divd(new Lit(5.0), new Lit(2.0)), new Lit(4.0)).accept(makeEql(new Mult(new Divd(new Lit(5.0), new Lit(2.0)), new Lit(3.0)))));
             org.junit.Assert.assertTrue(new Mult(new Divd(new Lit(5.0), new Lit(2.0)), new Lit(4.0)).accept(makeEql(new Mult(new Divd(new Lit(5.0), new Lit(2.0)), new Lit(4.0)))));
@@ -60,9 +75,10 @@ public class M6Test {
             org.junit.Assert.assertTrue(new Add(new Lit(5.0), new Lit(3.0)).accept(makeEql(new Add(new Lit(5.0), new Lit(3.0)))));
             org.junit.Assert.assertFalse(new Add(new Lit(5.0), new Lit(3.0)).accept(makeEql(new Mult(new Divd(new Lit(5.0), new Lit(2.0)), new Lit(3.0)))));
         }
-    }
 
-    static Eql makeEql(Exp exp) { return new Eql(exp); }
+        default VisitorDivdMultNeg<Boolean> makeEql(Exp exp) { return new Eql(exp); }
+        default VisitorDivdMultNeg<Boolean> makeEquals(Exp exp) { return new Equals(exp); }
+    }
 
     private static class ActualTest implements M5Test.TestTemplate {}
 

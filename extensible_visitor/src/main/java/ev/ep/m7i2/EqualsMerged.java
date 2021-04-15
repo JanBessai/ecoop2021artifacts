@@ -5,7 +5,7 @@ import ev.ep.i2.VisitorPower;
 import ev.ep.i2.Power;
 import ev.ep.m6.Equals;
 
-public class EqualsMerged extends Equals implements VisitorPower<Boolean> {
+public class EqualsMerged extends Equals implements VisitorMerged<Boolean> {
 
     public EqualsMerged(Exp _other) { super(_other); }
 

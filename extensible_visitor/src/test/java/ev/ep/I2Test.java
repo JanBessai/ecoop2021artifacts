@@ -1,9 +1,6 @@
 package ev.ep;
 
-import ev.ep.i2.EvalPower;
-import ev.ep.i2.MultByPower;
-import ev.ep.i2.Power;
-import ev.ep.i2.PrettypPower;
+import ev.ep.i2.*;
 import ev.ep.m0.Lit;
 import org.junit.Assert;
 import org.junit.Test;
@@ -24,16 +21,16 @@ public class I2Test  {
                             "((2.0^5.0)*4.0)".equals(mb.accept(makePrettyp())));
         }
 
-    }
+        default VisitorPower<Double> makeEval() {
+            return new EvalPower();
+        }
+        default VisitorPower<String> makePrettyp () {
+            return new PrettypPower();
+        }
+        default VisitorPower<Exp> makeMultBy (Exp other) {
+            return new MultByPower(other);
+        }
 
-    static EvalPower makeEval() {
-        return new EvalPower();
-    }
-    static PrettypPower makePrettyp () {
-        return new PrettypPower();
-    }
-    static MultByPower makeMultBy (Exp other) {
-        return new MultByPower(other);
     }
 
     private static class ActualTest implements I2Test.TestTemplate {}

@@ -1,6 +1,5 @@
 package ev.ep.m7i2;
 
-import ev.ep.Exp;
 import ev.ep.m4.Truncate;
 
 /**
@@ -11,13 +10,13 @@ import ev.ep.m4.Truncate;
  * veneer to satisfy the compiler, but it will throw runtime exceptions
  * if the new operation is invoked on an earlier data type.
  */
-public class TruncateMerged extends Truncate implements VisitorMerged<Exp> {
+public class TruncateMerged extends Truncate implements VisitorMerged<Void> {
     public TruncateMerged(int level) {
         super(level);
     }
 
     @Override
-    public Exp visit(ev.ep.i2.Power exp) {
+    public Void visit(ev.ep.i2.Power exp) {
         if (level > 1) {
             exp.getLeft().accept(this.makeTruncate(level-1));
             exp.getRight().accept(this.makeTruncate(level-1));
@@ -26,7 +25,7 @@ public class TruncateMerged extends Truncate implements VisitorMerged<Exp> {
             exp.setRight(new ev.ep.m0.Lit(exp.getRight().accept(this.makeEval())));
         }
 
-        return exp;
+        return null;
     }
 
     public EvalMerged makeEval() {
@@ -36,6 +35,4 @@ public class TruncateMerged extends Truncate implements VisitorMerged<Exp> {
     public TruncateMerged makeTruncate(int level) {
         return new TruncateMerged(level);
     }
-
-
 }

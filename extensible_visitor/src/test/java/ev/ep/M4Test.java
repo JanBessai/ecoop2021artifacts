@@ -104,22 +104,22 @@ public class M4Test {
             Sub largerTrunc = new Sub(baseTrunc, new Divd(baseTrunc, new Lit(1.0)));
             Assert.assertEquals(larger.accept(makePrettyp()), largerTrunc.accept(makePrettyp()));
         }
-    }
 
-    static EvalDivdMultNeg makeEval() {
-        return new EvalDivdMultNeg();
-    }
-    static PrettypDivdMultNeg makePrettyp() {
-        return new PrettypDivdMultNeg();
-    }
-    static Simplify makeSimplify() {
-        return new Simplify();
-    }
-    static Truncate makeTruncate(int level) {
-        return new Truncate(level);
-    }
-    static Collect makeCollect() {
-        return new Collect();
+        default Visitor<Double> makeEval() {
+            return new EvalDivdMultNeg();
+        }
+        default Visitor<String> makePrettyp() {
+            return new PrettypDivdMultNeg();
+        }
+        default Visitor<Exp> makeSimplify() {
+            return new Simplify();
+        }
+        default Visitor<Void> makeTruncate(int level) {
+            return new Truncate(level);
+        }
+        default Visitor<java.util.List<Double>> makeCollect() {
+            return new Collect();
+        }
     }
 
     private static class ActualTest implements M1Test.TestTemplate {}

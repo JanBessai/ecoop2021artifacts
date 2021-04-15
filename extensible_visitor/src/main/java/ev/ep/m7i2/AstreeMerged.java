@@ -6,7 +6,7 @@ import ev.ep.m5.Astree;
 import util.Node;
 import util.Tree;
 
-public class AstreeMerged extends Astree implements VisitorPower<Tree> {
+public class AstreeMerged extends Astree implements VisitorMerged<Tree> {
 
     public AstreeMerged() {
     }

@@ -22,10 +22,10 @@ public class M0Test {
             Assert.assertEquals(3.0, new Add(new Lit(1.0), new Lit(2.0)).<Double>accept(makeEval()), 0.0);
             Assert.assertEquals(5.0, new Lit(5.0).<Double>accept(makeEval()), 0.0);
         }
-    }
 
-    static Eval makeEval() {
-        return new Eval();
+        default Visitor<Double> makeEval() {
+            return new Eval();
+        }
     }
 
     @Test

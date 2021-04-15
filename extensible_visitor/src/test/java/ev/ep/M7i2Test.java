@@ -14,8 +14,10 @@ import java.util.Arrays;
 public class M7i2Test {
 
     // clash when attempting to extend both I2Test.TestTemplate and M7TestTemplate
-    public interface TestTemplate extends M7Test.TestTemplate {
+    public interface TestTemplate extends M7Test.TestTemplate, I2Test.TestTemplate {
         default void test() {
+            M7Test.TestTemplate.super.test();
+            I2Test.TestTemplate.super.test();
 
             Mult m = new Mult(new Lit(2.0), new Lit(5.0));
             Exp mb = m.accept(makeMultBy(new Lit(4.0)));
@@ -66,24 +68,23 @@ public class M7i2Test {
             Exp pwr4 = pwr3.accept(makePowby(new Lit(4.0)));
             Assert.assertEquals("((2.0^3.0)^4.0)", pwr4.accept(makePrettyp()));
         }
-    }
 
-    static EvalMerged makeEval() {
-        return new EvalMerged();
+        default VisitorMerged<Double> makeEval() {
+            return new EvalMerged();
+        }
+        default VisitorMerged<Exp> makeSimplify() {
+            return new SimplifyMerged();
+        }
+        default VisitorMerged<String> makePrettyp() { return new PrettypMerged(); }
+        default VisitorMerged<Boolean> makeEql(Exp exp) { return new EqlMerged(exp); }
+        default VisitorMerged<Boolean> makeEquals(Exp exp) { return new EqualsMerged(exp); }
+        default VisitorMerged<Exp> makeMultBy (Exp other) {
+            return new MultByMerged(other);
+        }
+        default VisitorMerged<Exp> makePowby(Exp exp) { return new PowByMerged(exp); }
+        default VisitorMerged<java.util.List<Double>> makeCollect() { return new CollectMerged(); }
+        default VisitorMerged<Void> makeTruncate(int level) { return new TruncateMerged(level); }
     }
-    static SimplifyMerged makeSimplify() {
-        return new SimplifyMerged();
-    }
-    static PrettypMerged makePrettyp() {
-        return new PrettypMerged();
-    }
-    static EqlMerged makeEql(Exp exp) { return new EqlMerged(exp); }
-    static MultByMerged makeMultBy (Exp other) {
-        return new MultByMerged(other);
-    }
-    static PowByMerged makePowby(Exp exp) { return new PowByMerged(exp); }
-    static CollectMerged makeCollect() { return new CollectMerged(); }
-    static TruncateMerged makeTruncate(int level) { return new TruncateMerged(level); }
 
     private static class ActualTest implements M7i2Test.TestTemplate {}
 

@@ -23,13 +23,13 @@ public class M2Test {
             Assert.assertEquals("(1.0-2.0)", new Sub(new Lit(1.0), new Lit(2.0)).accept(makePrettyp()));
             Assert.assertEquals("((1.0-2.0)+(5.0+6.0))", new Add(new Sub(new Lit(1.0), new Lit(2.0)), new Add(new Lit(5.0), new Lit(6.0))).accept(makePrettyp()));
         }
-    }
 
-    static EvalSub makeEval() {
-        return new EvalSub();
-    }
-    static Prettyp makePrettyp() {
-        return new Prettyp();
+        default Visitor<Double> makeEval() {
+            return new EvalSub();
+        }
+        default Visitor<String> makePrettyp() {
+            return new Prettyp();
+        }
     }
 
     private static class ActualTest implements M2Test.TestTemplate {}

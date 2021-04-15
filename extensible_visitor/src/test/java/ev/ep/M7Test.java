@@ -3,10 +3,7 @@ package ev.ep;
 import ev.ep.m0.Add;
 import ev.ep.m0.Lit;
 import ev.ep.m1.Sub;
-import ev.ep.m3.Divd;
-import ev.ep.m3.EvalDivdMultNeg;
-import ev.ep.m3.Mult;
-import ev.ep.m3.Neg;
+import ev.ep.m3.*;
 import ev.ep.m7.PowBy;
 import org.junit.Assert;
 import org.junit.Test;
@@ -33,12 +30,12 @@ public class M7Test {
 
             Assert.assertEquals(28561.0, new Add(new Lit(1.0), new Lit(12.0)).accept(makePowby(new Lit(4.0))).accept(makeEval()), 0.0);
         }
-    }
 
-    static EvalDivdMultNeg makeEval() {
-        return new EvalDivdMultNeg();
+        default VisitorDivdMultNeg<Double> makeEval() {
+            return new EvalDivdMultNeg();
+        }
+        default VisitorDivdMultNeg<Exp> makePowby(Exp exp) { return new PowBy(exp); }
     }
-    static PowBy makePowby(Exp exp) { return new PowBy(exp); }
 
     private static class ActualTest implements M7Test.TestTemplate {}
 

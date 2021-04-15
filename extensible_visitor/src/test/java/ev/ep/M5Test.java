@@ -1,15 +1,12 @@
 package ev.ep;
 
-import ev.ep.m3.PrettypDivdMultNeg;
+import ev.ep.m3.*;
 import ev.ep.m4.Simplify;
 import ev.ep.m5.Astree;
 import ev.ep.m5.Id;
-import ev.ep.m3.Mult;
 import ev.ep.m0.Lit;
 import ev.ep.m0.Add;
 import ev.ep.m1.Sub;
-import ev.ep.m3.Neg;
-import ev.ep.m3.Divd;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -60,12 +57,12 @@ public class M5Test {
             util.Tree tree2 = new Node(2409808, new Node(76407, new Leaf<>(2.0)), new Node(76407, new Leaf<>(7.0)));
             org.junit.Assert.assertEquals(tree, tree2);
         }
-    }
 
-    static PrettypDivdMultNeg makePrettyp() { return new PrettypDivdMultNeg(); }
-    static Simplify makeSimplify() { return new Simplify();}
-    static Id makeId() { return new Id(); }
-    static Astree makeAstree() { return new Astree(); }
+        default VisitorDivdMultNeg<String> makePrettyp() { return new PrettypDivdMultNeg(); }
+        default VisitorDivdMultNeg<Exp> makeSimplify() { return new Simplify();}
+        default VisitorDivdMultNeg<Integer> makeId() { return new Id(); }
+        default VisitorDivdMultNeg<util.Tree> makeAstree() { return new Astree(); }
+    }
 
     private static class ActualTest implements M5Test.TestTemplate {}
 

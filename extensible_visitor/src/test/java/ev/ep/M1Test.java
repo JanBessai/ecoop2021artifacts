@@ -20,10 +20,9 @@ public class M1Test extends M0Test {
             Assert.assertEquals(new Sub(new Lit(1.0), new Lit(2.0)).<Double>accept(makeEval()), -1.0, 0.0);
         }
 
-    }
-
-    static EvalSub makeEval() {
-        return new EvalSub();
+        default Visitor<Double> makeEval() {
+            return new EvalSub();
+        }
     }
 
     private static class ActualTest implements M1Test.TestTemplate {}
