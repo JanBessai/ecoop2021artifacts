@@ -2,7 +2,6 @@ package interpreter.ep.m7i2;
 
 import interpreter.ep.i1.MultByExp;
 import interpreter.ep.m7.PowByExp;
-import interpreter.ep.m7.PowByLit;
 import interpreter.ep.m7.PowByNeg;
 
 public class MergedNeg extends PowByNeg implements MergedExp {
@@ -27,7 +26,7 @@ public class MergedNeg extends PowByNeg implements MergedExp {
 		if (getInner().eval().equals(0.0)) {
 			return new MergedLit(0.0);
 		} else {
-			return new MergedNeg((MergedExp) ((MergedExp)inner).simplify());
+			return new MergedNeg( ((MergedExp)inner).simplify());
 		}
 	}
 

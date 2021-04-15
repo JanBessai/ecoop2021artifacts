@@ -16,7 +16,7 @@ public class MergedLit extends PowByLit implements MergedExp {
     }
 
     public MergedExp simplify() {
-        return new MergedLit(getValue());
+        return this;
     }
 
     /** Take advantage of results from both branches. */

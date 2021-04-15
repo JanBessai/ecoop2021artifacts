@@ -1,6 +1,5 @@
 package interpreter.ep.m7;
 
-import interpreter.ep.m4.CollectSimplifyExp;
 import interpreter.ep.m6.EqualsSub;
 
 public class PowBySub extends EqualsSub implements PowByExp {
@@ -17,8 +16,8 @@ public class PowBySub extends EqualsSub implements PowByExp {
         if (left.eval().equals(right.eval())) {
             return new PowByLit(0.0);
         } else {
-            return new PowBySub((PowByExp) ((CollectSimplifyExp)left).simplify(),
-                                (PowByExp) ((CollectSimplifyExp)right).simplify());
+            return new PowBySub(((PowByExp)left).simplify(),
+                                ((PowByExp)right).simplify());
         }
     }
 

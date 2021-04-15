@@ -42,11 +42,9 @@ public class MergedPower extends EvalPrettypMultByPower implements MergedExp {
 		} else if (rightVal == 0) {
 			return new MergedLit(1.0);
 		} else if (rightVal == 1) {
-			return (MergedExp) ((MergedExp)left).simplify();
+			return ((MergedExp)left).simplify();
 		} else {
-			MergedExp mleft = (MergedExp) ((MergedExp)left).simplify();
-			MergedExp mright = (MergedExp) ((MergedExp)right).simplify();
-			return new MergedPower(mleft, mright);
+			return new MergedPower(((MergedExp)left).simplify(), ((MergedExp)right).simplify());
 		}
 	}
 

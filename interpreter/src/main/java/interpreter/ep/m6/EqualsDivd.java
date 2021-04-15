@@ -22,13 +22,13 @@ public class EqualsDivd extends AstreeIdzDivd implements EqualsExp {
         if (leftVal == 0) {
             return new EqualsLit(0.0);
         } else if (rightVal == 1) {
-            return (EqualsExp) ((EqualsExp)left).simplify();
+            return  ((EqualsExp)left).simplify();
         } else if (leftVal == rightVal) {
             return new EqualsLit(1.0);
         } else if (leftVal == -rightVal) {
             return new EqualsLit(-1.0);
         } else {
-            return new EqualsDivd ((EqualsExp) ((EqualsExp)left).simplify(), (EqualsExp) ((EqualsExp)right).simplify());
+            return new EqualsDivd (((EqualsExp)left).simplify(), ((EqualsExp)right).simplify());
         }
     }
 

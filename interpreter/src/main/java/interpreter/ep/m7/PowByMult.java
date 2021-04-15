@@ -1,6 +1,5 @@
 package interpreter.ep.m7;
 
-import interpreter.ep.m4.CollectSimplifyExp;
 import interpreter.ep.m6.EqualsMult;
 
 public class PowByMult extends EqualsMult implements PowByExp {
@@ -19,11 +18,11 @@ public class PowByMult extends EqualsMult implements PowByExp {
         if (leftVal == 0 || rightVal == 0) {
             return new PowByLit(0.0);
         } else if (leftVal == 1) {
-            return (PowByExp) ((CollectSimplifyExp)right).simplify();
+            return ((PowByExp)right).simplify();
         } else if (rightVal == 1) {
-            return (PowByExp) ((CollectSimplifyExp)left).simplify();
+            return  ((PowByExp)left).simplify();
         } else {
-            return new PowByMult((PowByExp) ((CollectSimplifyExp)left).simplify(), (PowByExp) ((CollectSimplifyExp)right).simplify());
+            return new PowByMult(((PowByExp)left).simplify(),  ((PowByExp)right).simplify());
         }
     }
 

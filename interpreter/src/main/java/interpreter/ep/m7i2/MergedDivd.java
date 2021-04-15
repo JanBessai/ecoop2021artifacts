@@ -16,15 +16,13 @@ public class MergedDivd extends PowByDivd implements MergedExp {
         if (leftVal == 0) {
             return new MergedLit(0.0);
         } else if (rightVal == 1) {
-            return (MergedExp) ((MergedExp)left).simplify();
+            return ((MergedExp)left).simplify();
         } else if (leftVal == rightVal) {
             return new MergedLit(1.0);
         } else if (leftVal == -rightVal) {
             return new MergedLit(-1.0);
         } else {
-            MergedExp mleft = (MergedExp) ((MergedExp)left).simplify();
-            MergedExp mright = (MergedExp) ((MergedExp)right).simplify();
-            return new MergedDivd(mleft, mright);
+            return new MergedDivd(((MergedExp)left).simplify(), ((MergedExp)right).simplify());
         }
     }
 

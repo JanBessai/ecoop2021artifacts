@@ -24,7 +24,7 @@ public class EqualsNeg extends AstreeIdzNeg implements EqualsExp {
         if (inner.eval().equals(0.0)) {
             return new EqualsLit(0.0);
         } else {
-            return new EqualsNeg((EqualsExp) ((EqualsExp)inner).simplify());
+            return new EqualsNeg(((EqualsExp)inner).simplify());
         }
     }
 

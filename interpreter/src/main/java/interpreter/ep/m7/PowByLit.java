@@ -8,6 +8,8 @@ public class PowByLit extends EqualsLit implements PowByExp {
 		super(value);
 	}
 
+    public PowByExp simplify() { return this; }
+
     public PowByExp powby(PowByExp other) {
         Double exponentValue = other.eval();
         PowByExp result = this;

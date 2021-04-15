@@ -11,6 +11,8 @@ public class EqualsLit extends AstreeIdzLit implements EqualsExp {
     public Boolean equals(EqualsExp that) {
         return this.astree().equals(that.astree());
     }
+
+    public EqualsExp simplify() { return this; }
     
     public Boolean isLit(Double d) { 
 		return d.equals(this.value);

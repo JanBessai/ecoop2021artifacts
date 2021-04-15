@@ -16,13 +16,11 @@ public class MergedMult extends PowByMult implements MergedExp {
 		if (leftVal == 0 || rightVal == 0) {
 			return new MergedLit(0.0);
 		} else if (leftVal == 1) {
-			return (MergedExp) ((MergedExp)right).simplify();
+			return ((MergedExp)right).simplify();
 		} else if (rightVal == 1) {
-			return (MergedExp) ((MergedExp)left).simplify();
+			return ((MergedExp)left).simplify();
 		} else {
-			MergedExp mleft = (MergedExp) ((MergedExp)left).simplify();
-			MergedExp mright = (MergedExp) ((MergedExp)right).simplify();
-			return new MergedMult(mleft, mright);
+			return new MergedMult(((MergedExp)left).simplify(), ((MergedExp)right).simplify());
 		}
 	}
 

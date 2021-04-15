@@ -26,12 +26,11 @@ public class EqualsAdd extends AstreeIdzAdd implements EqualsExp {
 		if ((leftVal == 0 && rightVal == 0) || (leftVal + rightVal == 0)) {
 			return new EqualsLit(0.0);
 		} else if (leftVal == 0) {
-			return (EqualsExp) ((EqualsExp)right).simplify();
+			return ((EqualsExp)right).simplify();
 		} else if (rightVal == 0) {
-			return (EqualsExp) ((EqualsExp)left).simplify();
+			return ((EqualsExp)left).simplify();
 		} else {
-			return new EqualsAdd((EqualsExp) ((EqualsExp)left).simplify(),
-					(EqualsExp) ((EqualsExp)right).simplify());
+			return new EqualsAdd(((EqualsExp)left).simplify(), ((EqualsExp)right).simplify());
 		}
 	}
 

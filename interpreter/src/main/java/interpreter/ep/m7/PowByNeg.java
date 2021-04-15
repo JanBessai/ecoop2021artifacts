@@ -1,6 +1,5 @@
 package interpreter.ep.m7;
 
-import interpreter.ep.m4.CollectSimplifyExp;
 import interpreter.ep.m6.EqualsNeg;
 
 public class PowByNeg extends EqualsNeg implements PowByExp {
@@ -19,7 +18,7 @@ public class PowByNeg extends EqualsNeg implements PowByExp {
         if (inner.eval().equals(0.0)) {
             return new PowByLit(0.0);
         } else {
-            return new PowByNeg((PowByExp) ((CollectSimplifyExp)inner).simplify());
+            return new PowByNeg( ((PowByExp)inner).simplify());
         }
     }
 

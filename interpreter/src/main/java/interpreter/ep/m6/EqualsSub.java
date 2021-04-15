@@ -22,8 +22,7 @@ public class EqualsSub extends AstreeIdzSub implements EqualsExp {
         if (left.eval().equals(right.eval())) {
             return new EqualsLit(0.0);
         } else {
-            return new EqualsSub((EqualsExp) ((EqualsExp)left).simplify(),
-                         (EqualsExp) ((EqualsExp)right).simplify());
+            return new EqualsSub(((EqualsExp)left).simplify(), ((EqualsExp)right).simplify());
         }
     }
 

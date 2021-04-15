@@ -26,9 +26,7 @@ public class MergedSub extends PowBySub implements MergedExp {
 		if (left.eval().equals(right.eval())) {
 			return new MergedLit(0.0);
 		} else {
-			MergedExp mleft = (MergedExp) ((MergedExp)left).simplify();
-			MergedExp mright = (MergedExp) ((MergedExp)right).simplify();
-			return new MergedSub(mleft, mright);
+			return new MergedSub( ((MergedExp)left).simplify(), ((MergedExp)right).simplify());
 		}
 	}
 }

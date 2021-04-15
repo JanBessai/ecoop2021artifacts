@@ -1,6 +1,5 @@
 package interpreter.ep.m7;
 
-import interpreter.ep.m4.CollectSimplifyExp;
 import interpreter.ep.m6.EqualsDivd;
 
 public class PowByDivd extends EqualsDivd implements PowByExp {
@@ -19,13 +18,13 @@ public class PowByDivd extends EqualsDivd implements PowByExp {
         if (leftVal == 0) {
             return new PowByLit(0.0);
         } else if (rightVal == 1) {
-            return (PowByExp) ((CollectSimplifyExp)left).simplify();
+            return ((PowByExp)left).simplify();
         } else if (leftVal == rightVal) {
             return new PowByLit(1.0);
         } else if (leftVal == -rightVal) {
             return new PowByLit(-1.0);
         } else {
-            return new PowByDivd ((PowByExp) ((CollectSimplifyExp)left).simplify(), (PowByExp) ((CollectSimplifyExp)right).simplify());
+            return new PowByDivd (((PowByExp)left).simplify(), ((PowByExp)right).simplify());
         }
     }
 

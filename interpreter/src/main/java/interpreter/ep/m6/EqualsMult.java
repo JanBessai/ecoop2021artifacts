@@ -26,11 +26,11 @@ public class EqualsMult extends AstreeIdzMult implements EqualsExp {
         if (leftVal == 0 || rightVal == 0) {
             return new EqualsLit(0.0);
         } else if (leftVal == 1) {
-            return (EqualsExp) ((EqualsExp)right).simplify();
+            return ((EqualsExp)right).simplify();
         } else if (rightVal == 1) {
-            return (EqualsExp) ((EqualsExp)left).simplify();
+            return ((EqualsExp)left).simplify();
         } else {
-            return new EqualsMult((EqualsExp) ((EqualsExp)left).simplify(), (EqualsExp) ((EqualsExp)right).simplify());
+            return new EqualsMult(((EqualsExp)left).simplify(), ((EqualsExp)right).simplify());
         }
     }
 

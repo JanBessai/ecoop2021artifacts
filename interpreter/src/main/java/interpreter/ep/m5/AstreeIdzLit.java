@@ -12,6 +12,8 @@ public class AstreeIdzLit extends CollectSimplifyLit implements AstreeIdzExp {
         return new util.Node(idz(), new util.Leaf<Double>(getValue()));
     }
 
+    public AstreeIdzExp simplify() { return this; }
+
     public Integer idz() {
         return 76407;
     }

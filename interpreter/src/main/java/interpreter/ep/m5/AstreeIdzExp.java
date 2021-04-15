@@ -9,7 +9,7 @@ public interface AstreeIdzExp extends CollectSimplifyExp {
     Integer idz();
 
     // producer methods must be present in all subsequent evolutions
-    CollectSimplifyExp simplify();
+    AstreeIdzExp simplify();
 
     // all subsequent data types involved in Truncate must also duplicate logic to access correct lit() factory method
 }
