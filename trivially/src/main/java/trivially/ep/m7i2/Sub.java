@@ -13,7 +13,7 @@ public interface Sub extends Exp, trivially.ep.m7.Sub, trivially.ep.i1.Sub {
     default Exp multby(trivially.ep.i1.Exp other) { return  new trivially.ep.m7i2.finalized.Mult(this, (trivially.ep.m7i2.Exp)other); }
 
     default Exp simplify() {
-        if (Double.valueOf(this.getLeft().eval()).equals(this.getRight().eval())) {
+        if (this.getLeft().eval().equals(this.getRight().eval())) {
             return new Lit(0.0);
         } else {
             return new trivially.ep.m7i2.finalized.Sub(this.getLeft().simplify(), this.getRight().simplify());

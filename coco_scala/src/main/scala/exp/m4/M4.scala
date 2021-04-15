@@ -12,17 +12,17 @@ trait Factory[T] extends exp.m3.Factory[T] {
 
 trait Lit[T] extends exp.m2.Lit[T] with Exp[T] {
   def simplify : exp.Exp[T] = this
-  def truncate(level:Int) = ()
+  def truncate(level:Int): Unit = ()
   def collect : List[Double] = List(this.value)
 }
 
 trait BinaryExp[T] extends Exp[T] {
   var _left:exp.Exp[T]
   var _right:exp.Exp[T]
-  def left = _left
-  def right = _right
+  def left:Exp[T] = _left
+  def right:Exp[T] = _right
 
-  def truncate(level:Int) = {
+  def truncate(level:Int): Unit = {
     if (level > 0) {
       left.truncate(level-1)
       right.truncate(level-1)
@@ -85,7 +85,7 @@ trait Neg[T] extends exp.m3.Neg[T] with Exp[T] {
   var _inner:exp.Exp[T]
   def inner:exp.Exp[T] = _inner
 
-  def truncate(level:Int) = {
+  def truncate(level:Int): Unit = {
     if (level > 0) {
       inner.truncate(level-1)
     } else {

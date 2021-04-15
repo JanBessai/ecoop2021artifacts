@@ -13,7 +13,7 @@ public interface Tree {
     }
 
     default boolean equals(util.Tree o) {
-        java.util.Optional<Boolean> leafCheck = this.asLeaf().flatMap(leaf -> o.asLeaf().map(leaf2 -> Boolean.valueOf(leaf.value.equals(leaf2.value))));
+        java.util.Optional<Boolean> leafCheck = this.asLeaf().flatMap(leaf -> o.asLeaf().map(leaf2 -> leaf.value.equals(leaf2.value)));
         java.util.Optional<Boolean> nodeCheck = this.asNode().flatMap(node -> o.asNode().map(node2 -> {
             // must be same label
             if (!(node2.label == node.label)) {
@@ -40,7 +40,7 @@ public interface Tree {
     default boolean defaultEquals(Object o) {
         if (this == o)
             return true;
-        if (o == null || !(Tree.class.isInstance(o)))
+        if (!(Tree.class.isInstance(o)))
             return false;
         return equals((Tree) o);
     }

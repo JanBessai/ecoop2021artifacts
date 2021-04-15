@@ -5,21 +5,20 @@ import trivially.ep.m7.finalized.Lit;
 public interface Divd extends Exp, trivially.ep.m6.Divd {
 
     Exp getLeft();
-
     Exp getRight();
 
     default Exp powby(Exp other) {
-        return new trivially.ep.m7.finalized.Divd(this.getLeft().powby(((Exp) other)), this.getRight().powby(((Exp) other)));
+        return new trivially.ep.m7.finalized.Divd(this.getLeft().powby(other), this.getRight().powby(other));
     }
 
     default Exp simplify() {
-        if (Double.valueOf(this.getLeft().eval()).equals(0.0)) {
+        if (this.getLeft().eval().equals(0.0)) {
             return new Lit(0.0);
-        } else if (Double.valueOf(this.getRight().eval()).equals(1.0)) {
+        } else if (this.getRight().eval().equals(1.0)) {
             return this.getLeft().simplify();
-        } else if (Double.valueOf(this.getLeft().eval()).equals(this.getRight().eval())) {
+        } else if (this.getLeft().eval().equals(this.getRight().eval())) {
             return new Lit(1.0);
-        } else if (Double.valueOf(this.getLeft().eval()).equals(-1.0 * this.getRight().eval())) {
+        } else if (this.getLeft().eval().equals(-1.0 * this.getRight().eval())) {
             return new Lit(-1.0);
         } else {
             return new trivially.ep.m7.finalized.Divd(this.getLeft().simplify(), this.getRight().simplify());

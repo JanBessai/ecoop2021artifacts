@@ -8,10 +8,10 @@ public interface Lit extends Exp, trivially.ep.m2.Lit {
     Double getValue();
 
     default Exp multby(Exp other) {
-        Exp result = ((Exp) other);
-        Double counter = Math.floor(Math.abs(this.getValue()));
+        Exp result = other;
+        double counter = Math.floor(Math.abs(this.getValue()));
         while (1.0 < counter) {
-            result = new Add(result, ((Exp) other));
+            result = new Add(result, other);
             counter = counter - 1.0;
         }
         if (this.getValue() < 0.0) {

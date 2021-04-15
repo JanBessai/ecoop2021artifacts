@@ -6,7 +6,7 @@ public interface Lit<FT> extends coco.ep.m2.Lit<FT>, coco.ep.i1.Exp<FT> {
 
     default Exp<FT> multby(Exp<FT> other) {
         Exp<FT> result = convert(other);
-        Double counter = Math.floor(Math.abs(this.getValue()));
+        double counter = Math.floor(Math.abs(this.getValue()));
         while (1.0 < counter) {
             result = this.add(result, convert(other));
             counter = counter - 1.0;

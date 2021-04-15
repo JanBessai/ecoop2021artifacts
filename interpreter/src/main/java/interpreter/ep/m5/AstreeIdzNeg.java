@@ -18,7 +18,7 @@ public class AstreeIdzNeg extends CollectSimplifyNeg implements AstreeIdzExp {
         if (inner.eval().equals(0.0)) {
             return new AstreeIdzLit(0.0);
         } else {
-            return new AstreeIdzNeg((AstreeIdzExp) ((AstreeIdzExp)inner).simplify());
+            return new AstreeIdzNeg( ((AstreeIdzExp)inner).simplify());
         }
     }
 

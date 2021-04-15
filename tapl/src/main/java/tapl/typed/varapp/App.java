@@ -8,7 +8,7 @@ public interface App<Elem, Tm, Ty> extends Term<Elem, Tm, Ty>, tapl.varapp.App<E
                 .replaceRight(convert(getRight()).setTypeOfVariable(binderIndex, type));
     }
 
-    @Override public default tapl.typed.Type<Elem, Tm, Ty> getType() {
+    @Override default tapl.typed.Type<Elem, Tm, Ty> getType() {
         throw new TypeError(
                 String.format("No typing rule for applications of %s to %s in: %s",
                         convert(getLeft()).getType().print(),

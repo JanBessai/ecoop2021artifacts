@@ -30,7 +30,7 @@ public class Lit extends Exp {
     }
 
     public Tree astree() {
-        return new Node(this.id(), new Leaf<Double>(this.value));
+        return new Node(this.id(), new Leaf<>(this.value));
     }
 
     public Integer id() {
@@ -52,7 +52,7 @@ public class Lit extends Exp {
     // ORIGINAL implementation for multby before merge
     public Exp multby_old(Exp other) {
         Exp result = other;
-        Double counter = Math.floor(Math.abs(this.value));
+        double counter = Math.floor(Math.abs(this.value));
         while (1.0 < counter) {
             result = new Add(result, other);
             counter = counter - 1.0;
@@ -71,7 +71,7 @@ public class Lit extends Exp {
     public Exp powby_old(Exp other) {
         Double exponentValue = other.eval();
         Exp result = this;
-        Double counter = Math.floor(Math.abs(exponentValue));
+        double counter = Math.floor(Math.abs(exponentValue));
         while (1.0 < counter) {
             result = new Mult(result, this);
             counter = counter - 1.0;

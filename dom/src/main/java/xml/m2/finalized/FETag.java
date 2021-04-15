@@ -1,8 +1,6 @@
 package xml.m2.finalized;
 
 import xml.m0.XML;
-import xml.m0.finalized.FDocument;
-import xml.m0.finalized.FXML;
 
 public class FETag implements xml.m2.ETag<FEXML, FETag, FEDocument>, FEXML {
     String name;

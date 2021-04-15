@@ -5,7 +5,6 @@ import coco.ep.m0.finalized.Exp;
 public class Sub extends Exp implements Factory, coco.ep.m1.Sub<Exp> {
 
     protected Exp left;
-
     protected Exp right;
 
     public Sub(Exp _left, Exp _right) {
@@ -16,7 +15,6 @@ public class Sub extends Exp implements Factory, coco.ep.m1.Sub<Exp> {
     public Exp getLeft() {
         return left;
     }
-
     public Exp getRight() {
         return right;
     }

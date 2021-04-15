@@ -6,8 +6,8 @@ public interface Factory extends tapl.typed.floatstring.Factory<Element, Term, T
     @Override default FloatTimes floatTimes(tapl.Term<Element, Term> left, tapl.Term<Element, Term> right) {
         return new FloatTimes(left, right);
     }
-    @Override public default StringTy stringTy() { return new StringTy(); }
-    @Override public default FloatTy floatTy() { return new FloatTy(); }
+    @Override default StringTy stringTy() { return new StringTy(); }
+    @Override default FloatTy floatTy() { return new FloatTy(); }
 
     @Override default Term convert(tapl.Term<Element, Term> other) { return other.getSelfTerm(); }
     @Override default Element convert(tapl.Element<Element, Term> other) { return other.getSelf(); }

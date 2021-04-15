@@ -5,11 +5,10 @@ import trivially.ep.m6.finalized.Lit;
 public interface Sub extends Exp, trivially.ep.m5.Sub {
 
     Exp getLeft();
-
     Exp getRight();
 
     default Boolean equals(Exp other) {
-        return this.astree().equals(((Exp) other).astree());
+        return this.astree().equals(other.astree());
     }
 
     default Exp simplify() {

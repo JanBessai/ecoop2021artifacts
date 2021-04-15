@@ -15,7 +15,6 @@ public class Divd extends Exp implements Factory, coco.ep.m3.Divd<Exp> {
     public Exp getLeft() {
         return left;
     }
-
     public Exp getRight() {
         return right;
     }

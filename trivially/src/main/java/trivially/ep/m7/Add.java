@@ -9,15 +9,15 @@ public interface Add extends Exp, trivially.ep.m6.Add {
     Exp getRight();
 
     default Exp powby(Exp other) {
-        return new Lit(this.eval()).powby(((Exp) other));
+        return new Lit(this.eval()).powby(other);
     }
 
     default Exp simplify() {
         if (Double.valueOf(this.getLeft().eval() + this.getRight().eval()).equals(0.0)) {
             return new Lit(0.0);
-        } else if (Double.valueOf(this.getLeft().eval()).equals(0.0)) {
+        } else if (this.getLeft().eval().equals(0.0)) {
             return this.getRight().simplify();
-        } else if (Double.valueOf(this.getRight().eval()).equals(0.0)) {
+        } else if (this.getRight().eval().equals(0.0)) {
             return this.getLeft().simplify();
         } else {
             return new trivially.ep.m7.finalized.Add(this.getLeft().simplify(), this.getRight().simplify());

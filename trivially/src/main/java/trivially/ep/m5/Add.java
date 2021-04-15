@@ -21,9 +21,9 @@ public interface Add extends Exp, trivially.ep.m4.Add {
     default Exp simplify() {
         if (Double.valueOf(this.getLeft().eval() + this.getRight().eval()).equals(0.0)) {
             return new Lit(0.0);
-        } else if (Double.valueOf(this.getLeft().eval()).equals(0.0)) {
+        } else if (this.getLeft().eval().equals(0.0)) {
             return this.getRight().simplify();
-        } else if (Double.valueOf(this.getRight().eval()).equals(0.0)) {
+        } else if (this.getRight().eval().equals(0.0)) {
             return this.getLeft().simplify();
         } else {
             return new trivially.ep.m5.finalized.Add(this.getLeft().simplify(), this.getRight().simplify());

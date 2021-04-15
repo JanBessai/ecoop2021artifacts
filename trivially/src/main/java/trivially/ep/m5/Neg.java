@@ -16,7 +16,7 @@ public interface Neg extends Exp, trivially.ep.m4.Neg {
     }
 
     default Exp simplify() {
-        if (Double.valueOf(this.getInner().eval()).equals(0.0)) {
+        if (this.getInner().eval().equals(0.0)) {
             return new trivially.ep.m5.finalized.Lit(0.0);
         } else {
             return new trivially.ep.m5.finalized.Neg(this.getInner().simplify());

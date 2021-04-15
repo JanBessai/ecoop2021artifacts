@@ -6,14 +6,15 @@ public class Neg implements trivially.ep.m7i2.Neg {
 
     protected Exp inner;
 
+    public Neg(Exp inner) {
+        this.inner = inner;
+    }
+
     public Exp getInner() {
         return this.inner;
     }
 
     // Warning: Unsafe casts
-    public void setInner(trivially.ep.m4.Exp left) { this.inner = (trivially.ep.m7i2.Exp) inner; }
+    public void setInner(trivially.ep.m4.Exp inner) { this.inner = (trivially.ep.m7i2.Exp) inner; }
 
-    public Neg(Exp inner) {
-        this.inner = inner;
-    }
 }

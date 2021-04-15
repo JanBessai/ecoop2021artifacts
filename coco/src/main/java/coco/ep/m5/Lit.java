@@ -7,7 +7,7 @@ import util.Tree;
 public interface Lit<FT> extends coco.ep.m4.Lit<FT>, Exp<FT> {
 
     default Tree astree() {
-        return new Node(convert(this).id(), new Leaf<Double>(getValue()));
+        return new Node(convert(this).id(), new Leaf<>(getValue()));
     }
 
     default Integer id() {

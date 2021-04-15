@@ -18,8 +18,8 @@ public class AstreeIdzSub extends CollectSimplifySub implements AstreeIdzExp {
         if (left.eval().equals(right.eval())) {
             return new AstreeIdzLit(0.0);
         } else {
-            return new AstreeIdzSub((AstreeIdzExp) ((AstreeIdzExp)left).simplify(),
-                                    (AstreeIdzExp) ((AstreeIdzExp)right).simplify());
+            return new AstreeIdzSub(((AstreeIdzExp)left).simplify(),
+                                    ((AstreeIdzExp)right).simplify());
         }
     }
 

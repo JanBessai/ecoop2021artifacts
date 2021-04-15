@@ -7,7 +7,7 @@ public interface Neg extends Exp, trivially.ep.m5.Neg {
     Exp getInner();
 
     default Boolean equals(Exp other) {
-        return this.astree().equals(((Exp) other).astree());
+        return this.astree().equals(other.astree());
     }
 
     default Exp simplify() {

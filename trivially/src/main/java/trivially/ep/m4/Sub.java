@@ -14,7 +14,7 @@ public interface Sub extends Exp, trivially.ep.m2.Sub {
     void setRight(Exp exp);
 
     default Exp simplify() {
-        if (Double.valueOf(this.getLeft().eval()).equals(this.getRight().eval())) {
+        if (this.getLeft().eval().equals(this.getRight().eval())) {
             return new Lit(0.0);
         } else {
             return new trivially.ep.m4.finalized.Sub(this.getLeft().simplify(), this.getRight().simplify());

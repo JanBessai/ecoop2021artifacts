@@ -22,13 +22,13 @@ public class AstreeIdzDivd extends CollectSimplifyDivd implements AstreeIdzExp {
         if (leftVal == 0) {
             return new AstreeIdzLit(0.0);
         } else if (rightVal == 1) {
-            return (AstreeIdzExp) ((AstreeIdzExp)left).simplify();
+            return  ((AstreeIdzExp)left).simplify();
         } else if (leftVal == rightVal) {
             return new AstreeIdzLit(1.0);
         } else if (leftVal == -rightVal) {
             return new AstreeIdzLit(-1.0);
         } else {
-            return new AstreeIdzDivd ((AstreeIdzExp) ((AstreeIdzExp)left).simplify(), (AstreeIdzExp) ((AstreeIdzExp)right).simplify());
+            return new AstreeIdzDivd (((AstreeIdzExp)left).simplify(), ((AstreeIdzExp)right).simplify());
         }
     }
 

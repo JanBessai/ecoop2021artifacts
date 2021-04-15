@@ -13,7 +13,7 @@ public class PowByLit extends EqualsLit implements PowByExp {
     public PowByExp powby(PowByExp other) {
         Double exponentValue = other.eval();
         PowByExp result = this;
-        Double counter = Math.floor(Math.abs(exponentValue));
+        double counter = Math.floor(Math.abs(exponentValue));
         while (1.0 < counter) {
             result = new PowByMult(result, this);
             counter = counter - 1.0;

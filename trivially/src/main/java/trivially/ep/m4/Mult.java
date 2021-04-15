@@ -6,19 +6,17 @@ import java.util.List;
 public interface Mult extends Exp, trivially.ep.m3.Mult {
 
     Exp getLeft();
-
     Exp getRight();
 
     void setLeft(Exp exp);
-
     void setRight(Exp exp);
 
     default Exp simplify() {
-        if (Double.valueOf(this.getLeft().eval()).equals(0.0) || Double.valueOf(this.getRight().eval()).equals(0.0)) {
+        if (this.getLeft().eval().equals(0.0) || this.getRight().eval().equals(0.0)) {
             return new Lit(0.0);
-        } else if (Double.valueOf(this.getLeft().eval()).equals(1.0)) {
+        } else if (this.getLeft().eval().equals(1.0)) {
             return this.getRight().simplify();
-        } else if (Double.valueOf(this.getRight().eval()).equals(1.0)) {
+        } else if (this.getRight().eval().equals(1.0)) {
             return this.getLeft().simplify();
         } else {
             return new trivially.ep.m4.finalized.Mult(this.getLeft().simplify(), this.getRight().simplify());

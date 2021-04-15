@@ -7,7 +7,7 @@ public interface Mult extends Exp, trivially.ep.m5.Mult {
     Exp getRight();
 
     default Boolean equals(Exp other) {
-        return this.astree().equals(((Exp) other).astree());
+        return this.astree().equals(other.astree());
     }
 
     default Exp simplify() {

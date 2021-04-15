@@ -8,7 +8,7 @@ public interface Divd extends Exp, trivially.ep.m5.Divd {
     Exp getRight();
 
     default Boolean equals(Exp other) {
-        return this.astree().equals(((Exp) other).astree());
+        return this.astree().equals(other.astree());
     }
 
     default Exp simplify() {

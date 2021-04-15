@@ -13,7 +13,6 @@ public class Sub extends Exp implements coco.ep.m2.Sub<Exp> {
     public Exp getLeft() {
         return left;
     }
-
     public Exp getRight() {
         return right;
     }

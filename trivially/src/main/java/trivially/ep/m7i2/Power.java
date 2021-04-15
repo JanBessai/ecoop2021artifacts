@@ -1,6 +1,5 @@
 package trivially.ep.m7i2;
 
-import trivially.ep.m7i2.finalized.Add;
 import trivially.ep.m7i2.finalized.Lit;
 import java.util.List;
 import util.Node;
@@ -9,7 +8,6 @@ import util.Tree;
 public interface Power extends Exp, trivially.ep.i2.Power {
 
     Exp getLeft();
-
     Exp getRight();
 
     void setLeft(Exp left);

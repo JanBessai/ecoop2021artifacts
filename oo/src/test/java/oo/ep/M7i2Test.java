@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.util.Arrays;
 
 public class M7i2Test {
-    public interface TestTemplate<FT> extends M7Test.TestTemplate, I2Test.TestTemplate{
+    public interface TestTemplate extends M7Test.TestTemplate, I2Test.TestTemplate{
         default void test() {
             M7Test.TestTemplate.super.test();
             I2Test.TestTemplate.super.test();

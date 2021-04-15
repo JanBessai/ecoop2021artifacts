@@ -1,7 +1,6 @@
 package trivially.ep.m7i2;
 
 import trivially.ep.m7i2.finalized.Lit;
-import trivially.ep.m7i2.finalized.Mult;
 
 public interface Divd extends Exp, trivially.ep.m7.Divd {
 

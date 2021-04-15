@@ -10,7 +10,7 @@ public class MultByLit extends PrettypLit implements MultByExp {
 
     public MultByExp multby(MultByExp other) {
         MultByExp result = other;
-        Double counter = Math.floor(Math.abs(value));
+        double counter = Math.floor(Math.abs(value));
         while (1.0 < counter) {
             result = new MultByAdd(result, other);
             counter = counter - 1.0;

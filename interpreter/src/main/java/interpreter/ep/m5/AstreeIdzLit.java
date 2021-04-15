@@ -9,7 +9,7 @@ public class AstreeIdzLit extends CollectSimplifyLit implements AstreeIdzExp {
     }
 
     public util.Tree astree() {
-        return new util.Node(idz(), new util.Leaf<Double>(getValue()));
+        return new util.Node(idz(), new util.Leaf<>(getValue()));
     }
 
     public AstreeIdzExp simplify() { return this; }

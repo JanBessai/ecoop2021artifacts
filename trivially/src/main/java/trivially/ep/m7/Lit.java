@@ -8,9 +8,9 @@ public interface Lit extends Exp, trivially.ep.m6.Lit {
     Double getValue();
 
     default Exp powby(Exp other) {
-        Double exponentValue = ((Exp) other).eval();
+        Double exponentValue = other.eval();
         Exp result = this;
-        Double counter = Math.floor(Math.abs(exponentValue));
+        double counter = Math.floor(Math.abs(exponentValue));
         while (1.0 < counter) {
             result = new Mult(result, this);
             counter = counter - 1.0;

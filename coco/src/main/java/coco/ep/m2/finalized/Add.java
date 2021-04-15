@@ -3,7 +3,6 @@ package coco.ep.m2.finalized;
 public class Add extends Exp implements coco.ep.m2.Add<Exp> {
 
     protected Exp left;
-
     protected Exp right;
 
     public Add(Exp _left, Exp _right) {
@@ -14,7 +13,6 @@ public class Add extends Exp implements coco.ep.m2.Add<Exp> {
     public Exp getLeft() {
         return left;
     }
-
     public Exp getRight() {
         return right;
     }

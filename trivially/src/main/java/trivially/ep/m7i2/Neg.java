@@ -1,7 +1,6 @@
 package trivially.ep.m7i2;
 
 import trivially.ep.m7i2.finalized.Lit;
-import trivially.ep.m7i2.finalized.Mult;
 
 public interface Neg extends Exp, trivially.ep.m7.Neg {
 
@@ -12,7 +11,7 @@ public interface Neg extends Exp, trivially.ep.m7.Neg {
     default Exp multby(trivially.ep.i1.Exp other) { return  new trivially.ep.m7i2.finalized.Mult(this, (trivially.ep.m7i2.Exp)other); }
 
     default Exp simplify() {
-        if (Double.valueOf(this.getInner().eval()).equals(0.0)) {
+        if (this.getInner().eval().equals(0.0)) {
             return new Lit(0.0);
         } else {
             return new trivially.ep.m7i2.finalized.Neg(this.getInner().simplify());

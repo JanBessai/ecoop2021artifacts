@@ -5,7 +5,7 @@ public interface Lit extends Exp, trivially.ep.m5.Lit {
     Double getValue();
 
     default Boolean equals(Exp other) {
-        return this.astree().equals(((Exp) other).astree());
+        return this.astree().equals(other.astree());
     }
 
     default Exp simplify() {

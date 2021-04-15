@@ -4,7 +4,6 @@ import tapl.typed.Type;
 import tapl.typed.util.TypeError;
 
 import java.util.Optional;
-import java.util.function.Function;
 
 public interface Lambda<Elem, Tm, Ty> extends tapl.lambdacalculus.Lambda<Elem, Tm>, Term<Elem, Tm, Ty>, Factory<Elem, Tm, Ty> {
     Optional<tapl.typed.Type<Elem, Tm, Ty>> getBoundType();
@@ -32,7 +31,7 @@ public interface Lambda<Elem, Tm, Ty> extends tapl.lambdacalculus.Lambda<Elem, T
 
     @Override default Type<Elem, Tm, Ty> getType() {
         Optional<tapl.typed.Type<Elem, Tm, Ty>> sourceOpt = getBoundType();
-        if (!sourceOpt.isPresent()) {
+        if (sourceOpt.isEmpty()) {
             throw new TypeError("source annotation required");
         }
         tapl.typed.Type<Elem, Tm, Ty> source = sourceOpt.get();

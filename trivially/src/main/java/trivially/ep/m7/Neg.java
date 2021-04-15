@@ -8,11 +8,11 @@ public interface Neg extends Exp, trivially.ep.m6.Neg {
     Exp getInner();
 
     default Exp powby(Exp other) {
-        return new Mult(new Lit(1.0).powby(this.getInner()), this.getInner().powby(((Exp) other)));
+        return new Mult(new Lit(1.0).powby(this.getInner()), this.getInner().powby(other));
     }
 
     default Exp simplify() {
-        if (Double.valueOf(this.getInner().eval()).equals(0.0)) {
+        if (this.getInner().eval().equals(0.0)) {
             return new Lit(0.0);
         } else {
             return new trivially.ep.m7.finalized.Neg(this.getInner().simplify());

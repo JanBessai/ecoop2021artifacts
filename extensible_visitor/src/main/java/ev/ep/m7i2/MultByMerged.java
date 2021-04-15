@@ -1,10 +1,7 @@
 package ev.ep.m7i2;
 
 import ev.ep.Exp;
-import ev.ep.i1.MultBy;
-import ev.ep.i2.EvalPower;
 import ev.ep.i2.MultByPower;
-import ev.ep.i2.Power;
 
 public class MultByMerged extends MultByPower implements VisitorMerged<Exp> {
 

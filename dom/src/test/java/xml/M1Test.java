@@ -2,8 +2,6 @@ package xml;
 
 import org.junit.Test;
 import xml.m0.Document;
-import xml.m0.Factory;
-import xml.m0.Tag;
 import xml.m0.XML;
 import xml.m0.finalized.FDocument;
 import xml.m0.finalized.FTag;

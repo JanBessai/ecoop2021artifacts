@@ -22,11 +22,11 @@ public class AstreeIdzMult extends CollectSimplifyMult implements AstreeIdzExp {
         if (leftVal == 0 || rightVal == 0) {
             return new AstreeIdzLit(0.0);
         } else if (leftVal == 1) {
-            return (AstreeIdzExp) ((AstreeIdzExp)right).simplify();
+            return ((AstreeIdzExp)right).simplify();
         } else if (rightVal == 1) {
-            return (AstreeIdzExp) ((AstreeIdzExp)left).simplify();
+            return ((AstreeIdzExp)left).simplify();
         } else {
-            return new AstreeIdzMult((AstreeIdzExp) ((AstreeIdzExp)left).simplify(), (AstreeIdzExp) ((AstreeIdzExp)right).simplify());
+            return new AstreeIdzMult(((AstreeIdzExp)left).simplify(), ((AstreeIdzExp)right).simplify());
         }
     }
 

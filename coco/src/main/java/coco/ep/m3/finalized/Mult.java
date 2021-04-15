@@ -15,7 +15,6 @@ public class Mult extends Exp implements Factory, coco.ep.m3.Mult<Exp> {
     public Exp getLeft() {
         return left;
     }
-
     public Exp getRight() {
         return right;
     }

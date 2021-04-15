@@ -9,7 +9,7 @@ public interface Lit extends Exp, trivially.ep.m4.Lit {
     Double getValue();
 
     default Tree astree() {
-        return new Node(this.id(), new Leaf<Double>(this.getValue()));
+        return new Node(this.id(), new Leaf<>(this.getValue()));
     }
 
     default Integer id() {

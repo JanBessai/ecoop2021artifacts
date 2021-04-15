@@ -5,7 +5,6 @@ import trivially.ep.m7i2.finalized.Lit;
 public interface Add extends Exp, trivially.ep.m7.Add, trivially.ep.i1.Add {
 
     Exp getLeft();
-
     Exp getRight();
 
     // unsafe casts
