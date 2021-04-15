@@ -23,7 +23,7 @@ public class I2Test extends I1Test {
     static MultByExp sub(MultByExp left, MultByExp right) { return new interpreter.ep.i1.MultBySub(left, right); }
     static MultByExp power(MultByExp left, MultByExp right) { return new interpreter.ep.i2.EvalPrettypMultByPower(left, right); }
 
-    private static class ActualTest implements M0Test.TestTemplate {}
+    private static class ActualTest implements I2Test.TestTemplate {}
 
     @Test
     public void testTest() { new I2Test.ActualTest().test(); }

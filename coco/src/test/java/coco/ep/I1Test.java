@@ -15,7 +15,6 @@ public class I1Test {
     }
     private static class ActualTest implements I1Test.TestTemplate<coco.ep.i1.finalized.Exp>, coco.ep.i1.finalized.Factory {}
 
-
     @Test
     public void testTest() { new I1Test.ActualTest().test(); }
 }
