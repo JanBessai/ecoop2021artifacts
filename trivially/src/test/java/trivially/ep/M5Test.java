@@ -47,12 +47,12 @@ public class M5Test {
             org.junit.Assert.assertTrue(mult(mult(lit(2.0), lit(1.0)), add(lit(0.0), lit(7.0))).simplify().astree().equals(new Node(2409808, new Node(76407, new Leaf<>(2.0)), new Node(76407, new Leaf<>(7.0)))));
         }
 
-        default Lit lit(Double d) { return new trivially.ep.m5.finalized.Lit(d); }
-        default Add add(Exp left, Exp right) { return new trivially.ep.m5.finalized.Add(left, right); }
-        default Sub sub(Exp left, Exp right) { return new trivially.ep.m5.finalized.Sub(left, right); }
-        default Mult mult(Exp left, Exp right) { return new trivially.ep.m5.finalized.Mult(left, right); }
-        default Neg neg(Exp inner) { return new trivially.ep.m5.finalized.Neg(inner); }
-        default Divd divd(Exp left, Exp right) { return new trivially.ep.m5.finalized.Divd(left, right); }
+        @Override default Exp lit(Double d) { return new trivially.ep.m5.finalized.Lit(d); }
+        @Override default Exp add(trivially.ep.m0.Exp left, trivially.ep.m0.Exp right) { return new trivially.ep.m5.finalized.Add((Exp) left, (Exp) right); }
+        @Override default Exp sub(trivially.ep.m0.Exp left, trivially.ep.m0.Exp right) { return new trivially.ep.m5.finalized.Sub((Exp) left, (Exp) right); }
+        @Override default Exp mult(trivially.ep.m0.Exp left, trivially.ep.m0.Exp right) { return new trivially.ep.m5.finalized.Mult((Exp) left, (Exp) right); }
+        @Override default Exp neg(trivially.ep.m0.Exp inner) { return new trivially.ep.m5.finalized.Neg((Exp) inner); }
+        @Override default Exp divd(trivially.ep.m0.Exp left, trivially.ep.m0.Exp right) { return new trivially.ep.m5.finalized.Divd((Exp) left, (Exp) right); }
     }
     private static class ActualTest implements TestTemplate {}
 

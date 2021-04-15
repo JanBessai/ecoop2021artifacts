@@ -51,7 +51,7 @@ class Leaf(val value : Any) extends Tree {
   override def toString : String =  String.format("[%s]", value.toString)
 }
 
-class Node(val children:Seq[Tree], val label:Int) extends Tree {
+class Node(val label:Int, val children:Tree*) extends Tree {
   // copy elements
   val subtrees : Seq[Tree] = children.map {x => x}
 

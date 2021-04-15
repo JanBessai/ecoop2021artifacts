@@ -33,9 +33,9 @@ public class M3Test {
             Assert.assertEquals("(-(2.0*3.0))", neg(mult(lit(2.0), lit(3.0))).prettyp());
         }
 
-        default Mult mult(Exp left, Exp right) { return new trivially.ep.m3.finalized.Mult(left, right); }
-        default Neg neg(Exp inner) { return new trivially.ep.m3.finalized.Neg(inner); }
-        default Divd divd(Exp left, Exp right) { return new trivially.ep.m3.finalized.Divd(left, right); }
+        default Exp mult(trivially.ep.m0.Exp left, trivially.ep.m0.Exp right) { return new trivially.ep.m3.finalized.Mult((Exp) left, (Exp) right); }
+        default Exp neg(trivially.ep.m0.Exp inner) { return new trivially.ep.m3.finalized.Neg((Exp) inner); }
+        default Exp divd(trivially.ep.m0.Exp left, trivially.ep.m0.Exp right) { return new trivially.ep.m3.finalized.Divd((Exp) left, (Exp) right); }
     }
     private static class ActualTest implements TestTemplate {}
 

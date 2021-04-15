@@ -1,10 +1,12 @@
 package interpreter.ep;
 
-import interpreter.ep.m7.PowByExp;
+import interpreter.ep.m0.EvalExp;
+import interpreter.ep.m2.PrettypExp;
+import interpreter.ep.m7.*;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class M7Test extends M6Test {
+public class M7Test {
 
     public interface TestTemplate extends M6Test.TestTemplate {
         default void test() {
@@ -26,15 +28,14 @@ public class M7Test extends M6Test {
 
             Assert.assertEquals(28561.0, add(lit(1.0), lit(12.0)).powby(lit(4.0)).eval(), 0.0);
         }
+
+        @Override default PowByExp lit(Double d) { return new interpreter.ep.m7.PowByLit(d); }
+        @Override default PowByExp add(EvalExp left, EvalExp right) { return new interpreter.ep.m7.PowByAdd((PowByExp) left, (PowByExp) right); }
+        @Override default PowByExp sub(EvalExp left, EvalExp right) { return new interpreter.ep.m7.PowBySub((PowByExp) left, (PowByExp) right); }
+        @Override default PowByExp mult(PrettypExp left, PrettypExp right) { return new interpreter.ep.m7.PowByMult((PowByExp) left, (PowByExp) right); }
+        @Override default PowByExp neg(PrettypExp inner) { return new interpreter.ep.m7.PowByNeg((PowByExp) inner); }
+        @Override default PowByExp divd(PrettypExp left, PrettypExp right) { return new interpreter.ep.m7.PowByDivd((PowByExp) left, (PowByExp) right); }
     }
-
-    static PowByExp lit(Double d) { return new interpreter.ep.m7.PowByLit(d); }
-    static PowByExp add(PowByExp left, PowByExp right) { return new interpreter.ep.m7.PowByAdd(left, right); }
-    static PowByExp sub(PowByExp left, PowByExp right) { return new interpreter.ep.m7.PowBySub(left, right); }
-    static PowByExp mult(PowByExp left, PowByExp right) { return new interpreter.ep.m7.PowByMult(left, right); }
-    static PowByExp neg(PowByExp inner) { return new interpreter.ep.m7.PowByNeg(inner); }
-    static PowByExp divd(PowByExp left, PowByExp right) { return new interpreter.ep.m7.PowByDivd(left, right); }
-
     private static class ActualTest implements M7Test.TestTemplate {}
 
     @Test

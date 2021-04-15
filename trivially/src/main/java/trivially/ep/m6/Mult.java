@@ -33,8 +33,8 @@ public interface Mult extends Exp, trivially.ep.m5.Mult {
             getLeft().truncate(level-1);
             getRight().truncate(level-1);
         } else {
-            setLeft(new trivially.ep.m5.finalized.Lit(getLeft().eval()));
-            setRight(new trivially.ep.m5.finalized.Lit(getRight().eval()));
+            setLeft(new trivially.ep.m6.finalized.Lit(getLeft().eval()));
+            setRight(new trivially.ep.m6.finalized.Lit(getRight().eval()));
         }
     }
 }

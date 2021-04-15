@@ -1,10 +1,12 @@
 package interpreter.ep;
 
-import interpreter.ep.m6.EqualsExp;
+import interpreter.ep.m0.EvalExp;
+import interpreter.ep.m2.PrettypExp;
+import interpreter.ep.m6.*;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class M6Test extends M5Test {
+public class M6Test {
 
     public interface TestTemplate extends M5Test.TestTemplate {
         default void test() {
@@ -54,14 +56,14 @@ public class M6Test extends M5Test {
             Assert.assertTrue(add(lit(5.0), lit(3.0)).equals(add(lit(5.0), lit(3.0))));
             Assert.assertFalse(add(lit(5.0), lit(3.0)).equals(mult(divd(lit(5.0), lit(2.0)), lit(3.0))));
         }
-    }
 
-    static EqualsExp lit(Double d) { return new interpreter.ep.m6.EqualsLit(d); }
-    static EqualsExp add(EqualsExp left, EqualsExp right) { return new interpreter.ep.m6.EqualsAdd(left, right); }
-    static EqualsExp sub(EqualsExp left, EqualsExp right) { return new interpreter.ep.m6.EqualsSub(left, right); }
-    static EqualsExp mult(EqualsExp left, EqualsExp right) { return new interpreter.ep.m6.EqualsMult(left, right); }
-    static EqualsExp neg(EqualsExp inner) { return new interpreter.ep.m6.EqualsNeg(inner); }
-    static EqualsExp divd(EqualsExp left, EqualsExp right) { return new interpreter.ep.m6.EqualsDivd(left, right); }
+        @Override default EqualsExp lit(Double d) { return new interpreter.ep.m6.EqualsLit(d); }
+        @Override default EqualsExp add(EvalExp left, EvalExp right) { return new interpreter.ep.m6.EqualsAdd((EqualsExp) left, (EqualsExp) right); }
+        @Override default EqualsExp sub(EvalExp left, EvalExp right) { return new interpreter.ep.m6.EqualsSub((EqualsExp) left, (EqualsExp) right); }
+        @Override default EqualsExp mult(PrettypExp left, PrettypExp right) { return new interpreter.ep.m6.EqualsMult((EqualsExp) left, (EqualsExp) right); }
+        @Override default EqualsExp neg(PrettypExp inner) { return new interpreter.ep.m6.EqualsNeg((EqualsExp) inner); }
+        @Override default EqualsExp divd(PrettypExp left, PrettypExp right) { return new interpreter.ep.m6.EqualsDivd((EqualsExp) left, (EqualsExp) right); }
+    }
 
     private static class ActualTest implements M6Test.TestTemplate {}
 

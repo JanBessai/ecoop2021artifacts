@@ -1,7 +1,7 @@
 package exp.m7
 
 trait Exp[T] extends exp.m6.Exp[T] with Factory[T] {
-  def powBy(other: exp.Exp[T]) : exp.Exp[T]
+  def powby(other: exp.Exp[T]) : exp.Exp[T]
 }
 
 trait Factory[T] extends exp.m6.Factory[T] {
@@ -9,7 +9,7 @@ trait Factory[T] extends exp.m6.Factory[T] {
 }
 
 trait Lit[T] extends exp.m6.Lit[T] with Exp[T] {
-  def powBy(exponent : exp.Exp[T]) : exp.Exp[T] = {
+  def powby(exponent : exp.Exp[T]) : exp.Exp[T] = {
     val exponentValue = exponent.eval
     var result : exp.Exp[T] = this
     for ( _ <- math.floor(math.abs(exponentValue)).toInt until 1 by -1) {
@@ -25,24 +25,24 @@ trait Lit[T] extends exp.m6.Lit[T] with Exp[T] {
 
 trait Add[T] extends exp.m6.Add[T] with Exp[T] {
   // evaluate self and raise that value (as a literal) to the given exponent
-  override def powBy(exponent: exp.Exp[T]) : exp.Exp[T] = lit(eval).powBy(exponent)
+  override def powby(exponent: exp.Exp[T]) : exp.Exp[T] = lit(eval).powby(exponent)
 }
 
 trait Sub[T] extends exp.m6.Sub[T] with Exp[T] {
   // evaluate self and raise that value (as a literal) to the given exponent
-  override def powBy(exponent: exp.Exp[T]) : exp.Exp[T] = lit(eval).powBy(exponent)
+  override def powby(exponent: exp.Exp[T]) : exp.Exp[T] = lit(eval).powby(exponent)
 }
 
 trait Mult[T] extends exp.m6.Mult[T] with Exp[T] {
-  override def powBy(exponent: exp.Exp[T]) : exp.Exp[T] = mult(left.powBy(exponent), right.powBy(exponent))
+  override def powby(exponent: exp.Exp[T]) : exp.Exp[T] = mult(left.powby(exponent), right.powby(exponent))
 }
 
 trait Neg[T] extends exp.m6.Neg[T] with Exp[T] {
-  override def powBy(exponent: exp.Exp[T]) : exp.Exp[T] = mult(lit(-1).powBy(exponent), inner.powBy(exponent))
+  override def powby(exponent: exp.Exp[T]) : exp.Exp[T] = mult(lit(-1).powby(exponent), inner.powby(exponent))
 }
 
 trait Divd[T] extends exp.m6.Divd[T] with Exp[T] {
-  override def powBy(exponent: exp.Exp[T]) : exp.Exp[T] = divd(left.powBy(exponent), right.powBy(exponent))
+  override def powby(exponent: exp.Exp[T]) : exp.Exp[T] = divd(left.powby(exponent), right.powby(exponent))
 }
 
 object finalized {

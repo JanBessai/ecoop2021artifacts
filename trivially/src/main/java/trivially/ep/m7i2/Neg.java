@@ -17,4 +17,12 @@ public interface Neg extends Exp, trivially.ep.m7.Neg {
             return new trivially.ep.m7i2.finalized.Neg(this.getInner().simplify());
         }
     }
+
+    default void truncate (int level) {
+        if (level > 1) {
+            getInner().truncate(level-1);
+        } else {
+            setInner(new trivially.ep.m7i2.finalized.Lit(getInner().eval()));
+        }
+    }
 }

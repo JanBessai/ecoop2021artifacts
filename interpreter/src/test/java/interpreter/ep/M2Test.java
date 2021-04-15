@@ -1,10 +1,15 @@
 package interpreter.ep;
 
+import interpreter.ep.m0.EvalExp;
+import interpreter.ep.m1.EvalSub;
+import interpreter.ep.m2.PrettypAdd;
 import interpreter.ep.m2.PrettypExp;
+import interpreter.ep.m2.PrettypLit;
+import interpreter.ep.m2.PrettypSub;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class M2Test extends M1Test {
+public class M2Test {
 
     public interface TestTemplate extends M1Test.TestTemplate {
         default void test() {
@@ -19,11 +24,11 @@ public class M2Test extends M1Test {
             Assert.assertEquals("(1.0-2.0)", sub(lit(1.0), lit(2.0)).prettyp());
             Assert.assertEquals("((1.0-2.0)+(5.0+6.0))", add(sub(lit(1.0), lit(2.0)), add(lit(5.0), lit(6.0))).prettyp());
         }
-    }
 
-    static PrettypExp lit(Double d) { return new interpreter.ep.m2.PrettypLit(d); }
-    static PrettypExp add(PrettypExp left, PrettypExp right) { return new interpreter.ep.m2.PrettypAdd(left, right); }
-    static PrettypExp sub(PrettypExp left, PrettypExp right) { return new interpreter.ep.m2.PrettypSub(left, right); }
+        @Override default PrettypExp lit(Double d) { return new interpreter.ep.m2.PrettypLit(d); }
+        @Override default PrettypExp add(EvalExp left, EvalExp right) { return new interpreter.ep.m2.PrettypAdd((PrettypExp)left, (PrettypExp)right); }
+        default PrettypExp sub(EvalExp left, EvalExp right) { return new interpreter.ep.m2.PrettypSub((PrettypExp)left, (PrettypExp)right); }
+    }
 
     private static class ActualTest implements M2Test.TestTemplate {}
 

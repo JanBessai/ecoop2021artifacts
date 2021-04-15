@@ -19,7 +19,7 @@ public class M1Test {
             Assert.assertEquals(sub(lit(1.0), lit(2.0)).eval(), -1.0, 0.0);
         }
 
-        default Sub sub(Exp left, Exp right) { return new trivially.ep.m1.finalized.Sub(left, right); }
+        default Exp sub(trivially.ep.m0.Exp left, trivially.ep.m0.Exp right) { return new trivially.ep.m1.finalized.Sub(left, right); }
     }
     private static class ActualTest implements TestTemplate {}
 

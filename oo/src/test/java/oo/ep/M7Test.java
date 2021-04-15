@@ -23,6 +23,8 @@ public class M7Test {
             Assert.assertEquals(4.0, s1.eval(), 0.0);
             Assert.assertEquals(25.0, n1.eval(), 0.0);
 
+            Assert.assertEquals(1000.0, new Lit(10.0).powby_old(new Lit(3.0)).eval(), 0.0);
+
             Assert.assertEquals(28561.0, new Add(new Lit(1.0), new Lit(12.0)).powby(new Lit(4.0)).eval(), 0.0);
         }
     }

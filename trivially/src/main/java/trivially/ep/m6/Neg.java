@@ -28,7 +28,7 @@ public interface Neg extends Exp, trivially.ep.m5.Neg {
         if (level > 1) {
             getInner().truncate(level-1);
         } else {
-            setInner(new trivially.ep.m5.finalized.Lit(getInner().eval()));
+            setInner(new trivially.ep.m6.finalized.Lit(getInner().eval()));
         }
     }
 }

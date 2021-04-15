@@ -1,13 +1,15 @@
 package interpreter.ep;
 
-import interpreter.ep.m4.CollectSimplifyExp;
+import interpreter.ep.m0.EvalExp;
+import interpreter.ep.m2.PrettypExp;
+import interpreter.ep.m4.*;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Collections;
 
-public class M4Test extends M3Test {
+public class M4Test {
     public interface TestTemplate extends M3Test.TestTemplate {
         default void test() {
             M3Test.TestTemplate.super.test();
@@ -97,14 +99,14 @@ public class M4Test extends M3Test {
             CollectSimplifyExp largerTrunc = sub(baseTrunc, divd(baseTrunc, lit(1.0)));
             Assert.assertEquals(larger.prettyp(), largerTrunc.prettyp());
         }
-    }
 
-    static CollectSimplifyExp lit(Double d) { return new interpreter.ep.m4.CollectSimplifyLit(d); }
-    static CollectSimplifyExp add(CollectSimplifyExp left, CollectSimplifyExp right) { return new interpreter.ep.m4.CollectSimplifyAdd(left, right); }
-    static CollectSimplifyExp sub(CollectSimplifyExp left, CollectSimplifyExp right) { return new interpreter.ep.m4.CollectSimplifySub(left, right); }
-    static CollectSimplifyExp mult(CollectSimplifyExp left, CollectSimplifyExp right) { return new interpreter.ep.m4.CollectSimplifyMult(left, right); }
-    static CollectSimplifyExp neg(CollectSimplifyExp inner) { return new interpreter.ep.m4.CollectSimplifyNeg(inner); }
-    static CollectSimplifyExp divd(CollectSimplifyExp left, CollectSimplifyExp right) { return new interpreter.ep.m4.CollectSimplifyDivd(left, right); }
+        @Override default CollectSimplifyExp lit(Double d) { return new interpreter.ep.m4.CollectSimplifyLit(d); }
+        @Override default CollectSimplifyExp add(EvalExp left, EvalExp right) { return new interpreter.ep.m4.CollectSimplifyAdd((CollectSimplifyExp) left, (CollectSimplifyExp) right); }
+        @Override default CollectSimplifyExp sub(EvalExp left, EvalExp right) { return new interpreter.ep.m4.CollectSimplifySub((CollectSimplifyExp) left, (CollectSimplifyExp) right); }
+        @Override default CollectSimplifyExp mult(PrettypExp left, PrettypExp right) { return new interpreter.ep.m4.CollectSimplifyMult((CollectSimplifyExp) left, (CollectSimplifyExp) right); }
+        @Override default CollectSimplifyExp neg(PrettypExp inner) { return new interpreter.ep.m4.CollectSimplifyNeg((CollectSimplifyExp) inner); }
+        @Override default CollectSimplifyExp divd(PrettypExp left, PrettypExp right) { return new interpreter.ep.m4.CollectSimplifyDivd((CollectSimplifyExp) left, (CollectSimplifyExp) right); }
+    }
 
     private static class ActualTest implements M4Test.TestTemplate {}
 

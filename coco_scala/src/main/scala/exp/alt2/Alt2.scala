@@ -11,9 +11,9 @@ trait Power[T] extends exp.alt1.Exp[T] with Factory[T] {
   def base: exp.Exp[T]
   def exponent: exp.Exp[T]
 
-  def prettyp: String = String.format("(%s ^ %s)", base.prettyp, exponent.prettyp)
+  def prettyp: String = String.format("(%s^%s)", base.prettyp, exponent.prettyp)
   def eval: Double = math.pow(base.eval, exponent.eval)
-  def multBy(other: exp.Exp[T]): exp.Exp[T] = power(base, add(exponent, lit(math.log(other.eval)/math.log(base.eval))))
+  def multby(other: exp.Exp[T]): exp.Exp[T] = power(base, add(exponent, lit(math.log(other.eval)/math.log(base.eval))))
 }
 
 object finalized {

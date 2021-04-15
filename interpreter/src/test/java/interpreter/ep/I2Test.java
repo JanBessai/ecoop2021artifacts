@@ -1,10 +1,15 @@
 package interpreter.ep;
 
+import interpreter.ep.i1.MultByAdd;
 import interpreter.ep.i1.MultByExp;
+import interpreter.ep.i1.MultByLit;
+import interpreter.ep.i1.MultBySub;
+import interpreter.ep.i2.EvalPrettypMultByPower;
+import interpreter.ep.m0.EvalExp;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class I2Test extends I1Test {
+public class I2Test {
     public interface TestTemplate extends I1Test.TestTemplate {
         default void test() {
 
@@ -16,12 +21,12 @@ public class I2Test extends I1Test {
 
             Assert.assertTrue("(2.0^(5.0+2.0))".equals(mb.prettyp()));
         }
-    }
 
-    static MultByExp lit(Double d) { return new interpreter.ep.i1.MultByLit(d); }
-    static MultByExp add(MultByExp left, MultByExp right) { return new interpreter.ep.i1.MultByAdd(left, right); }
-    static MultByExp sub(MultByExp left, MultByExp right) { return new interpreter.ep.i1.MultBySub(left, right); }
-    static MultByExp power(MultByExp left, MultByExp right) { return new interpreter.ep.i2.EvalPrettypMultByPower(left, right); }
+        @Override default MultByExp lit(Double d) { return new interpreter.ep.i1.MultByLit(d); }
+        @Override default MultByExp add(EvalExp left, EvalExp right) { return new interpreter.ep.i1.MultByAdd((MultByExp) left, (MultByExp) right); }
+        @Override default MultByExp sub(EvalExp left, EvalExp right) { return new interpreter.ep.i1.MultBySub((MultByExp) left, (MultByExp) right); }
+        default MultByExp power(MultByExp left, MultByExp right) { return new EvalPrettypMultByPower(left, right); }
+    }
 
     private static class ActualTest implements I2Test.TestTemplate {}
 

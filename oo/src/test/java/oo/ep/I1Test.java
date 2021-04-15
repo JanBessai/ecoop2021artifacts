@@ -9,8 +9,10 @@ public class I1Test {
             M2Test.TestTemplate.super.test();
 
             Assert.assertEquals(-3.0, new Sub(new Lit(1.0), new Lit(2.0)).multby(new Lit(3.0)).eval(), 0.0);
+            Assert.assertEquals(-3.0, new Lit(3.0).multby_old(new Sub(new Lit(1.0), new Lit(2.0))).eval(), 0.0);
 
             Assert.assertEquals(9.0, new Add(new Lit(1.0), new Lit(2.0)).multby(new Lit(3.0)).eval(), 0.0);
+            Assert.assertEquals(9.0, new Lit(3.0).multby_old(new Add(new Lit(1.0), new Lit(2.0))).eval(), 0.0);
         }
     }
     private static class ActualTest implements TestTemplate {}

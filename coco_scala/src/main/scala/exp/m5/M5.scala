@@ -10,12 +10,12 @@ trait Factory[T] extends exp.m4.Factory[T] {
 }
 
 trait Lit[T] extends exp.m4.Lit[T] with Exp[T] {
-  def astree : Tree = new Leaf(value)
+  def astree : Tree = new Node(id, new Leaf(value))
   def id : Int = 76407
 }
 
 trait BinaryExp[T] extends exp.m4.BinaryExp[T] with Exp[T] {
-  def astree : Tree = new Node(Seq(left.astree, right.astree), id)
+  def astree : Tree = new Node(id, left.astree, right.astree)
 }
 
 trait Add[T] extends exp.m4.Add[T] with BinaryExp[T] {
@@ -35,7 +35,7 @@ trait Divd[T] extends exp.m4.Divd[T] with BinaryExp[T] {
 }
 
 trait Neg[T] extends exp.m4.Neg[T] with Exp[T] {
-  def astree: Tree = new Node(Seq(inner.astree), id)
+  def astree: Tree = new Node(id, inner.astree)
   def id: Int = 78192
 }
 

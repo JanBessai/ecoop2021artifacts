@@ -11,14 +11,14 @@ trait Mult[T] extends exp.m2.Exp[T] {
   def right : exp.Exp[T]
 
   def eval : Double = left.eval * right.eval
-  def prettyp : String = String.format("(%s * %s)", left.prettyp, right.prettyp)
+  def prettyp : String = String.format("(%s*%s)", left.prettyp, right.prettyp)
 }
 
 trait Neg[T] extends exp.m2.Exp[T] {
   def inner : exp.Exp[T]
 
   def eval : Double = -inner.eval
-  def prettyp : String = String.format("(- %s)", inner.prettyp)
+  def prettyp : String = String.format("(-%s)", inner.prettyp)
 }
 
 trait Divd[T] extends exp.m2.Exp[T] {
@@ -26,7 +26,7 @@ trait Divd[T] extends exp.m2.Exp[T] {
   def right: exp.Exp[T]
 
   def eval: Double = left.eval / right.eval
-  def prettyp: String = String.format("(%s / %s)", left.prettyp, right.prettyp)
+  def prettyp: String = String.format("(%s/%s)", left.prettyp, right.prettyp)
 }
 
 object finalized {

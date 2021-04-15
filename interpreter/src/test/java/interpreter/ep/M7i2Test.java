@@ -1,14 +1,15 @@
 package interpreter.ep;
 
-import interpreter.ep.m7i2.MergedExp;
+import interpreter.ep.m0.EvalExp;
+import interpreter.ep.m2.PrettypExp;
+import interpreter.ep.m7i2.*;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
 
-// Pick one of the past branches to extend
-public class M7i2Test extends M7Test {
-    public interface TestTemplate extends M7Test.TestTemplate, I2Test.TestTemplate {
+public class M7i2Test {
+    public interface TestTemplate extends M7Test.TestTemplate,I2Test.TestTemplate {
         default void test() {
             M7Test.TestTemplate.super.test();
             I2Test.TestTemplate.super.test();
@@ -63,16 +64,17 @@ public class M7i2Test extends M7Test {
             MergedExp pwr4 = (MergedExp) pwr3.powby(lit(4.0));
             Assert.assertEquals("((2.0^3.0)^4.0)", pwr4.prettyp());
         }
+
+        @Override default MergedExp lit(Double d) { return new interpreter.ep.m7i2.MergedLit(d); }
+        @Override default MergedExp add(EvalExp left, EvalExp right) { return new interpreter.ep.m7i2.MergedAdd((MergedExp) left, (MergedExp) right); }
+        @Override default MergedExp sub(EvalExp left, EvalExp right) { return new interpreter.ep.m7i2.MergedSub((MergedExp) left, (MergedExp) right); }
+        @Override default MergedExp mult(PrettypExp left, PrettypExp right) { return new interpreter.ep.m7i2.MergedMult((MergedExp) left, (MergedExp) right); }
+        @Override default MergedExp neg(PrettypExp inner) { return new interpreter.ep.m7i2.MergedNeg((MergedExp) inner); }
+        @Override default MergedExp divd(PrettypExp left, PrettypExp right) { return new interpreter.ep.m7i2.MergedDivd((MergedExp) left, (MergedExp) right); }
+        default MergedExp power(MergedExp left, MergedExp right) { return new interpreter.ep.m7i2.MergedPower(left, right); }
     }
 
-    static MergedExp lit(Double d) { return new interpreter.ep.m7i2.MergedLit(d); }
-    static MergedExp add(MergedExp left, MergedExp right) { return new interpreter.ep.m7i2.MergedAdd(left, right); }
-    static MergedExp sub(MergedExp left, MergedExp right) { return new interpreter.ep.m7i2.MergedSub(left, right); }
-    static MergedExp mult(MergedExp left, MergedExp right) { return new interpreter.ep.m7i2.MergedMult(left, right); }
-    static MergedExp neg(MergedExp inner) { return new interpreter.ep.m7i2.MergedNeg(inner); }
-    static MergedExp divd(MergedExp left, MergedExp right) { return new interpreter.ep.m7i2.MergedDivd(left, right); }
-    static MergedExp power(MergedExp left, MergedExp right) { return new interpreter.ep.m7i2.MergedPower(left, right); }
-    private static class ActualTest implements M7i2Test.TestTemplate {}
+     private static class ActualTest implements M7i2Test.TestTemplate {}
 
     @Test
     public void testTest() { new M7i2Test.ActualTest().test(); }

@@ -104,12 +104,12 @@ public class M4Test {
             Assert.assertEquals(larger.prettyp(), largerTrunc.prettyp());
         }
 
-        default Lit lit(Double d) { return new trivially.ep.m4.finalized.Lit(d); }
-        default Add add(Exp left, Exp right) { return new trivially.ep.m4.finalized.Add(left, right); }
-        default Sub sub(Exp left, Exp right) { return new trivially.ep.m4.finalized.Sub(left, right); }
-        default Mult mult(Exp left, Exp right) { return new trivially.ep.m4.finalized.Mult(left, right); }
-        default Neg neg(Exp inner) { return new trivially.ep.m4.finalized.Neg(inner); }
-        default Divd divd(Exp left, Exp right) { return new trivially.ep.m4.finalized.Divd(left, right); }
+        @Override default Exp lit(Double d) { return new trivially.ep.m4.finalized.Lit(d); }
+        @Override default Exp add(trivially.ep.m0.Exp left, trivially.ep.m0.Exp right) { return new trivially.ep.m4.finalized.Add((Exp) left, (Exp) right); }
+        @Override default Exp sub(trivially.ep.m0.Exp left, trivially.ep.m0.Exp right) { return new trivially.ep.m4.finalized.Sub((Exp) left, (Exp) right); }
+        @Override default Exp mult(trivially.ep.m0.Exp left, trivially.ep.m0.Exp right) { return new trivially.ep.m4.finalized.Mult((Exp) left, (Exp) right); }
+        @Override default Exp neg(trivially.ep.m0.Exp inner) { return new trivially.ep.m4.finalized.Neg((Exp) inner); }
+        @Override default Exp divd(trivially.ep.m0.Exp left, trivially.ep.m0.Exp right) { return new trivially.ep.m4.finalized.Divd((Exp) left, (Exp) right); }
     }
     private static class ActualTest implements TestTemplate {}
 

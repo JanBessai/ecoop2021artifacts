@@ -19,8 +19,8 @@ public class M0Test {
             Assert.assertEquals(5.0, lit(5.0).eval(), 0.0);
         }
         
-        default Lit lit(Double d) { return new trivially.ep.m0.finalized.Lit(d); }
-        default Add add(Exp left, Exp right) { return new trivially.ep.m0.finalized.Add(left, right); }
+        default Exp lit(Double d) { return new trivially.ep.m0.finalized.Lit(d); }
+        default Exp add(Exp left, Exp right) { return new trivially.ep.m0.finalized.Add(left, right); }
     }
 
     private static class ActualTest implements TestTemplate {}

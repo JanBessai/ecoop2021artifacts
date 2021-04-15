@@ -23,7 +23,7 @@ trait BinaryExp[T] extends Exp[T] {
   def right:Exp[T] = _right
 
   def truncate(level:Int): Unit = {
-    if (level > 0) {
+    if (level > 1) {
       left.truncate(level-1)
       right.truncate(level-1)
     } else {
@@ -86,7 +86,7 @@ trait Neg[T] extends exp.m3.Neg[T] with Exp[T] {
   def inner:exp.Exp[T] = _inner
 
   def truncate(level:Int): Unit = {
-    if (level > 0) {
+    if (level > 1) {
       inner.truncate(level-1)
     } else {
       _inner = lit(inner.eval)

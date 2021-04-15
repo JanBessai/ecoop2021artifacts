@@ -13,11 +13,11 @@ trait Lit[T] extends exp.m0.Lit[T] with Exp[T] {
 }
 
 trait Add[T] extends exp.m0.Add[T] with Exp[T] {
-  def prettyp: String = String.format("(%s + %s)", left.prettyp, right.prettyp)
+  def prettyp: String = String.format("(%s+%s)", left.prettyp, right.prettyp)
 }
 
 trait Sub[T] extends exp.m1.Sub[T] with Exp[T] {
-  def prettyp: String = String.format("(%s - %s)", left.prettyp, right.prettyp)
+  def prettyp: String = String.format("(%s-%s)", left.prettyp, right.prettyp)
 }
 
 object finalized {

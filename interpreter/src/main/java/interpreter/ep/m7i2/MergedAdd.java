@@ -19,9 +19,9 @@ public class MergedAdd extends PowByAdd implements MergedExp {
         if ((leftVal == 0 && rightVal == 0) || (leftVal + rightVal == 0)) {
             return new MergedLit(0.0);
         } else if (leftVal == 0) {
-            return ((MergedExp)left).simplify();
-        } else if (rightVal == 0) {
             return ((MergedExp)right).simplify();
+        } else if (rightVal == 0) {
+            return ((MergedExp)left).simplify();
         } else {
             return new MergedAdd( ((MergedExp)left).simplify(), ((MergedExp)right).simplify());
         }

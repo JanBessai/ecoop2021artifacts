@@ -21,7 +21,7 @@ public class I2Test {
                             "((2.0^5.0)*4.0)".equals(mb.prettyp()));
         }
 
-        default Power power(Exp left, Exp right) { return new trivially.ep.i2.finalized.Power(left, right); }
+        default Exp power(trivially.ep.m0.Exp left, trivially.ep.m0.Exp right) { return new trivially.ep.i2.finalized.Power((Exp)left, (Exp) right); }
     }
     private static class ActualTest implements TestTemplate {}
 

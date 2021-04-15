@@ -1,8 +1,8 @@
 package exp.m7alt2
 
 trait Exp[T] extends exp.m7.Exp[T] with exp.alt1.Exp[T] with Factory[T] {
-  override def powBy(other: exp.Exp[T]) : exp.Exp[T] = power(this, other)
-  override def multBy(other: exp.Exp[T]) : exp.Exp[T] = mult(this, other)
+  override def powby(other: exp.Exp[T]) : exp.Exp[T] = power(this, other)
+  override def multby(other: exp.Exp[T]) : exp.Exp[T] = mult(this, other)
   def isPower(base : exp.Exp[T], exponent: exp.Exp[T]) : Boolean = false
 }
 

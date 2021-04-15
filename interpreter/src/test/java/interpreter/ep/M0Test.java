@@ -1,6 +1,8 @@
 package interpreter.ep;
 
+import interpreter.ep.m0.EvalAdd;
 import interpreter.ep.m0.EvalExp;
+import interpreter.ep.m0.EvalLit;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -17,9 +19,9 @@ public class M0Test {
             Assert.assertEquals(5.0, lit(5.0).eval(), 0.0);
         }
 
+        default EvalExp lit(Double d) { return new interpreter.ep.m0.EvalLit(d); }
+        default EvalExp add(EvalExp left, EvalExp right) { return new interpreter.ep.m0.EvalAdd(left, right); }
     }
-    static EvalExp lit(Double d) { return new interpreter.ep.m0.EvalLit(d); }
-    static EvalExp add(EvalExp left, EvalExp right) { return new interpreter.ep.m0.EvalAdd(left, right); }
 
     private static class ActualTest implements TestTemplate {}
 

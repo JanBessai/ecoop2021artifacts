@@ -1,7 +1,7 @@
 package exp.alt1
 
 trait Exp[T] extends exp.m2.Exp[T] with Factory[T] {
-  def multBy(other: exp.Exp[T]): exp.Exp[T]
+  def multby(other: exp.Exp[T]): exp.Exp[T]
 }
 
 trait Factory[T] extends exp.m2.Factory[T] {
@@ -10,7 +10,7 @@ trait Factory[T] extends exp.m2.Factory[T] {
 }
 
 trait Lit[T] extends exp.m2.Lit[T] with Exp[T] {
-  def multBy(other: exp.Exp[T]) : exp.Exp[T] = {
+  def multby(other: exp.Exp[T]) : exp.Exp[T] = {
     val otherValue = other.eval
     var result: exp.Exp[T] = this
     for( _ <- math.floor(math.abs(otherValue)).toInt until 1 by -1) {
@@ -25,11 +25,11 @@ trait Lit[T] extends exp.m2.Lit[T] with Exp[T] {
 }
 
 trait Add[T] extends exp.m2.Add[T] with Exp[T] {
-  override def multBy(exponent: exp.Exp[T]): exp.alt1.Exp[T] = add(left.multBy(exponent), right.multBy(exponent))
+  override def multby(exponent: exp.Exp[T]): exp.alt1.Exp[T] = add(left.multby(exponent), right.multby(exponent))
 }
 
 trait Sub[T] extends exp.m2.Sub[T] with Exp[T] {
-  override def multBy(exponent: exp.Exp[T]): exp.alt1.Exp[T] = sub(left.multBy(exponent), right.multBy(exponent))
+  override def multby(exponent: exp.Exp[T]): exp.alt1.Exp[T] = sub(left.multby(exponent), right.multby(exponent))
 }
 
 object finalized {

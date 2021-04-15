@@ -14,9 +14,9 @@ public class I1Test {
             Assert.assertEquals(9.0, add(lit(1.0), lit(2.0)).multby(lit(3.0)).eval(), 0.0);
         }
 
-        default Lit lit(Double d) { return new trivially.ep.i1.finalized.Lit(d); }
-        default Add add(Exp left, Exp right) { return new trivially.ep.i1.finalized.Add(left, right); }
-        default Sub sub(Exp left, Exp right) { return new trivially.ep.i1.finalized.Sub(left, right); }
+        @Override default Exp lit(Double d) { return new trivially.ep.i1.finalized.Lit(d); }
+        @Override default Exp add(trivially.ep.m0.Exp left, trivially.ep.m0.Exp right) { return new trivially.ep.i1.finalized.Add((Exp) left, (Exp) right); }
+        @Override default Exp sub(trivially.ep.m0.Exp left, trivially.ep.m0.Exp right) { return new trivially.ep.i1.finalized.Sub((Exp) left, (Exp) right); }
     }
     private static class ActualTest implements TestTemplate {}
 
