@@ -2,9 +2,7 @@ package trivially.ep;
 
 import org.junit.Assert;
 import org.junit.Test;
-import trivially.ep.m0.Add;
 import trivially.ep.m0.Exp;
-import trivially.ep.m0.Lit;
 
 public class M0Test {
     public interface TestTemplate  {

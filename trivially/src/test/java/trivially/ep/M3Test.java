@@ -3,9 +3,6 @@ package trivially.ep;
 import org.junit.Assert;
 import org.junit.Test;
 import trivially.ep.m2.Exp;
-import trivially.ep.m3.Mult;
-import trivially.ep.m3.Neg;
-import trivially.ep.m3.Divd;
 
 public class M3Test {
 

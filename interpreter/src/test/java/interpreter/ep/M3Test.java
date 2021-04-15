@@ -1,9 +1,6 @@
 package interpreter.ep;
 
 import interpreter.ep.m2.PrettypExp;
-import interpreter.ep.m3.PrettypDivd;
-import interpreter.ep.m3.PrettypMult;
-import interpreter.ep.m3.PrettypNeg;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -1,9 +1,6 @@
 package interpreter.ep;
 
-import interpreter.ep.i1.MultByAdd;
 import interpreter.ep.i1.MultByExp;
-import interpreter.ep.i1.MultByLit;
-import interpreter.ep.i1.MultBySub;
 import interpreter.ep.m0.EvalExp;
 import org.junit.Assert;
 import org.junit.Test;

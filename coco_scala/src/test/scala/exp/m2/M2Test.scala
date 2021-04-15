@@ -15,8 +15,8 @@
      val expr2 = this.lit(2.0)
      assert("2.0" === expr2.prettyp)
 
-     assert("(1.0-2.0)" === convert(this.sub(this.lit(1.0), this.lit(2.0))).prettyp)
-     assert( "((1.0-2.0)+(5.0+6.0))" === convert(this.add(this.sub(this.lit(1.0), this.lit(2.0)), this.add(this.lit(5.0), this.lit(6.0)))).prettyp)
+     assert("(1.0-2.0)" === this.sub(this.lit(1.0), this.lit(2.0)).prettyp)
+     assert( "((1.0-2.0)+(5.0+6.0))" === this.add(this.sub(this.lit(1.0), this.lit(2.0)), this.add(this.lit(5.0), this.lit(6.0))).prettyp)
     }
   }
 

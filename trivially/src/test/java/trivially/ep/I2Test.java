@@ -3,7 +3,6 @@ package trivially.ep;
 import org.junit.Assert;
 import org.junit.Test;
 import trivially.ep.i1.*;
-import trivially.ep.i2.Power;
 
 public class I2Test {
     public interface TestTemplate extends I1Test.TestTemplate {

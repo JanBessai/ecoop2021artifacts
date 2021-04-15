@@ -1,11 +1,7 @@
 package interpreter.ep;
 
 import interpreter.ep.m0.EvalExp;
-import interpreter.ep.m1.EvalSub;
-import interpreter.ep.m2.PrettypAdd;
 import interpreter.ep.m2.PrettypExp;
-import interpreter.ep.m2.PrettypLit;
-import interpreter.ep.m2.PrettypSub;
 import org.junit.Assert;
 import org.junit.Test;
 

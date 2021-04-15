@@ -1,7 +1,6 @@
 package ev.ep.m7i2;
 
 import ev.ep.Exp;
-import ev.ep.i2.VisitorPower;
 import ev.ep.i2.Power;
 import ev.ep.m6.Equals;
 
@@ -16,5 +15,4 @@ public class EqualsMerged extends Equals implements VisitorMerged<Boolean> {
     public AstreeMerged makeAstree() {
         return new AstreeMerged();
     }
-
 }

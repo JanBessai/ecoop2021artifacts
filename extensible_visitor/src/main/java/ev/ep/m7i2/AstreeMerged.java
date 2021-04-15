@@ -1,6 +1,5 @@
 package ev.ep.m7i2;
 
-import ev.ep.i2.VisitorPower;
 import ev.ep.i2.Power;
 import ev.ep.m5.Astree;
 import util.Node;

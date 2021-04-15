@@ -8,10 +8,13 @@ trait TestTemplate[FT] extends Factory[FT] with exp.m0.TestTemplate[FT] {
 
   override def test() : Unit = {
     super.test()
-    val one = lit(3)
-    val two = lit(8)
-    val subOneTwo = sub(one, two)
-    assert(subOneTwo.eval === -5)
+
+    val expr1 = this.sub(this.lit(1.0), this.lit(2.0))
+    assert(-1.0 === expr1.eval)
+
+    val expr2 = this.lit(2.0)
+    assert(2.0 === expr2.eval)
+    assert(this.sub(this.lit(1.0), this.lit(2.0)).eval === -1.0)
   }
 }
 

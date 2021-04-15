@@ -4,10 +4,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import trivially.ep.m2.Exp;
 
-import trivially.ep.m2.Add;
-import trivially.ep.m2.Lit;
-import trivially.ep.m2.Sub;
-
 public class M2Test {
 
     public interface TestTemplate extends M1Test.TestTemplate {

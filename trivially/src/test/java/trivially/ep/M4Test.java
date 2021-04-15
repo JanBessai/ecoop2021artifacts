@@ -2,13 +2,7 @@ package trivially.ep;
 
 import org.junit.Assert;
 import org.junit.Test;
-import trivially.ep.m4.Add;
-import trivially.ep.m4.Lit;
-import trivially.ep.m4.Sub;
 import trivially.ep.m4.Exp;
-import trivially.ep.m4.Divd;
-import trivially.ep.m4.Mult;
-import trivially.ep.m4.Neg;
 
 import java.util.Arrays;
 import java.util.Collections;
