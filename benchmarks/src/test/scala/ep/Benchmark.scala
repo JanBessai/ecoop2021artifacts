@@ -1,8 +1,5 @@
 package ep
 
-import coco.ep.m7i2.finalized
-import ev.ep.m7i2.{EvalMerged, SimplifyMerged}
-import exp.m7alt2.finalized
 import org.scalameter.KeyValue
 import org.scalameter.api._
 
@@ -50,7 +47,7 @@ object Benchmark extends Bench.OfflineReport {
     val startSimplify: Exp = new Sub(new Lit(5.0), new Lit(0.0))
     val simplifyExps: Gen[Exp] = sizes.map(size => (0 until size).foldLeft(startSimplify)((current, _) => new Power(current, current)))
   }
-object interpreterObjects {
+  object interpreterObjects {
     import interpreter.ep.m7i2._
     val startEval: MergedExp = new MergedPower(new MergedLit(evalBase), new MergedLit(evalExponent))
     val evalExps: Gen[MergedExp] = sizes.map(size => (0 until size).foldLeft(startEval)((current, _) => new MergedPower(current, current)))
@@ -89,7 +86,7 @@ object interpreterObjects {
     }
     measure method "ev" in {
       using(evObjects.evalExps) in { exp =>
-        exp.accept(new EvalMerged)
+        exp.accept(new ev.ep.m7i2.EvalMerged())
       }
     }
     measure method "interpreter" in {
@@ -122,7 +119,7 @@ object interpreterObjects {
     }
     measure method "ev" in {
       using(evObjects.simplifyExps) in { exp =>
-        exp.accept(new SimplifyMerged)
+        exp.accept(new ev.ep.m7i2.SimplifyMerged())
       }
     }
     measure method "interpreter" in {
