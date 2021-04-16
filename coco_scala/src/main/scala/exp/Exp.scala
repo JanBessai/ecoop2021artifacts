@@ -1,6 +1,6 @@
 package exp
 
-trait Exp[T] {
+trait Exp[T] extends Factory[T] {
   def getSelf:T
 }
 
