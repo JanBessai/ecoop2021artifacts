@@ -6,8 +6,8 @@ import ev.ep.m3.Divd;
 import ev.ep.m3.Mult;
 import ev.ep.m3.Neg;
 import ev.ep.m7i2.*;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
@@ -25,33 +25,33 @@ public class M7i2Test {
             Exp pwr = new Power(new Lit(2.0), new Lit(5.0));
             Exp pwr2 = new Lit(2.0).accept(makePowby(new Lit(5.0)));
 
-            Assert.assertFalse(pwr.accept(makeEql(mb)));
-            Assert.assertFalse(mb.accept(makeEql(pwr)));
+            Assertions.assertFalse(pwr.accept(makeEql(mb)));
+            Assertions.assertFalse(mb.accept(makeEql(pwr)));
 
-            Assert.assertTrue(pwr.accept(makeEql(pwr2)));
-            Assert.assertTrue(pwr2.accept(makeEql(pwr)));
+            Assertions.assertTrue(pwr.accept(makeEql(pwr2)));
+            Assertions.assertTrue(pwr2.accept(makeEql(pwr)));
 
             Neg neg = new Neg(new Lit(2.0));
             Exp neg2 = neg.accept(makePowby(new Lit(5.0)));
-            Assert.assertEquals(-32.0, neg2.accept(makeEval()), 0.0);
+            Assertions.assertEquals(-32.0, neg2.accept(makeEval()), 0.0);
 
             Exp neg3 = neg.accept(makeMultBy(new Lit(5.0)));
-            Assert.assertEquals(-10.0, neg3.accept(makeEval()), 0.0);
+            Assertions.assertEquals(-10.0, neg3.accept(makeEval()), 0.0);
 
             Exp divd2 = new Divd(new Lit(6.0), new Lit(2.0)).accept(makeMultBy(new Lit(5.0)));
-            Assert.assertEquals(15.0, divd2.accept(makeEval()), 0.0);
+            Assertions.assertEquals(15.0, divd2.accept(makeEval()), 0.0);
 
-            Assert.assertEquals(40.0, mb.accept(makeEval()), 0.0);
-            Assert.assertEquals("((2.0*5.0)*4.0)", mb.accept(makePrettyp()));
+            Assertions.assertEquals(40.0, mb.accept(makeEval()), 0.0);
+            Assertions.assertEquals("((2.0*5.0)*4.0)", mb.accept(makePrettyp()));
 
             Exp expr1 = new Power(new Lit(3.0), new Lit(1.0));
-            Assert.assertEquals("3.0", expr1.accept(makeSimplify()).accept(makePrettyp()));
+            Assertions.assertEquals("3.0", expr1.accept(makeSimplify()).accept(makePrettyp()));
 
             Exp expr2 = new Power(new Lit(1.0), new Lit(2.0));
-            Assert.assertEquals("1.0", expr2.accept(makeSimplify()).accept(makePrettyp()));
+            Assertions.assertEquals("1.0", expr2.accept(makeSimplify()).accept(makePrettyp()));
 
             Exp expr3 = new Power(new Lit(3.0), new Lit(2.0));
-            Assert.assertEquals("(3.0^2.0)", expr3.accept(makeSimplify()).accept(makePrettyp()));
+            Assertions.assertEquals("(3.0^2.0)", expr3.accept(makeSimplify()).accept(makePrettyp()));
 
             // 43046721 = ((9^2)^2)^2
             Exp h1 = new Power(new Lit(43046721.0), new Lit(0.5));
@@ -60,13 +60,13 @@ public class M7i2Test {
 
             Exp pwr1 = new Power(new Lit(5.0), threeDeep);
             pwr1.accept(makeTruncate(1));
-            Assert.assertEquals("(5.0^9.0)", pwr1.accept(makePrettyp()));
+            Assertions.assertEquals("(5.0^9.0)", pwr1.accept(makePrettyp()));
 
-            Assert.assertEquals(new Power(new Lit(1.0), new Lit(12.0)).accept(makeCollect()), Arrays.asList(1.0, 12.0));
+            Assertions.assertEquals(new Power(new Lit(1.0), new Lit(12.0)).accept(makeCollect()), Arrays.asList(1.0, 12.0));
 
             Exp pwr3 = new Power(new Lit(2.0), new Lit(3.0));
             Exp pwr4 = pwr3.accept(makePowby(new Lit(4.0)));
-            Assert.assertEquals("((2.0^3.0)^4.0)", pwr4.accept(makePrettyp()));
+            Assertions.assertEquals("((2.0^3.0)^4.0)", pwr4.accept(makePrettyp()));
         }
 
         default VisitorMerged<Double> makeEval() {

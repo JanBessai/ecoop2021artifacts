@@ -1,6 +1,6 @@
 package coco.ep;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class M1Test {
 
@@ -9,11 +9,11 @@ public class M1Test {
             M0Test.TestTemplate.super.test();
 
             Exp<FT> expr1 = this.sub(this.lit(1.0), this.lit(2.0));
-            org.junit.Assert.assertEquals(-1.0, convert(expr1).eval(), 0.0);
+            org.junit.jupiter.api.Assertions.assertEquals(-1.0, convert(expr1).eval(), 0.0);
 
             Exp<FT> expr2 = this.lit(2.0);
-            org.junit.Assert.assertEquals(2.0, convert(expr2).eval(), 0.0);
-            Assert.assertEquals(convert(this.sub(this.lit(1.0), this.lit(2.0))).eval(), -1.0, 0.0);
+            org.junit.jupiter.api.Assertions.assertEquals(2.0, convert(expr2).eval(), 0.0);
+            Assertions.assertEquals(convert(this.sub(this.lit(1.0), this.lit(2.0))).eval(), -1.0, 0.0);
         }
     }
     private static class ActualTest implements M1Test.TestTemplate<coco.ep.m0.finalized.Exp>, coco.ep.m1.finalized.Factory {}

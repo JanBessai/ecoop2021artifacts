@@ -3,8 +3,8 @@ package interpreter.ep;
 import interpreter.ep.m0.EvalExp;
 import interpreter.ep.m2.PrettypExp;
 import interpreter.ep.m7.*;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class M7Test {
 
@@ -19,14 +19,14 @@ public class M7Test {
             PowByExp s1 = sub(lit(5.0), lit(3.0)).powby(lit(2.0));
             PowByExp n1 = neg(lit(5.0)).powby(lit(2.0));
 
-            Assert.assertEquals(9.0, pby.eval(), 0.0);
-            Assert.assertEquals(6.25, d1.eval(), 0.0);
-            Assert.assertEquals(100.0, m1.eval(), 0.0);
-            Assert.assertEquals(49.0, a1.eval(), 0.0);
-            Assert.assertEquals(4.0, s1.eval(), 0.0);
-            Assert.assertEquals(25.0, n1.eval(), 0.0);
+            Assertions.assertEquals(9.0, pby.eval(), 0.0);
+            Assertions.assertEquals(6.25, d1.eval(), 0.0);
+            Assertions.assertEquals(100.0, m1.eval(), 0.0);
+            Assertions.assertEquals(49.0, a1.eval(), 0.0);
+            Assertions.assertEquals(4.0, s1.eval(), 0.0);
+            Assertions.assertEquals(25.0, n1.eval(), 0.0);
 
-            Assert.assertEquals(28561.0, add(lit(1.0), lit(12.0)).powby(lit(4.0)).eval(), 0.0);
+            Assertions.assertEquals(28561.0, add(lit(1.0), lit(12.0)).powby(lit(4.0)).eval(), 0.0);
         }
 
         @Override default PowByExp lit(Double d) { return new interpreter.ep.m7.PowByLit(d); }

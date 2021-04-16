@@ -1,6 +1,6 @@
 package xml;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import xml.m0.Factory;
 import xml.m0.Tag;
 
@@ -9,11 +9,11 @@ public class M0Test {
         default void test() {
 
             Tag<FX,FT,FD> tag = this.tag("html");
-            org.junit.Assert.assertTrue(tag.addChild(this.tag("head")));
-            org.junit.Assert.assertTrue(tag.addChild(this.tag("body")));
+            org.junit.jupiter.api.Assertions.assertTrue(tag.addChild(this.tag("head")));
+            org.junit.jupiter.api.Assertions.assertTrue(tag.addChild(this.tag("body")));
 
-            org.junit.Assert.assertTrue(tag.hasTag("body"));
-            org.junit.Assert.assertTrue(tag.notHasTag("script"));
+            org.junit.jupiter.api.Assertions.assertTrue(tag.hasTag("body"));
+            org.junit.jupiter.api.Assertions.assertTrue(tag.notHasTag("script"));
         }
     }
 

@@ -5,7 +5,7 @@ import java.util.Optional;
 public interface Pred<Elem, Tm, UNat> extends UnaryNat<Elem, Tm, UNat> {
 	tapl.Term<Elem, Tm> getOf();
 
-	default Pred<Elem, Tm, UNat> replaceOf(tapl.Term<Elem, Tm> by) {	return pred(by); }
+	default Pred<Elem, Tm, UNat> replaceOf(tapl.Term<Elem, Tm> by) { return pred(by); }
 	
 	@Override default tapl.Term<Elem, Tm> eval() {
 		Term<Elem, Tm, UNat> evaluatedInner = convert(getOf().eval());

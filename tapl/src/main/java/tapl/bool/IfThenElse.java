@@ -26,7 +26,7 @@ public interface IfThenElse<Elem, Tm> extends Term<Elem, Tm> {
 	}
 
 	@Override default tapl.Term<Elem, Tm> eval() {
-		Term<Elem, Tm> evaluatedCondition = convert(convert(getCondition()).eval());  // IF don't make progress, always returns SELF
+		Term<Elem, Tm> evaluatedCondition = convert(convert(getCondition()).eval());
 		if (evaluatedCondition != getCondition()) {
 			return replaceCondition(evaluatedCondition);
 		} else if (evaluatedCondition.isConstTrue()) {

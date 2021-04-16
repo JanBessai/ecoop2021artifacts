@@ -3,11 +3,9 @@ val defaultSettings =
     crossPaths := false,
     autoScalaLibrary := false,
     libraryDependencies ++= Seq(
-      "com.novocode" % "junit-interface" % "0.11" % "test",
-      "junit" % "junit" % "4.12" % "test"
+      "net.aichler" % "jupiter-interface" % JupiterKeys.jupiterVersion.value % Test
     ),
-    testFrameworks := Seq(TestFrameworks.JUnit),
-    testOptions += Tests.Argument(TestFrameworks.JUnit, "-v"),
+    testOptions += Tests.Argument(jupiterTestFramework, "-v"),
     Test / parallelExecution := false
   )
 
@@ -17,6 +15,7 @@ lazy val extensible_visitor = Project("extensible_visitor", file("extensible_vis
 lazy val oo = Project("oo", file("oo")).settings(defaultSettings).dependsOn(shared)
 lazy val trivially = Project("trivially", file("trivially")).settings(defaultSettings).dependsOn(shared)
 lazy val interpreter = Project("interpreter", file("interpreter")).settings(defaultSettings).dependsOn(shared)
+lazy val tapl = Project("tapl", file("tapl")).settings(defaultSettings)
 
 lazy val benchmarks = Project("benchmarks", file("benchmarks"))
   .settings(

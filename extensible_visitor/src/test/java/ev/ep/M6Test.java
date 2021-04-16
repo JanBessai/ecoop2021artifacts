@@ -9,8 +9,8 @@ import ev.ep.m3.Neg;
 import ev.ep.m3.VisitorDivdMultNeg;
 import ev.ep.m6.Eql;
 import ev.ep.m6.Equals;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class M6Test {
 
@@ -25,55 +25,55 @@ public class M6Test {
             Sub sub1 = new Sub(lit1, lit2);
             Neg neg1 = new Neg(lit1);
 
-            Assert.assertEquals(lit1, lit1);
-            Assert.assertNotEquals(lit1, lit2);
-            Assert.assertEquals(mult1, mult1);
-            Assert.assertNotEquals(mult1, divd1);
-            Assert.assertEquals(divd1, divd1);
-            Assert.assertNotEquals(divd1, add1);
-            Assert.assertEquals(add1, add1);
-            Assert.assertNotEquals(add1, sub1);
-            Assert.assertEquals(sub1, sub1);
-            Assert.assertNotEquals(sub1, neg1);
-            Assert.assertEquals(neg1, neg1);
-            Assert.assertNotEquals(neg1, mult1);
+            Assertions.assertEquals(lit1, lit1);
+            Assertions.assertNotEquals(lit1, lit2);
+            Assertions.assertEquals(mult1, mult1);
+            Assertions.assertNotEquals(mult1, divd1);
+            Assertions.assertEquals(divd1, divd1);
+            Assertions.assertNotEquals(divd1, add1);
+            Assertions.assertEquals(add1, add1);
+            Assertions.assertNotEquals(add1, sub1);
+            Assertions.assertEquals(sub1, sub1);
+            Assertions.assertNotEquals(sub1, neg1);
+            Assertions.assertEquals(neg1, neg1);
+            Assertions.assertNotEquals(neg1, mult1);
 
-            org.junit.Assert.assertFalse(lit1.accept(makeEql(lit2)));
-            org.junit.Assert.assertTrue(lit1.accept(makeEql(lit1)));
-            org.junit.Assert.assertFalse(mult1.accept(makeEql(lit2)));
-            org.junit.Assert.assertTrue(mult1.accept(makeEql(mult1)));
-            org.junit.Assert.assertFalse(mult1.accept(makeEql(divd1)));
-            org.junit.Assert.assertTrue(divd1.accept(makeEql(divd1)));
-            org.junit.Assert.assertFalse(divd1.accept(makeEql(add1)));
-            org.junit.Assert.assertTrue(add1.accept(makeEql(add1)));
-            org.junit.Assert.assertFalse(add1.accept(makeEql(sub1)));
-            org.junit.Assert.assertTrue(sub1.accept(makeEql(sub1)));
-            org.junit.Assert.assertFalse(sub1.accept(makeEql(neg1)));
-            org.junit.Assert.assertTrue(neg1.accept(makeEql(neg1)));
-            org.junit.Assert.assertFalse(neg1.accept(makeEql(mult1)));
+            org.junit.jupiter.api.Assertions.assertFalse(lit1.accept(makeEql(lit2)));
+            org.junit.jupiter.api.Assertions.assertTrue(lit1.accept(makeEql(lit1)));
+            org.junit.jupiter.api.Assertions.assertFalse(mult1.accept(makeEql(lit2)));
+            org.junit.jupiter.api.Assertions.assertTrue(mult1.accept(makeEql(mult1)));
+            org.junit.jupiter.api.Assertions.assertFalse(mult1.accept(makeEql(divd1)));
+            org.junit.jupiter.api.Assertions.assertTrue(divd1.accept(makeEql(divd1)));
+            org.junit.jupiter.api.Assertions.assertFalse(divd1.accept(makeEql(add1)));
+            org.junit.jupiter.api.Assertions.assertTrue(add1.accept(makeEql(add1)));
+            org.junit.jupiter.api.Assertions.assertFalse(add1.accept(makeEql(sub1)));
+            org.junit.jupiter.api.Assertions.assertTrue(sub1.accept(makeEql(sub1)));
+            org.junit.jupiter.api.Assertions.assertFalse(sub1.accept(makeEql(neg1)));
+            org.junit.jupiter.api.Assertions.assertTrue(neg1.accept(makeEql(neg1)));
+            org.junit.jupiter.api.Assertions.assertFalse(neg1.accept(makeEql(mult1)));
 
-            org.junit.Assert.assertTrue(lit1.accept(makeEquals(lit1)));
-            org.junit.Assert.assertFalse(mult1.accept(makeEquals(lit2)));
-            org.junit.Assert.assertTrue(mult1.accept(makeEquals(mult1)));
-            org.junit.Assert.assertFalse(mult1.accept(makeEquals(divd1)));
-            org.junit.Assert.assertTrue(divd1.accept(makeEquals(divd1)));
-            org.junit.Assert.assertFalse(divd1.accept(makeEquals(add1)));
-            org.junit.Assert.assertTrue(add1.accept(makeEquals(add1)));
-            org.junit.Assert.assertFalse(add1.accept(makeEquals(sub1)));
-            org.junit.Assert.assertTrue(sub1.accept(makeEquals(sub1)));
-            org.junit.Assert.assertFalse(sub1.accept(makeEquals(neg1)));
-            org.junit.Assert.assertTrue(neg1.accept(makeEquals(neg1)));
-            org.junit.Assert.assertFalse(neg1.accept(makeEquals(mult1)));
+            org.junit.jupiter.api.Assertions.assertTrue(lit1.accept(makeEquals(lit1)));
+            org.junit.jupiter.api.Assertions.assertFalse(mult1.accept(makeEquals(lit2)));
+            org.junit.jupiter.api.Assertions.assertTrue(mult1.accept(makeEquals(mult1)));
+            org.junit.jupiter.api.Assertions.assertFalse(mult1.accept(makeEquals(divd1)));
+            org.junit.jupiter.api.Assertions.assertTrue(divd1.accept(makeEquals(divd1)));
+            org.junit.jupiter.api.Assertions.assertFalse(divd1.accept(makeEquals(add1)));
+            org.junit.jupiter.api.Assertions.assertTrue(add1.accept(makeEquals(add1)));
+            org.junit.jupiter.api.Assertions.assertFalse(add1.accept(makeEquals(sub1)));
+            org.junit.jupiter.api.Assertions.assertTrue(sub1.accept(makeEquals(sub1)));
+            org.junit.jupiter.api.Assertions.assertFalse(sub1.accept(makeEquals(neg1)));
+            org.junit.jupiter.api.Assertions.assertTrue(neg1.accept(makeEquals(neg1)));
+            org.junit.jupiter.api.Assertions.assertFalse(neg1.accept(makeEquals(mult1)));
 
-            org.junit.Assert.assertTrue(new Sub(new Lit(1.0), new Lit(73.0)).accept(makeEql(new Sub(new Lit(1.0), new Lit(73.0)))));
-            org.junit.Assert.assertFalse(new Mult(new Divd(new Lit(5.0), new Lit(2.0)), new Lit(4.0)).accept(makeEql(new Mult(new Divd(new Lit(5.0), new Lit(2.0)), new Lit(3.0)))));
-            org.junit.Assert.assertTrue(new Mult(new Divd(new Lit(5.0), new Lit(2.0)), new Lit(4.0)).accept(makeEql(new Mult(new Divd(new Lit(5.0), new Lit(2.0)), new Lit(4.0)))));
-            org.junit.Assert.assertTrue(new Neg(new Mult(new Divd(new Lit(5.0), new Lit(2.0)), new Lit(4.0))).accept(makeEql(new Neg(new Mult(new Divd(new Lit(5.0), new Lit(2.0)), new Lit(4.0))))));
-            org.junit.Assert.assertFalse(new Mult(new Divd(new Lit(5.0), new Lit(2.0)), new Lit(4.0)).accept(makeEql(new Neg(new Mult(new Divd(new Lit(5.0), new Lit(2.0)), new Lit(4.0))))));
-            org.junit.Assert.assertFalse(new Divd(new Lit(6.0), new Lit(2.0)).accept(makeEql(new Divd(new Lit(8.0), new Lit(2.0)))));
-            org.junit.Assert.assertTrue(new Divd(new Lit(6.0), new Lit(2.0)).accept(makeEql(new Divd(new Lit(6.0), new Lit(2.0)))));
-            org.junit.Assert.assertTrue(new Add(new Lit(5.0), new Lit(3.0)).accept(makeEql(new Add(new Lit(5.0), new Lit(3.0)))));
-            org.junit.Assert.assertFalse(new Add(new Lit(5.0), new Lit(3.0)).accept(makeEql(new Mult(new Divd(new Lit(5.0), new Lit(2.0)), new Lit(3.0)))));
+            org.junit.jupiter.api.Assertions.assertTrue(new Sub(new Lit(1.0), new Lit(73.0)).accept(makeEql(new Sub(new Lit(1.0), new Lit(73.0)))));
+            org.junit.jupiter.api.Assertions.assertFalse(new Mult(new Divd(new Lit(5.0), new Lit(2.0)), new Lit(4.0)).accept(makeEql(new Mult(new Divd(new Lit(5.0), new Lit(2.0)), new Lit(3.0)))));
+            org.junit.jupiter.api.Assertions.assertTrue(new Mult(new Divd(new Lit(5.0), new Lit(2.0)), new Lit(4.0)).accept(makeEql(new Mult(new Divd(new Lit(5.0), new Lit(2.0)), new Lit(4.0)))));
+            org.junit.jupiter.api.Assertions.assertTrue(new Neg(new Mult(new Divd(new Lit(5.0), new Lit(2.0)), new Lit(4.0))).accept(makeEql(new Neg(new Mult(new Divd(new Lit(5.0), new Lit(2.0)), new Lit(4.0))))));
+            org.junit.jupiter.api.Assertions.assertFalse(new Mult(new Divd(new Lit(5.0), new Lit(2.0)), new Lit(4.0)).accept(makeEql(new Neg(new Mult(new Divd(new Lit(5.0), new Lit(2.0)), new Lit(4.0))))));
+            org.junit.jupiter.api.Assertions.assertFalse(new Divd(new Lit(6.0), new Lit(2.0)).accept(makeEql(new Divd(new Lit(8.0), new Lit(2.0)))));
+            org.junit.jupiter.api.Assertions.assertTrue(new Divd(new Lit(6.0), new Lit(2.0)).accept(makeEql(new Divd(new Lit(6.0), new Lit(2.0)))));
+            org.junit.jupiter.api.Assertions.assertTrue(new Add(new Lit(5.0), new Lit(3.0)).accept(makeEql(new Add(new Lit(5.0), new Lit(3.0)))));
+            org.junit.jupiter.api.Assertions.assertFalse(new Add(new Lit(5.0), new Lit(3.0)).accept(makeEql(new Mult(new Divd(new Lit(5.0), new Lit(2.0)), new Lit(3.0)))));
         }
 
         default VisitorDivdMultNeg<Boolean> makeEql(Exp exp) { return new Eql(exp); }

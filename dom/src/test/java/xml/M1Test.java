@@ -1,6 +1,6 @@
 package xml;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import xml.m0.Document;
 import xml.m0.XML;
 import xml.m0.finalized.FDocument;
@@ -16,11 +16,11 @@ public class M1Test {
             Document<FX, FT, FD> doc2 = this.singleRoot(this.tag("top2"));
             XML<FX, FT, FD> schema = this.schema(doc);
             XML<FX, FT, FD> schema2 = this.schema(doc2);
-            org.junit.Assert.assertTrue("",
+            org.junit.jupiter.api.Assertions.assertTrue("",
                     schema.hasTag("top"));
-            org.junit.Assert.assertFalse("",
+            org.junit.jupiter.api.Assertions.assertFalse("",
                     doc.sameRootElements(doc2));
-            org.junit.Assert.assertTrue("",
+            org.junit.jupiter.api.Assertions.assertTrue("",
                     doc.sameRootElements(doc));
 
         }

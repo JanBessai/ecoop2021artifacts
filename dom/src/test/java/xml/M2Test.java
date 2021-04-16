@@ -1,6 +1,6 @@
 package xml;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import xml.m0.Document;
 import xml.m0.XML;
 import xml.m2.finalized.FEDocument;
@@ -18,8 +18,8 @@ public class M2Test {
             Document<FX, FT, FD> doc3 = this.singleRoot(this.tag("top", this.tag("b")));
             XML<FX, FT, FD> schema = this.schema(doc);
 
-            org.junit.Assert.assertTrue(convert(schema).validate(doc2.getRootTag().get()).isEmpty());
-            org.junit.Assert.assertFalse(convert(schema).validate(doc3.getRootTag().get()).isEmpty());
+            org.junit.jupiter.api.Assertions.assertTrue(convert(schema).validate(doc2.getRootTag().get()).isEmpty());
+            org.junit.jupiter.api.Assertions.assertFalse(convert(schema).validate(doc3.getRootTag().get()).isEmpty());
         }
     }
     private static class ActualTest implements M2Test.TestTemplate<FEXML, FETag, FEDocument>, xml.m2.finalized.FEFactory {}

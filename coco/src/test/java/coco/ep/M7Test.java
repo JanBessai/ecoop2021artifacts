@@ -1,7 +1,7 @@
 package coco.ep;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class M7Test {
 
@@ -16,14 +16,14 @@ public class M7Test {
             Exp<FT> s1 = convert(this.sub(this.lit(5.0), this.lit(3.0))).powby(this.lit(2.0));
             Exp<FT> n1 = convert(this.neg(this.lit(5.0))).powby(this.lit(2.0));
 
-            Assert.assertEquals(9.0, convert(pby).eval(), 0.0);
-            Assert.assertEquals(6.25, convert(d1).eval(), 0.0);
-            Assert.assertEquals(100.0, convert(m1).eval(), 0.0);
-            Assert.assertEquals(49.0, convert(a1).eval(), 0.0);
-            Assert.assertEquals(4.0, convert(s1).eval(), 0.0);
-            Assert.assertEquals(25.0, convert(n1).eval(), 0.0);
+            Assertions.assertEquals(9.0, convert(pby).eval(), 0.0);
+            Assertions.assertEquals(6.25, convert(d1).eval(), 0.0);
+            Assertions.assertEquals(100.0, convert(m1).eval(), 0.0);
+            Assertions.assertEquals(49.0, convert(a1).eval(), 0.0);
+            Assertions.assertEquals(4.0, convert(s1).eval(), 0.0);
+            Assertions.assertEquals(25.0, convert(n1).eval(), 0.0);
 
-            Assert.assertEquals(28561.0, convert(convert(this.add(this.lit(1.0), this.lit(12.0))).powby(this.lit(4.0))).eval(), 0.0);
+            Assertions.assertEquals(28561.0, convert(convert(this.add(this.lit(1.0), this.lit(12.0))).powby(this.lit(4.0))).eval(), 0.0);
         }
     }
     private static class ActualTest implements M7Test.TestTemplate<coco.ep.m7.finalized.Exp>, coco.ep.m7.finalized.Factory {}
