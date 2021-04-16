@@ -11,5 +11,4 @@ public class Var implements tapl.varapp.Var<Element, Term>, Term {
 
 	@Override public int getBinderIndex() { return binderIndex; }
 	@Override public String getName() { return name; }
-	@Override public Var getSelf() { return this; }
 }

@@ -58,6 +58,6 @@ public interface ArithTests<Elem, Tm, UNat> extends tapl.nat.NatTests<Elem, Tm, 
     @Override default void testTerm() {
         tapl.nat.NatTests.super.testTerm();
         tapl.bool.BoolTests.super.testTerm();
-        assertFalse(getTerm().matchUnaryNat().isPresent());
+        assertFalse(getFactory().isZero(getFactory().zero()).matchUnaryNat().isPresent());
     }
 }

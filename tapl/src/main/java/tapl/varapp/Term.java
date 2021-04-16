@@ -11,7 +11,7 @@ public interface Term<Elem, Tm> extends tapl.Term<Elem, Tm>, Factory<Elem, Tm> {
 
 	default tapl.Term<Elem, Tm> termShiftAbove(int shiftBy, int shiftIndexesAbove) {
 		return mapVariables(v ->
-				v.getBinderIndex() >= shiftIndexesAbove ? v.replaceBinderIndex(v.getBinderIndex() +  shiftBy) : v);
+				v.getBinderIndex() >= shiftIndexesAbove && shiftBy != 0 ? v.replaceBinderIndex(v.getBinderIndex() + shiftBy) : v);
 	}
 	default tapl.Term<Elem, Tm> termShift(int shiftBy) { return termShiftAbove(shiftBy, 0); }
 	default tapl.Term<Elem, Tm> subst(int binderIndex, tapl.Term<Elem, Tm> by) {
@@ -19,7 +19,8 @@ public interface Term<Elem, Tm> extends tapl.Term<Elem, Tm>, Factory<Elem, Tm> {
 		return mapVariables(v -> v.getBinderIndex() == binderIndex ? shifted : v);
 	}
 	default tapl.Term<Elem, Tm> termSubstTop(tapl.Term<Elem, Tm> by) {
-		return convert(subst(0, convert(by).termShift(1))).termShift(-1);
+		Term<Elem, Tm> substituted = convert(subst(0, convert(by).termShift(1)));
+		return (substituted != this ? substituted.termShift(-1) : this);
 	}
 	default Optional<tapl.Term<Elem, Tm>> getBodyFromAbstraction() { return Optional.empty(); }
 	default tapl.Term<Elem, Tm> constantFunctionElimination() { return this; }

@@ -15,11 +15,7 @@ public interface Var<Elem, Tm> extends Term<Elem, Tm> {
 	@Override default boolean isVarUsed(int binderIndex) { return getBinderIndex() == binderIndex; }
 
 	@Override default tapl.Term<Elem, Tm> nameVariable(int binderIndex, String name) {
-		if (binderIndex == getBinderIndex()) {
-			return replaceName(name);
-		} else {
-			return this;
-		}
+		return (binderIndex == getBinderIndex() && !name.equals(getName()) ? replaceName(name) : this);
 	}
 
 	@Override default tapl.Term<Elem, Tm> mapVariables(Function<Var<Elem, Tm>, tapl.Term<Elem, Tm>> replacementFunction) {
