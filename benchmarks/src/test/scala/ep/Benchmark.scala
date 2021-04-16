@@ -3,6 +3,7 @@ package ep
 import coco.ep.m7i2.finalized
 import ev.ep.m7i2.{EvalMerged, SimplifyMerged}
 import exp.m7alt2.finalized
+import interpreter.ep.m7i2.{MergedLit, MergedPower, MergedSub}
 import org.scalameter.KeyValue
 import org.scalameter.api._
 
@@ -52,10 +53,10 @@ object Benchmark extends Bench.OfflineReport {
   }
 object interpreterObjects {
     import interpreter.ep.m7i2.MergedExp
-    val startEval: MergedExp = interpreter.ep.m7i2.MergedExpFactory.power(interpreter.ep.m7i2.MergedExpFactory.lit(evalBase), interpreter.ep.m7i2.MergedExpFactory.lit(evalExponent))
-    val evalExps: Gen[MergedExp] = sizes.map(size => (0 until size).foldLeft(startEval)((current, _) => interpreter.ep.m7i2.MergedExpFactory.power(current, current)))
-    val startSimplify: MergedExp = interpreter.ep.m7i2.MergedExpFactory.sub(interpreter.ep.m7i2.MergedExpFactory.lit(5.0), interpreter.ep.m7i2.MergedExpFactory.lit(0.0))
-    val simplifyExps: Gen[MergedExp] = sizes.map(size => (0 until size).foldLeft(startSimplify)((current, _) => interpreter.ep.m7i2.MergedExpFactory.power(current, current)))
+    val startEval: MergedExp = new MergedPower(new MergedLit(evalBase), new MergedLit(evalExponent))
+    val evalExps: Gen[MergedExp] = sizes.map(size => (0 until size).foldLeft(startEval)((current, _) => new MergedPower(current, current)))
+    val startSimplify: MergedExp = new MergedSub(new MergedLit(5.0), new MergedLit(0.0))
+    val simplifyExps: Gen[MergedExp] = sizes.map(size => (0 until size).foldLeft(startSimplify)((current, _) => new MergedPower(current, current)))
   }
   object triviallyObjects  {
     import trivially.ep.m7i2.Exp
