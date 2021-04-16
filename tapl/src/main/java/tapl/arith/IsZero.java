@@ -10,7 +10,7 @@ public interface IsZero<Elem, Tm, UNat> extends Term<Elem, Tm, UNat> {
         if (evaluatedToTest != getToTest()) {
             return replaceToTest(evaluatedToTest);
         }
-        if (evaluatedToTest.isValue()) {
+        if (evaluatedToTest.isNumericValue()) {
             return (evaluatedToTest.isZero() ? constTrue() : constFalse());
         }
         return this;

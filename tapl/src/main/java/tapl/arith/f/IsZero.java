@@ -7,8 +7,7 @@ public class IsZero implements tapl.arith.IsZero<Element, Term, UnaryNat>, Term 
         this.toTest = toTest;
     }
 
-    @Override
-    public tapl.Term<Element, Term> getToTest() {
+    @Override public tapl.Term<Element, Term> getToTest() {
         return toTest;
     }
 }

@@ -4,12 +4,8 @@ public interface Factory extends tapl.arith.Factory<Element, Term, UnaryNat> {
 	@Override default Zero zero() { return new Zero(); }
 	@Override default Succ succ(tapl.Term<Element, Term> of) { return new Succ(of); }
 	@Override default Pred pred(tapl.Term<Element, Term> of) { return new Pred(of); }
-	@Override default ConstTrue constTrue() {
-		return new ConstTrue();
-	}
-	@Override default ConstFalse constFalse() {
-		return new ConstFalse();
-	}
+	@Override default ConstTrue constTrue() { return new ConstTrue(); }
+	@Override default ConstFalse constFalse() {	return new ConstFalse(); }
 	@Override default IfThenElse ifThenElse(tapl.Term<Element, Term> cond, tapl.Term<Element, Term> ifBranch, tapl.Term<Element, Term> elseBranch) {
 		return new IfThenElse(cond, ifBranch, elseBranch);
 	}

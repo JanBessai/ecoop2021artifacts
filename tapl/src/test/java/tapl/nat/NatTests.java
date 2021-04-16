@@ -1,15 +1,17 @@
 package tapl.nat;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
 
-public interface NatTests<Element, Term, UNat> {
-	Factory<Element, Term, UNat> getFactory();
+public interface NatTests<Elem, Tm, UNat> extends tapl.ToplevelTests<Elem, Tm> {
+	@Override Factory<Elem, Tm, UNat> getFactory();
+	@Override default tapl.Element<Elem, Tm> getElement() { return getFactory().zero(); }
+	@Override default tapl.nat.Term<Elem, Tm, UNat> getTerm() { return getFactory().zero(); }
+	default tapl.nat.UnaryNat<Elem, Tm, UNat> getUnaryNat() { return getFactory().zero(); }
 
 	@Test
 	default void testZero() {
-		Zero<Element, Term, UNat> z = getFactory().zero();
+		Zero<Elem, Tm, UNat> z = getFactory().zero();
 		assertEquals("0", z.print()); 
 		assertTrue(z.isZero());
 		assertTrue(z.isNumericValue());
@@ -22,9 +24,9 @@ public interface NatTests<Element, Term, UNat> {
 
 	@Test
 	default void testSucc() {
-		Succ<Element, Term, UNat> one = getFactory().succ(getFactory().zero());
-		Succ<Element, Term, UNat> two = getFactory().succ(getFactory().succ(getFactory().pred(one)));
-		Succ<Element, Term, UNat> three = getFactory().succ(getFactory().succ(getFactory().pred(two)));
+		Succ<Elem, Tm, UNat> one = getFactory().succ(getFactory().zero());
+		Succ<Elem, Tm, UNat> two = getFactory().succ(getFactory().succ(getFactory().pred(one)));
+		Succ<Elem, Tm, UNat> three = getFactory().succ(getFactory().succ(getFactory().pred(two)));
 		assertEquals("1", one.print());
 		assertTrue(one.isNumericValue());
 		assertTrue(one.isValue());
@@ -41,11 +43,11 @@ public interface NatTests<Element, Term, UNat> {
 
 	@Test
 	default void testPred() {
-		Zero<Element, Term, UNat> z = getFactory().zero();
-		Succ<Element, Term, UNat> one = getFactory().succ(z);   // succ(0)
-		Succ<Element, Term, UNat> two = getFactory().succ(one);  // succ(succ(0))
-		Pred<Element, Term, UNat> pred = getFactory().pred(two);  // pred(succ(succ(0)))
-		Pred<Element, Term, UNat> predPred = getFactory().pred(pred);  // pred(pred(succ(succ(0))))
+		Zero<Elem, Tm, UNat> z = getFactory().zero();
+		Succ<Elem, Tm, UNat> one = getFactory().succ(z);   // succ(0)
+		Succ<Elem, Tm, UNat> two = getFactory().succ(one);  // succ(succ(0))
+		Pred<Elem, Tm, UNat> pred = getFactory().pred(two);  // pred(succ(succ(0)))
+		Pred<Elem, Tm, UNat> predPred = getFactory().pred(pred);  // pred(pred(succ(succ(0))))
 		assertEquals("1", pred.eval().print());
 		assertEquals("pred(1)", predPred.eval().print());
 		assertEquals("0", predPred.eval().eval().print());
@@ -57,12 +59,27 @@ public interface NatTests<Element, Term, UNat> {
 
 		assertEquals("pred(pred(2))", pred.predecessor().print());
 
-		Pred<Element, Term, UNat> bad = getFactory().pred(z);
+		Pred<Elem, Tm, UNat> bad = getFactory().pred(z);
 		assertEquals("pred(0)", bad.printDecimal(0));
-		Succ<Element, Term, UNat> backToZero = getFactory().succ(bad);
+		Succ<Elem, Tm, UNat> backToZero = getFactory().succ(bad);
 		assertEquals("succ(pred(0))", backToZero.printDecimal(0));
 
 		assertFalse(bad.isNumericValue());
 		assertFalse(bad.isValue());
+	}
+
+	@Test
+	@Override default void testFactory() {
+		tapl.ToplevelTests.super.testFactory();
+		UnaryNat<Elem, Tm, UNat> unat = getUnaryNat();
+		assertSame(unat, getFactory().convert(unat));
+	}
+
+	@Test
+	default void testUnaryNat() {
+		UnaryNat<Elem, Tm, UNat> unat = getUnaryNat();
+		assertSame(unat, unat.getSelfUnaryNat());
+		assertTrue(unat.matchUnaryNat().isPresent());
+		assertSame(unat, unat.matchUnaryNat().get());
 	}
 }

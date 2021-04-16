@@ -20,9 +20,9 @@ public interface Succ<Elem, Tm, UNat> extends UnaryNat<Elem, Tm, UNat> {
 		return of.matchUnaryNat()
 				.map(x -> x.printDecimal(offset + 1))
 				.orElseGet(() -> {
-					// Wrong in the EVF tapl: need to add offset-many succs
+					// Wrong in the EVF tapl: need to add (offset+1)-many succs
 					StringBuilder result = new StringBuilder(of.print());
-					for (int i = 0; i < offset; ++i) {
+					for (int i = 0; i < offset + 1; ++i) {
 						result = new StringBuilder("succ(").append(result).append(")");
 					}
 					return result.toString();

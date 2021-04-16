@@ -11,18 +11,15 @@ public class IfThenElse implements tapl.arith.IfThenElse<Element, Term, UnaryNat
 		this.elseBranch = elseBranch;
 	}
 	
-	@Override
-	public tapl.Term<Element, Term> getCondition() {
+	@Override public tapl.Term<Element, Term> getCondition() {
 		return cond;
 	}
 
-	@Override
-	public tapl.Term<Element, Term> getIfBranch() {
+	@Override public tapl.Term<Element, Term> getIfBranch() {
 		return ifBranch;
 	}
 
-	@Override
-	public tapl.Term<Element, Term> getElseBranch() {
+	@Override public tapl.Term<Element, Term> getElseBranch() {
 		return elseBranch;
 	}
 }

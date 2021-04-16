@@ -3,9 +3,11 @@ package tapl.bool;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
-public interface BoolTests<Elem, Tm> {
+public interface BoolTests<Elem, Tm> extends tapl.ToplevelTests<Elem, Tm> {
 
 	Factory<Elem, Tm> getFactory();
+	@Override default tapl.Element<Elem, Tm> getElement() { return getFactory().constTrue(); }
+	@Override default tapl.bool.Term<Elem, Tm> getTerm() { return getFactory().constTrue(); }
 
 	@Test
 	default void testConst() {

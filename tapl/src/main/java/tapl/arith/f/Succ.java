@@ -7,8 +7,7 @@ public class Succ implements tapl.arith.Succ<Element, Term, UnaryNat>, UnaryNat 
 		this.inner = of;
 	}
 
-	@Override
-	public tapl.Term<Element, Term> getOf() {
+	@Override public tapl.Term<Element, Term> getOf() {
 		return inner;
 	}
 }
