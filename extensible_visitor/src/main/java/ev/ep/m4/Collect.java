@@ -6,8 +6,7 @@ import java.util.List;
 
 public class Collect implements VisitorDivdMultNeg<List<Double>> {
 
-    public Collect() {
-    }
+    public Collect() { }
 
     public List<Double> visit(ev.ep.m0.Lit exp) {
         return java.util.Arrays.asList(exp.getValue());

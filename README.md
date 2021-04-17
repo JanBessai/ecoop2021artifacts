@@ -41,6 +41,41 @@ top-level directory. Launch `sbt compile` in the directory and wait for the tool
 all software dependencies. The tool will state "(this may take some time)" and that
 is a true statement. This command will compile all source files.
 
+## Expression Problem
+
+The Expression Problem (EP) refers to a common situation that occurs when evolving
+software systems, specifically with regard to the structure of the data types and
+the operations over these data types. As software engineers extend systems by adding
+new data types and/or new operations, the goal is to avoid changing existing code.
+As is well-documented by numerous researchers, the most common program design strategies
+do not simultaneously support both forms of extensibility (Krishnamurthi 1998); in
+functional programming, one can add new operations without modifying data types,
+while object-oriented programming allows new data types to be defined without modifying
+existing operations; however, neither approach can simultaneously avoid updating
+existing code when adding both new data types and new operations.
+
+As the popularity of EP grew, researchers in programming language theory rapidly 
+developed various strategies to address the fundamental issues so clearly exposed by EP. 
+Torgersen (2004) presented four criteria for characterizing and evaluating “solutions” to 
+EP, which we summarize as:
+
+* **Open For Extension** – any number of additional extensions can add both new data types and new operations.
+* **Closed For Modification** – an extension must not modify any existing source code previously developed in an earlier part of the system.
+* **Soundness** – it must be possible to detect unhandled combinations of data types and operations. This is essential for languages whose compilers detect type errors during compile time.
+* **Avoid Duplicating Domain Logic** – any EP approach invariably follows specific coding patterns used throughout the solution. Still, it must not copy the non-trivial code logic necessary for performing an operation on a data type.
+
+For each of the provided EP solutions, we evaluate the success (or failure) to achieve these criteria.
+To this list we add two more:
+
+* **Testable** - Each new extension must provide test cases to validate the run-time 
+  execution of the operations over existing data types. Subsequent evolutions must not 
+  require changes to these test cases.
+* **Mergeable** - It is common software engineering practice to merge together two 
+  independent code extensions. Merging independent branches must not require changes 
+  to an individual branch.
+
+Not every EP solution can achieve all criteria. CoCo does.
+
 ## Launching the Benchmarks
 
 Once all dependencies have been installed, then execute ```sbt test```. This command will
@@ -124,3 +159,7 @@ More fine-grained details of the coverage is summarized [here](documentation/cov
 and you can regenerate the table above from within IntelliJ by selecting the
 "Run Tests with Coverage" option for each of the modules.
 
+## References
+
+Torgersen, M. (2004). The Expression Problem Revisited: Four new solutions using 
+generics, European Conference on Object-Oriented Programming, LNCS 3086, pp. 123-146.

@@ -1,14 +1,19 @@
 # Introduction
 
-Synthesizing Object-Oriented and Functional Design to Promote Re-use (1998)
+This implementation is based on the following publication:
+
+Synthesizing Object-Oriented and Functional Design to Promote Re-use
+Shriram Krishnamurthi, Matthias Felleisen, Daniel P. Friedman (1998)
+https://dl.acm.org/doi/10.5555/646155.679709
 
 The original paper does not have mutable attributes, and
-for this example we include set() methods in each of the data types when they 
+for our example we include set() methods in each of the data types when they 
 are first defined, as per common object-oriented usage.
 
 # EP Violations
 
 ## Runtime Exception from dynamic casts
+
 Several operations contain dynamic casts which can lead to runtime
 exceptions, when a new operation is invoked on an older data type.
 
@@ -37,4 +42,5 @@ Business logic is duplicated in the visitors of successive visitors.
 ## Miscellaneous
 
 We use default interfaces to implement ev.ep.m6.Eql which was not part of the 
-original paper. We do this to avoid boilerplate code.
+original paper. We do this to avoid boilerplate code. In subsequent merged
+branches, these default interfaces need to be extended (ev.ep.m7i2.IsDataTypeMerged)

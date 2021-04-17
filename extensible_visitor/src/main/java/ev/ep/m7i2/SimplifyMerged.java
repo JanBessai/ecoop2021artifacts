@@ -3,7 +3,10 @@ package ev.ep.m7i2;
 import ev.ep.Exp;
 import ev.ep.m4.Simplify;
 
-// Duplication of operation logic
+/**
+ * The simplify() logic within the Power data type needs to be duplicated here,
+ * to take advantage of the new visitors defined for the merge.
+ */
 public class SimplifyMerged extends Simplify implements VisitorMerged<Exp> {
 
     public SimplifyMerged() { }

@@ -2,14 +2,6 @@ package ev.ep.m7i2;
 
 import ev.ep.m4.Truncate;
 
-/**
- * Truncate does not play well with earlier instances, since there is no
- * setLeft() and setRight() for these data types until they are introduced.
- *
- * Since this operation has a side-effect, the solution opts to provide a
- * veneer to satisfy the compiler, but it will throw runtime exceptions
- * if the new operation is invoked on an earlier data type.
- */
 public class TruncateMerged extends Truncate implements VisitorMerged<Void> {
     public TruncateMerged(int level) {
         super(level);

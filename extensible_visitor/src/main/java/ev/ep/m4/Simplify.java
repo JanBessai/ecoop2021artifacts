@@ -12,7 +12,7 @@ import ev.ep.m3.Divd;
 
 public class Simplify implements VisitorDivdMultNeg<Exp> {
 
-    public Simplify() {  }
+    public Simplify() { }
 
     public Exp visit(ev.ep.m0.Lit exp) {
         return exp;
