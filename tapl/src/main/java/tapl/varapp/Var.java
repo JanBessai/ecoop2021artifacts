@@ -1,6 +1,6 @@
 package tapl.varapp;
 
-import java.util.function.Function;
+import java.util.function.BiFunction;
 
 public interface Var<Elem, Tm> extends Term<Elem, Tm> {
 	int getBinderIndex();
@@ -18,7 +18,9 @@ public interface Var<Elem, Tm> extends Term<Elem, Tm> {
 		return (binderIndex == getBinderIndex() && !name.equals(getName()) ? replaceName(name) : this);
 	}
 
-	@Override default tapl.Term<Elem, Tm> mapVariables(Function<Var<Elem, Tm>, tapl.Term<Elem, Tm>> replacementFunction) {
-		return replacementFunction.apply(this);
+	@Override default tapl.Term<Elem, Tm> mapVariables(int offset, BiFunction<Integer, Var<Elem, Tm>, tapl.Term<Elem, Tm>> replacementFunction) {
+		return replacementFunction.apply(offset,this);
 	}
+
+	@Override default boolean isValue() { return false; }
 }

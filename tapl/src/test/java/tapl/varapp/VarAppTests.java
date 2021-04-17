@@ -3,6 +3,7 @@ package tapl.varapp;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import java.util.function.Function;
+import java.util.function.BiFunction;
 
 public interface VarAppTests<Elem, Tm> extends tapl.ToplevelTests<Elem, Tm>  {
 	Factory<Elem, Tm> getFactory();
@@ -26,12 +27,12 @@ public interface VarAppTests<Elem, Tm> extends tapl.ToplevelTests<Elem, Tm>  {
 		assertEquals("y", v.nameVariable(0, "y").print());
 		assertEquals("x", v.nameVariable(1, "y").print());
 
-		Function<Integer, Function<Var<Elem, Tm>, tapl.Term<Elem, Tm>>> replacement =
-				i -> x -> (x.getBinderIndex() == i ? getFactory().var(1, "y") : x);
-		assertEquals("y", v.mapVariables(replacement.apply(0)).print());
-		assertSame(v, v.mapVariables(replacement.apply(1)));
+		Function<Integer, BiFunction<Integer, Var<Elem, Tm>, tapl.Term<Elem, Tm>>> replacement =
+				i -> (offset, x) -> (x.getBinderIndex() == i ? getFactory().var(1, "y") : x);
+		assertEquals("y", v.mapVariables(0, replacement.apply(0)).print());
+		assertSame(v, v.mapVariables(0, replacement.apply(1)));
 
-		assertTrue(v.isValue());
+		assertFalse(v.isValue());
 		assertSame(v, v.eval());
 		assertSame(v, v.evalFull());
 		assertSame(v, v.constantFunctionElimination());
@@ -60,12 +61,12 @@ public interface VarAppTests<Elem, Tm> extends tapl.ToplevelTests<Elem, Tm>  {
 		assertEquals("((x a) (y a))", xz_yz.nameVariable(2, "a").print());
 		assertSame(xz_yz, xz_yz.nameVariable(3, "a"));
 
-		Function<Integer, Function<Var<Elem, Tm>, tapl.Term<Elem, Tm>>> replacement =
-				i -> x -> (x.getBinderIndex() == i ? getFactory().var(3, "a") : x);
-		assertEquals("((a z) (y z))", xz_yz.mapVariables(replacement.apply(0)).print());
-		assertEquals("((x z) (a z))", xz_yz.mapVariables(replacement.apply(1)).print());
-		assertEquals("((x a) (y a))", xz_yz.mapVariables(replacement.apply(2)).print());
-		assertSame(xz_yz, xz_yz.mapVariables(replacement.apply(3)));
+		Function<Integer, BiFunction<Integer, Var<Elem, Tm>, tapl.Term<Elem, Tm>>> replacement =
+				i -> (offset, x) -> (x.getBinderIndex() == i ? getFactory().var(3, "a") : x);
+		assertEquals("((a z) (y z))", xz_yz.mapVariables(0, replacement.apply(0)).print());
+		assertEquals("((x z) (a z))", xz_yz.mapVariables(0, replacement.apply(1)).print());
+		assertEquals("((x a) (y a))", xz_yz.mapVariables(0, replacement.apply(2)).print());
+		assertSame(xz_yz, xz_yz.mapVariables(0, replacement.apply(3)));
 
 		assertSame(xz_yz,  xz_yz.constantFunctionElimination());
 	}

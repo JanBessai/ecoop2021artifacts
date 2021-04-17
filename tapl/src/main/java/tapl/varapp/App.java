@@ -1,6 +1,6 @@
 package tapl.varapp;
 
-import java.util.function.Function;
+import java.util.function.BiFunction;
 
 public interface App<Elem, Tm> extends Term<Elem, Tm> {
     tapl.Term<Elem, Tm> getLeft();
@@ -21,9 +21,9 @@ public interface App<Elem, Tm> extends Term<Elem, Tm> {
         result = (newRight != getRight() ? result.replaceRight(newRight) : result);
         return result;
     }
-    @Override default tapl.Term<Elem, Tm> mapVariables(Function<Var<Elem, Tm>, tapl.Term<Elem, Tm>> replacementFunction) {
-        tapl.Term<Elem, Tm> newLeft = convert(getLeft()).mapVariables(replacementFunction);
-        tapl.Term<Elem, Tm> newRight = convert(getRight()).mapVariables(replacementFunction);
+    @Override default tapl.Term<Elem, Tm> mapVariables(int offset, BiFunction<Integer, Var<Elem, Tm>, tapl.Term<Elem, Tm>> replacementFunction) {
+        tapl.Term<Elem, Tm> newLeft = convert(getLeft()).mapVariables(offset, replacementFunction);
+        tapl.Term<Elem, Tm> newRight = convert(getRight()).mapVariables(offset, replacementFunction);
         App<Elem, Tm> result = (newLeft != getLeft() ? replaceLeft(newLeft) : this);
         result = (newRight != getRight() ? result.replaceRight(newRight) : result);
         return result;

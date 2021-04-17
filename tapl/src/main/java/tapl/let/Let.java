@@ -1,6 +1,6 @@
 package tapl.let;
 
-import java.util.function.Function;
+import java.util.function.BiFunction;
 
 public interface Let<Elem, Tm> extends tapl.varapp.Term<Elem, Tm>, Factory<Elem, Tm> {
     String getName();
@@ -28,9 +28,9 @@ public interface Let<Elem, Tm> extends tapl.varapp.Term<Elem, Tm>, Factory<Elem,
         return result;
     }
 
-    @Override default tapl.Term<Elem, Tm> mapVariables(Function<tapl.varapp.Var<Elem, Tm>, tapl.Term<Elem, Tm>> replacementFunction) {
-        tapl.Term<Elem, Tm> newValue = convert(getValue()).mapVariables(replacementFunction);
-        tapl.Term<Elem, Tm> newIn = convert(getIn()).mapVariables(replacementFunction);
+    @Override default tapl.Term<Elem, Tm> mapVariables(int offset, BiFunction<Integer, tapl.varapp.Var<Elem, Tm>, tapl.Term<Elem, Tm>> replacementFunction) {
+        tapl.Term<Elem, Tm> newValue = convert(getValue()).mapVariables(offset, replacementFunction);
+        tapl.Term<Elem, Tm> newIn = convert(getIn()).mapVariables(offset, (_offset, v) -> replacementFunction.apply(_offset + 1, v));
         Let<Elem, Tm> result = (getValue() != newValue ? replaceValue(newValue) : this);
         result = (getIn() != newIn ? result.replaceIn(newIn) : result);
         return result;
@@ -46,4 +46,6 @@ public interface Let<Elem, Tm> extends tapl.varapp.Term<Elem, Tm>, Factory<Elem,
     default boolean isVarUsed(int binderIndex) {
         return convert(getValue()).isVarUsed(binderIndex) || convert(getIn()).isVarUsed(binderIndex + 1);
     }
+
+    @Override default boolean isValue() { return false; }
 }

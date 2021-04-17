@@ -1,7 +1,7 @@
 package tapl.lambdacalculus;
 
 import java.util.Optional;
-import java.util.function.Function;
+import java.util.function.BiFunction;
 
 public interface Lambda<Elem, Tm> extends Term<Elem, Tm> {
     String getName();
@@ -12,16 +12,18 @@ public interface Lambda<Elem, Tm> extends Term<Elem, Tm> {
 
     @Override default String print() {
         return String.format(
-                "\\ %s . %s",
+                "(\\ %s . %s)",
                 getName(),
                 convert(getBody()).nameVariable(0, getName()).print()
             );
     }
     @Override default tapl.Term<Elem, Tm> nameVariable(int binderIndex, String name) {
-        return replaceBody(convert(getBody()).nameVariable(binderIndex + 1, name));
+        tapl.Term<Elem, Tm> newBody = convert(getBody()).nameVariable(binderIndex + 1, name);
+        return (getBody() != newBody ? replaceBody(newBody) : this);
     }
-    @Override default tapl.Term<Elem, Tm> mapVariables(Function<tapl.varapp.Var<Elem, Tm>, tapl.Term<Elem, Tm>> replacementFunction) {
-        return replaceBody(convert(getBody()).mapVariables(replacementFunction));
+    @Override default tapl.Term<Elem, Tm> mapVariables(int offset, BiFunction<Integer, tapl.varapp.Var<Elem, Tm>, tapl.Term<Elem, Tm>> replacementFunction) {
+        tapl.Term<Elem, Tm> newBody = convert(getBody()).mapVariables(offset, (_offset, v) -> replacementFunction.apply(_offset + 1, v));
+        return (getBody() != newBody ? replaceBody(newBody) : this);
     }
     @Override default Optional<Lambda<Elem, Tm>> matchAbstraction() { return Optional.of(this); }
     @Override default Optional<tapl.Term<Elem, Tm>> getBodyFromAbstraction() { return Optional.of(getBody()); }
