@@ -15,7 +15,7 @@ evolution (m7i2) occurs, numerous simplifications are made possible:
 
   * Power from i2 is used to replace the inefficient PowBy from m7
 
-  Here is implementation of PowBy from Add, which simplfy evaluated the
+  Here is implementation of PowBy from Add, which simplify evaluated the
   expression into a literal on which the powby operation was invoked.
 
 ```
@@ -33,7 +33,7 @@ public Exp powby(Exp other) {
 ```
 
   Similarly, the Divd data type had the following code which distributed the
-  powby operation to the numerator and denomiator.
+  powby operation to the numerator and denominator.
 
  ```
  public Exp powby(Exp other) {

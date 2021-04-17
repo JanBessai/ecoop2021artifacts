@@ -2,8 +2,9 @@
 
 This implementation is based on the following publication:
 
-The Expression Problem, Trivially! Yanlin Wang and Bruno C. d. S. Oliveira. (2016)
-https://dl.acm.org/doi/10.1145/2889443.2889448
+* The Expression Problem, Trivially! Yanlin Wang and Bruno C. d. S. Oliveira. (2016)
+  MODULARITY 2016: Proceedings of the 15th International Conference on Modularity
+  March 2016 Pages 37–41 https://dl.acm.org/doi/10.1145/2889443.2889448
 
 The original paper does not have mutable attributes, and we introduce set() methods
 in the trivially.ep.m4 evolution because of the truncate operation defined there.

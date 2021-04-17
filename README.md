@@ -23,7 +23,7 @@ some that would be suitable on different platforms:
 * Windows: https://download.java.net/openjdk/jdk15/ri/openjdk-15+36_windows-x64_bin.zip
 * Linux: https://download.java.net/openjdk/jdk15/ri/openjdk-15+36_linux-x64_bin.tar.gz
 
-Unzip this directory and set %JAVA_HOME% to its location on disk.
+Unzip this directory and set %JAVA_HOME% or $JAVA_HOME to its location on disk.
 
 You need to install the Scala Build Tool Version 1.5.0 (https://www.scala-sbt.org/1.x/docs/Setup.html)
 which can be downloaded from https://www.scala-sbt.org/download.html. You do not need
@@ -42,6 +42,15 @@ all software dependencies. The tool will state "(this may take some time)" and t
 is a true statement. This command will compile all source files.
 
 The testing framework depends upon JUnit 5.
+
+Compile the C# case study using the .NET Core SDK which you can Download and install  
+(https://dotnet.microsoft.com/download/dotnet/3.1). Open a terminal/console window and switch
+to the subfolder `coco_sharp/CoCo.Tests`. Enter the command `dotnet test` and the program will
+compile and all missing (and necessary) components will be downloaded. On a Windows 10 installation,
+find this executable in `C:\Program Files\dotnext\dotnet.exe`; on Linux, make sure it is 
+accessible from your `Path` variable.
+
+The unit tests are automatically executed, and the test results are displayed.
 
 ## Expression Problem
 
@@ -90,7 +99,7 @@ expression trees to produce a `double` value.
 * **m2** extends with a `PrettyP` operation to produce a human-readable expression with parentheses.
 * **m3** extends with three new data types -- `Mult`, `Neg`, and `Divd`.
 * **m4** extends with a `Collect` operation which collects all literal values in an expression
-tree and a `Simplify` producer operation that performs reasonable mathematical simplications
+tree and a `Simplify` producer operation that performs reasonable mathematical simplifications
 to produce a new expression tree: for example, "5 - 0" could be simplified to the literal "5".
 A `Truncate` operation has mutable side effects, replacing expressions at a given level in 
 an expression to a literal containing their evaluated value.
@@ -103,7 +112,7 @@ a tree, using `AsTree`, to determine equality. `Eql` dispatches to its arguments
 An independent development effort had split off from the **m2** evolution, leading to:
 
 * **alt1** extends **m2** by adding a `MultBy` producer operation that returns an expression
-mnultiplied by an expression.
+multiplied by an expression.
 * **alt2** extends **alt1** by adding a new `Power` data type representing an expression raised
 to the power of another expression.
   

@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import xml.m0.*;
 import xml.m0.finalized.*;
-import xml.m1.*;
 import xml.m1.finalized.*;
 
 public class M1Test {
