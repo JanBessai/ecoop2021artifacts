@@ -41,6 +41,8 @@ top-level directory. Launch `sbt compile` in the directory and wait for the tool
 all software dependencies. The tool will state "(this may take some time)" and that
 is a true statement. This command will compile all source files.
 
+The testing framework depends upon JUnit 5.
+
 ## Expression Problem
 
 The Expression Problem (EP) refers to a common situation that occurs when evolving
