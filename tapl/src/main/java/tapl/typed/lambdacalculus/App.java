@@ -4,9 +4,9 @@ import tapl.typed.util.TypeError;
 
 import java.util.Optional;
 
-public interface App<Elem, Tm, Ty> extends tapl.typed.varapp.App<Elem, Tm, Ty>, Term<Elem, Tm, Ty> {
+public interface App<Elem, Tm, Ty> extends tapl.lambdacalculus.App<Elem, Tm>, tapl.typed.varapp.App<Elem, Tm, Ty>, Term<Elem, Tm, Ty> {
     @Override default tapl.typed.Type<Elem, Tm, Ty> getType() {
-        tapl.typed.Type<Elem, Tm, Ty> leftType = convert(getRight()).getType();
+        tapl.typed.Type<Elem, Tm, Ty> leftType = convert(getLeft()).getType();
         tapl.typed.Type<Elem, Tm, Ty> rightType = convert(getRight()).getType();
 
         Optional<Arrow<Elem, Tm, Ty>> arrowOpt = convert(leftType).matchArrow();

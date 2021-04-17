@@ -1,8 +1,8 @@
-package tapl.typed.bool.f;
+package tapl.typed.nat.f;
 
-public class BoolTests implements tapl.typed.bool.BoolTests<Element, Term, Type> {
+public class NatTests implements tapl.typed.nat.NatTests<Element, Term, UnaryNat, Type> {
     @Override public Factory getFactory() { return new Factory() {}; }
-    @Override public Term getNonBoolTerm() {
+    @Override public Term getNonNatTerm() {
         return new Term() {
             @Override public tapl.typed.Type<Element, Term, Type> getType() {
                 return new Type() {
@@ -11,13 +11,13 @@ public class BoolTests implements tapl.typed.bool.BoolTests<Element, Term, Type>
                     }
 
                     @Override public String print() {
-                        return "Not a Bool";
+                        return "Not a Nat";
                     }
                 };
             }
 
             @Override public String print() {
-                return "NonBooleanDummy";
+                return "NonNatDummy";
             }
         };
     }

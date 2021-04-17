@@ -32,7 +32,8 @@ public interface LambdacalculusTests<Elem, Tm> extends tapl.varapp.VarAppTests<E
         assertTrue(k.getBodyFromAbstraction().isPresent());
         assertSame(k.getBody(), k.getBodyFromAbstraction().get());
         assertEquals("x", k.getName());
-        assertEquals("(\\ z . (\\ y . z))", k.replaceName("z").mapVariables(0, (offset, v) -> (offset == v.getBinderIndex() ? v.replaceName("z") : v)).print());
+        assertEquals(getFactory().lambda("z", getFactory().lambda("y", getFactory().var(1, "z"))).print(),
+                k.replaceName("z").mapVariables(0, (offset, v) -> (offset == v.getBinderIndex() ? v.replaceName("z") : v)).print());
 
     }
 

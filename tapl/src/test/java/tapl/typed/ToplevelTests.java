@@ -15,6 +15,12 @@ public interface ToplevelTests<Elem, Tm, Ty> extends tapl.ToplevelTests<Elem, Tm
     }
 
     @Test
+    @Override default void testTerm() {
+        tapl.ToplevelTests.super.testTerm();
+        assertFalse(getTerm().getType().matchTerm().isPresent());
+    }
+
+    @Test
     default void testType()  {
         Type<Elem, Tm, Ty> ty = getTerm().getType();
         assertSame(ty, ty.getSelfType());
