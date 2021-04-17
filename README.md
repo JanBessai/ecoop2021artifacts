@@ -106,7 +106,12 @@ other in Scala. In addition, the example problem from the paper is provided as a
 
 Full Benchmark results are included in an [Excel spreadsheet](documentation/Benchmark.xlsx),
 
-All values in this summary table are the mean results from the full execution referenced above.
+All values in this summary table are the mean results from the full execution referenced 
+above conducted on a Windows 10 machine. The numbers vary on a Linux platform. The
+key point is that CoCo Java compares very closely to the runtime performance of
+the Expression Problem Trivially solution. These benchmarks were executed within
+the ScalaMeter testing framework (https://scalameter.github.io) to guard against
+unpredictable JVM behavior.
 
 The following table evaluates the time to evaluate an expression tree
 of a given depth. The number of individual data types in the tree is 
