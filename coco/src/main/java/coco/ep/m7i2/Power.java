@@ -6,7 +6,7 @@ import util.Tree;
 
 import java.util.List;
 
-public interface Power<FT> extends coco.ep.i2.Power<FT>, coco.ep.m7i2.Exp<FT>, Factory<FT> {
+public interface Power<FT> extends coco.ep.i2.Power<FT>, coco.ep.m7i2.Exp<FT> {
 	void setLeft(coco.ep.Exp<FT> left);
 	void setRight(coco.ep.Exp<FT> right);
 
