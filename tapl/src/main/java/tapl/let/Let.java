@@ -1,6 +1,6 @@
 package tapl.let;
 
-import java.util.function.Function;
+import java.util.function.BiFunction;
 
 public interface Let<Elem, Tm> extends tapl.varapp.Term<Elem, Tm>, Factory<Elem, Tm> {
     String getName();
@@ -13,7 +13,7 @@ public interface Let<Elem, Tm> extends tapl.varapp.Term<Elem, Tm>, Factory<Elem,
 
     @Override default String print() {
         return String.format(
-                "let %s = %s in %s",
+                "(let %s = %s in %s)",
                 getName(),
                 getValue().print(),
                 convert(getIn()).nameVariable(0, getName()).print()
@@ -21,30 +21,31 @@ public interface Let<Elem, Tm> extends tapl.varapp.Term<Elem, Tm>, Factory<Elem,
     }
 
     @Override default tapl.Term<Elem, Tm> nameVariable(int binderIndex, String name) {
-        return replaceValue(convert(getValue()).nameVariable(binderIndex, name))
-                .replaceIn(convert(getIn()).nameVariable(binderIndex + 1, name));
+        tapl.Term<Elem, Tm> newValue = convert(getValue()).nameVariable(binderIndex, name);
+        tapl.Term<Elem, Tm> newIn = convert(getIn()).nameVariable(binderIndex + 1, name);
+        Let<Elem, Tm> result = (getValue() != newValue ? replaceValue(newValue) : this);
+        result = (getIn() != newIn ? result.replaceIn(newIn) : result);
+        return result;
     }
 
-    @Override default tapl.Term<Elem, Tm> mapVariables(Function<tapl.varapp.Var<Elem, Tm>, tapl.Term<Elem, Tm>> replacementFunction) {
-        return replaceValue(convert(getValue()).mapVariables(replacementFunction))
-                .replaceIn(convert(getIn()).mapVariables(replacementFunction));
+    @Override default tapl.Term<Elem, Tm> mapVariables(int offset, BiFunction<Integer, tapl.varapp.Var<Elem, Tm>, tapl.Term<Elem, Tm>> replacementFunction) {
+        tapl.Term<Elem, Tm> newValue = convert(getValue()).mapVariables(offset, replacementFunction);
+        tapl.Term<Elem, Tm> newIn = convert(getIn()).mapVariables(offset, (_offset, v) -> replacementFunction.apply(_offset + 1, v));
+        Let<Elem, Tm> result = (getValue() != newValue ? replaceValue(newValue) : this);
+        result = (getIn() != newIn ? result.replaceIn(newIn) : result);
+        return result;
     }
 
     @Override default tapl.Term<Elem, Tm> eval() {
         tapl.Term<Elem, Tm> evaluatedValue = getValue().eval();
-        if (evaluatedValue != getValue()) {
-            return replaceIn(evaluatedValue);
-        }
-
-        if (getValue().isValue()) {
-            return convert(getIn()).subst(0, getValue());
-        } else {
-            return this;
-        }
+        if (evaluatedValue != getValue()) { return replaceValue(evaluatedValue); }
+        return (getValue().isValue() ? convert(getIn()).subst(0, getValue()) : this);
     }
 
     @Override
     default boolean isVarUsed(int binderIndex) {
         return convert(getValue()).isVarUsed(binderIndex) || convert(getIn()).isVarUsed(binderIndex + 1);
     }
+
+    @Override default boolean isValue() { return false; }
 }

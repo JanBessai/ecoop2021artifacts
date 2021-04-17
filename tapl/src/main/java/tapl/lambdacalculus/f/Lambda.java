@@ -2,20 +2,16 @@ package tapl.lambdacalculus.f;
 
 public class Lambda implements tapl.lambdacalculus.Lambda<Element, Term>, Term {
     private final String name;
-    private final tapl.Term<Element, Term> body;
+    private final Term body;
 
     public Lambda(String name, tapl.Term<Element, Term> body) {
         this.name = name;
-        this.body = body;
+        this.body = convert(body);
     }
 
     @Override
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
 
     @Override
-    public tapl.Term<Element, Term> getBody() {
-        return body;
-    }
+    public Term getBody() { return body; }
 }

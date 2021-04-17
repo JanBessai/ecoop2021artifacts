@@ -8,8 +8,8 @@ public interface App<Elem, Tm> extends Term<Elem, Tm>, tapl.varapp.App<Elem, Tm>
         }
         return convert(getLeft())
                 .matchAbstraction()
-                .filter(abs -> getRight().isValue())
-                .map(abs -> abs.termSubstTop(getRight()))
+                .filter(x -> getRight().isValue())
+                .map(abs -> convert(abs.getBody()).termSubstTop(getRight()))
                 .orElse(this);
     }
 }
