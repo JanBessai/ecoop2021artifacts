@@ -16,21 +16,25 @@ You must have a working Java Development Kit (JDK) installation, at least Java 1
 You must also make sure that $JAVA_HOME (or %JAVA_HOME%) is properly set to 
 point to your Java installation.
 
-To install a compatible Java version, download the following OPEN-JDK version 15:
+To install a compatible Java version, download a suitable Java implementation. You
+can find freely available ones to download from https://jdk.java.net. Here are 
+some that would be suitable on different platforms:
 
-https://download.java.net/openjdk/jdk15/ri/openjdk-15+36_windows-x64_bin.zip
+* Windows: https://download.java.net/openjdk/jdk15/ri/openjdk-15+36_windows-x64_bin.zip
+* Linux: https://download.java.net/openjdk/jdk15/ri/openjdk-15+36_linux-x64_bin.tar.gz
 
 Unzip this directory and set %JAVA_HOME% to its location on disk.
 
-You need to install the Scala Build Tool (https://www.scala-sbt.org/1.x/docs/Setup.html)
+You need to install the Scala Build Tool Version 1.5.0 (https://www.scala-sbt.org/1.x/docs/Setup.html)
 which can be downloaded from https://www.scala-sbt.org/download.html. You do not need
-administrator privileges to install SBT. Once you have downloaded the MSI file,
-execute
+administrator privileges to install SBT. 
 
-```msiexec /a sbt-1.5.0.msi TARGETDIR=SOME-DIRECTORY```
-
-Either add this TARGETDIR to your environment variables or execute `sbt` from this
-directory from within the project as ```%TARGETDIR%\sbt```
+* On a Windows 10 operating system, downloaded the MSI file, and execute
+```msiexec /a sbt-1.5.0.msi TARGETDIR=SOME-DIRECTORY```. Either add this TARGETDIR to your environment variables or execute `sbt` from this 
+directory from within the project using ```%TARGETDIR%\sbt```
+* On a Linux operating system, download https://github.com/sbt/sbt/releases/download/v1.5.0/sbt-1.5.0.zip and simply
+unzip the file and ensure the `sbt` executable is in your path or execute `sbt` from this
+directory from within the project.
 
 Retrieve the project code from the git repository and open up a command line in the 
 top-level directory. Launch `sbt compile` in the directory and wait for the tool to download
@@ -39,7 +43,7 @@ is a true statement. This command will compile all source files.
 
 ## Launching the Benchmarks
 
-Once all dependencies have been installed, then execute ```sbt test```. This commmand will
+Once all dependencies have been installed, then execute ```sbt test```. This command will
 execute all tests, and in the scrolling output you will see all test cases pass.
 
 The final output (after about 5-10 minutes) is a comprehensive set of benchmark performance
