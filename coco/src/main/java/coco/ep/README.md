@@ -6,7 +6,8 @@ existing code with each successive evolution.
 
 # EP Violations
 
-Modifies code.
+All code is modified in place, so this is not (and never was considered to be) a solution
+to the EP problem.
 
 # Miscellaneous
 

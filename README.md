@@ -76,7 +76,47 @@ To this list we add two more:
   independent code extensions. Merging independent branches must not require changes 
   to an individual branch.
 
-Not every EP solution can achieve all criteria. CoCo does.
+Not every EP solution can achieve all criteria. CoCo does. We use the domain of 
+mathematical expressions to demonstrate the various EP solutions.
+
+![Extension Graph History](documentation/ExpressionDomain.png)
+
+In this domain, a primary development branch (**m0** through **m7**)  adds the following 
+capabilities:
+
+* **m0** starts with an `Add` and `Lit` data types with a supporting operation to evaluate recursive
+expression trees to produce a `double` value.
+* **m1** extends with the `Sub` data type to represent the subtraction of two expressions.
+* **m2** extends with a `PrettyP` operation to produce a human-readable expression with parentheses.
+* **m3** extends with three new data types -- `Mult`, `Neg`, and `Divd`.
+* **m4** extends with a `Collect` operation which collects all literal values in an expression
+tree and a `Simplify` producer operation that performs reasonable mathematical simplications
+to produce a new expression tree: for example, "5 - 0" could be simplified to the literal "5".
+A `Truncate` operation has mutable side effects, replacing expressions at a given level in 
+an expression to a literal containing their evaluated value.
+* **m5** extends with an `AsTree` operation to produce a separate tree-like representation using 
+`Node` and `Leaf` object. The `Id` operation assigns an integer for each data type.
+* **m6** extends with two binary operations. `Equals` converts an expression and its parameter into 
+a tree, using `AsTree`, to determine equality. `Eql` dispatches to its arguments instead.
+* **m7** extends with a `PowBy` producer operation that returns an expression raised to an exponent value.
+
+An independent development effort had split off from the **m2** evolution, leading to:
+
+* **alt1** extends **m2** by adding a `MultBy` producer operation that returns an expression
+mnultiplied by an expression.
+* **alt2** extends **alt1** by adding a new `Power` data type representing an expression raised
+to the power of another expression.
+  
+These two developments efforts are merged together by **m7alt2** which provides the necessary
+artifacts to ensure that every possible (data type, operation) pair has an implementation. In 
+some cases, the result is greatly simplified: for example, now that `Power` and `PowBy` exist 
+at the same time, the `PowBy` operation is replaced with logic to create a `Power` instance.
+Similarly, `Mult` and `MultBy` final coexist and a similar simplification takes place. The 
+existing binary operations, `Eql` and `Equals` now must contend with a new data type from an
+independent effort.
+
+This case study truly represents a non-trivial exploration of the expression problem.
+In addition, we include a significant collection of test cases to ensure code coverage.
 
 ## Launching the Benchmarks
 
@@ -99,8 +139,8 @@ literature, including:
     https://cs.pomona.edu/~kim/ftp/WOOD.pdf
   * Strawman Object-oriented implementation, which is decidedly *NOT* a solution to EP
 
-Two CoCo implementations are provided to the Expression Problems -- one in Java and the 
-other in Scala. In addition, the example problem from the paper is provided as a domain.
+Two CoCo implementations are provided in multiple languages -- Java, Scala and C#. 
+In addition, the example problem from the paper is provided as a domain.
 
 ## Runtime Benchmark results
 
@@ -143,6 +183,63 @@ table shows the runtime performance based on the depth of the tree.
 
 The table demonstrates that CoCo offers similar performance to "The Expression Problem, Trivially"
 while supporting producer and binary methods, in addition to independent branching and merging.
+
+## Code Statistics
+
+Using the cloc tool (https://github.com/AlDanial/cloc) the following are the statistics 
+for all code in this project
+
+### All Code
+
+| Language | files  | blank  |  comment  | code  |
+| -------- |  ----- | -----  |  -------- | ------|
+| Java     | 655    | 3242   | 106       | 11248 |
+| C#       | 140    | 345    | 5         | 1970  |
+| Scala    | 25     | 299    | 14        | 1094  |
+||
+| Sum      | 820    | 3886   | 125       | 14312 |
+github.com/AlDanial/cloc v 1.88  T=0.29 s (2793.9 files/s, 62429.1 lines/s)
+
+### Just Tests
+| Language | files  | blank  |  comment  | code  |
+| -------- |  ----- | -----  |  -------- | ------|
+| Java     | 566    | 2450   | 90        | 8119 |
+| C#       | 129    | 245    | 2         | 1494  |
+| Scala    | 13     | 151    | 11        | 565  |
+||
+| Sum      | 708    | 2846   | 103       | 10178 |
+
+
+### Just Expression Problem code (excluding tests)
+
+This covers CoCo, Extensible Visitor, Interpreter Design Pattern, Trivially, and OO.
+
+| Language | files  | blank  |  comment  | code  |
+| -------- |  ----- | -----  |  -------- | ------|
+| Java     | 128    | 536    | 2         | 1653 |
+| C#       | 129    | 245    | 2         | 1494 |
+| Scala    | 13     | 151    | 11        | 565  |
+||
+| Sum      | 270    | 932    | 15        | 3712 |
+
+### Just XML example domain (excluding tests)
+
+| Language | files  | blank  |  comment  | code  |
+| -------- |  ----- | -----  |  -------- | ------|
+| Java     | 30    | 124    | 0         | 412 |
+||
+| Sum      | 30    | 124    | 0        | 412 |
+
+### TAPL domain (excluding tests)
+
+| Language            | files  | blank  |  comment  | code  |
+| --------            |  ----- | -----  |  -------- | ------|
+| non-finalized Java  | 99    | 219    | 0         | 825 |
+| finalized Java      | 93    | 193    | 2         | 862
+||
+| Sum                 | 192    | 432    | 2        | 1687 |
+
+The finalized Java code is boilerplate Java code. The non-finalized Java code is not. 
 
 ## Code Coverage
 
