@@ -23,15 +23,12 @@ public interface ESchema<FX,FT,FD> extends Schema<FX,FT,FD>, EXML<FX,FT,FD> {
             if (tag.isEmpty()) {
                 return java.util.Optional.of("Schema can only include tags");
             } else {
-                if (idx >= childrenToValidate.length) {
-                    return java.util.Optional.of("Missing tag:" + tag.get().getName());
-                }
-                Optional<Tag<FX, FT, FD>> tagToValidate = convert(childrenToValidate[idx]).asTag();
+                Optional<Tag<FX, FT, FD>> tagToValidate = Optional.empty();
                 while (tagToValidate.isEmpty() && idx < childrenToValidate.length) {
-                    tagToValidate = convert(childrenToValidate[++idx]).asTag();
+                    tagToValidate = convert(childrenToValidate[idx]).asTag();
+                    idx++;
                 }
-
-                if (idx >= childrenToValidate.length) {
+                if (tagToValidate.isEmpty()) {
                     return java.util.Optional.of("Missing tag:" + tag.get().getName());
                 }
 
@@ -40,8 +37,6 @@ public interface ESchema<FX,FT,FD> extends Schema<FX,FT,FD>, EXML<FX,FT,FD> {
                 if (result.isPresent()) {
                     return result;  // the error which was found
                 }
-
-                idx++;  // try next one...
             }
         }
 

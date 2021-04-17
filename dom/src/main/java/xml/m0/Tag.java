@@ -17,11 +17,11 @@ public interface Tag<FX,FT,FD> extends XML<FX,FT,FD> {
         return this.tag(getName(), kids);
     }
 
-    default boolean hasTag(String name) {
-        if (name.equals(getName())) { return true; }
+    default boolean hasElem(String text) {
+        if (text.equals(getName())) { return true; }
 
         for (XML<FX,FT,FD> inner : getChildren()) {
-            if (inner.hasTag(name)) { return true; }
+            if (inner.hasElem(text)) { return true; }
         }
 
         return false;

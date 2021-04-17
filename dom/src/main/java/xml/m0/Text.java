@@ -3,7 +3,7 @@ package xml.m0;
 public interface Text<FX,FT,FD> extends XML<FX,FT,FD> {
     String getText();
 
-    default boolean hasTag(String tag) { return false; }
+    default boolean hasElem(String text) { return getText().equals(text); }
 
     default boolean addChild(XML<FX,FT,FD> child) { return false; }
 

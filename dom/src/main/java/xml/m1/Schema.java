@@ -7,9 +7,9 @@ public interface Schema<FX,FT,FD> extends Factory<FX,FT,FD>, XML<FX,FT,FD> {
     Document<FX,FT,FD> getDocument();
 
     @Override
-    default boolean hasTag(String tag) {
+    default boolean hasElem(String text) {
         Document<FX, FT, FD> ss = getDocument();
-        return getDocument().hasTag(tag);
+        return getDocument().hasElem(text);
     }
 
     @Override

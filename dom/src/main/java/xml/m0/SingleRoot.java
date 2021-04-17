@@ -9,8 +9,8 @@ public interface SingleRoot<FX,FT,FD> extends Document<FX,FT,FD> {
         return java.util.Optional.of(getRoot());
     }
 
-    default boolean hasTag(String name) {
-        return getRoot().hasTag(name);
+    default boolean hasElem(String text) {
+        return getRoot().hasElem(text);
     }
 
     @Override

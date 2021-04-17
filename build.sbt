@@ -16,6 +16,7 @@ lazy val oo = Project("oo", file("oo")).settings(defaultSettings).dependsOn(shar
 lazy val trivially = Project("trivially", file("trivially")).settings(defaultSettings).dependsOn(shared)
 lazy val interpreter = Project("interpreter", file("interpreter")).settings(defaultSettings).dependsOn(shared)
 lazy val tapl = Project("tapl", file("tapl")).settings(defaultSettings)
+lazy val dom = Project("dom", file("dom")).settings(defaultSettings)
 
 lazy val benchmarks = Project("benchmarks", file("benchmarks"))
   .settings(
