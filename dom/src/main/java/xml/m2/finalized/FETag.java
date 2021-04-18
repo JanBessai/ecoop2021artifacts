@@ -28,7 +28,6 @@ public class FETag implements xml.m2.ETag<FEXML, FETag, FEDocument>, FEXML {
     public void setChildren(XML<FEXML, FETag, FEDocument>[] children) {
         this.children = new FEXML[children.length];
         for (int i = 0; i < this.children.length; i++) {
-            XML<FEXML, FETag, FEDocument> ss = convert(children[i]);
             this.children[i] = convert(children[i]);
         }
     }

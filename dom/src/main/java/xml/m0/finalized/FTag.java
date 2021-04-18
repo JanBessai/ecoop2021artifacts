@@ -28,7 +28,6 @@ public class FTag implements xml.m0.Tag<FXML,FTag,FDocument>, FXML {
     public void setChildren(XML<FXML, FTag, FDocument>[] children) {
         this.children = new FXML[children.length];
         for (int i = 0; i < this.children.length; i++) {
-            XML<FXML, FTag, FDocument> ss = convert(children[i]);
             this.children[i] = convert(children[i]);
         }
     }

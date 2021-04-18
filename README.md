@@ -102,7 +102,7 @@ expression trees to produce a `double` value.
 tree and a `Simplify` producer operation that performs reasonable mathematical simplifications
 to produce a new expression tree: for example, "5 - 0" could be simplified to the literal "5".
 A `Truncate` operation has mutable side effects, replacing expressions at a given level in 
-an expression to a literal containing their evaluated value.
+an expression tree to a literal containing their evaluated value.
 * **m5** extends with an `AsTree` operation to produce a separate tree-like representation using 
 `Node` and `Leaf` object. The `Id` operation assigns an integer for each data type.
 * **m6** extends with two binary operations. `Equals` converts an expression and its parameter into 

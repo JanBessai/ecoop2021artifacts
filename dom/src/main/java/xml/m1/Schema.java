@@ -8,7 +8,6 @@ public interface Schema<FX,FT,FD> extends Factory<FX,FT,FD>, XML<FX,FT,FD> {
 
     @Override
     default boolean hasElem(String text) {
-        Document<FX, FT, FD> ss = getDocument();
         return getDocument().hasElem(text);
     }
 

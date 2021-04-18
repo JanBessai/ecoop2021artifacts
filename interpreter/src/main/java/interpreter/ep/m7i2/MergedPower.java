@@ -13,7 +13,7 @@ public class MergedPower extends EvalPrettypMultByPower implements MergedExp {
 		super(left, right);
 	}
 
-	/** Cannot covariantly overide the parameter to the method. */
+	/** Cannot covariantly override the parameter to the method. */
 	@Override
 	public Boolean equals(EqualsExp that) {
 		return this.astree().equals(that.astree());
