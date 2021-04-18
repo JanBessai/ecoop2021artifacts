@@ -148,7 +148,7 @@ literature, including:
     https://cs.pomona.edu/~kim/ftp/WOOD.pdf
   * Strawman Object-oriented implementation, which is decidedly *NOT* a solution to EP
 
-Two CoCo implementations are provided in multiple languages -- Java, Scala and C#. 
+Three CoCo implementations are provided in multiple languages -- Java, Scala and C#. 
 In addition, the example problem from the paper is provided as a domain.
 
 ## Runtime Benchmark results
