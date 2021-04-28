@@ -26,7 +26,7 @@ some that would be suitable on different platforms:
 
 Unzip this directory and set %JAVA_HOME% or $JAVA_HOME to its location on disk.
 
-You need to install the Scala Build Tool Version 1.5.0 (https://www.scala-sbt.org/1.x/docs/Setup.html)
+You need to install thce Scala Build Tool Version 1.5.0 (https://www.scala-sbt.org/1.x/docs/Setup.html)
 which can be downloaded from https://www.scala-sbt.org/download.html. You do not need
 administrator privileges to install SBT. 
 
@@ -46,7 +46,7 @@ The testing framework depends upon JUnit 5.
 
 Compile the C# case study using the .NET Core SDK which you can Download and install  
 (https://dotnet.microsoft.com/download/dotnet/3.1). Open a terminal/console window and switch
-to the subfolder `coco_sharp/CoCo.Tests`. Enter the command `dotnet test` and the program will
+to the subfolder `coco_csharp/CoCo.Tests`. Enter the command `dotnet test` and the program will
 compile and all missing (and necessary) components will be downloaded. On a Windows 10 installation,
 find this executable in `C:\Program Files\dotnext\dotnet.exe`; on Linux, make sure it is 
 accessible from your `Path` variable.
