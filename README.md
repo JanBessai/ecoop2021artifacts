@@ -1,6 +1,7 @@
 # Artifacts for Covariant Conversions (CoCo): A Design Pattern 
 
-This project contains the source code for the CoCo Design Pattern.
+This project contains the source code illustrating the CoCo Design Pattern in
+multiple programming languages.
 
 ## Installation
 
@@ -38,7 +39,7 @@ directory from within the project.
 
 Retrieve the project code from the git repository and open up a command line in the 
 top-level directory. Launch `sbt compile` in the directory and wait for the tool to download
-all software dependencies. The tool will state "(this may take some time)" and that
+all software dependencies (specifically, Java and Scala testing frameworks). The tool will state "(this may take some time)" and that
 is a true statement. This command will compile all source files.
 
 The testing framework depends upon JUnit 5.

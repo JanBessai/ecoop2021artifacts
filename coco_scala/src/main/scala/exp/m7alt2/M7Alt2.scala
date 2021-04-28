@@ -18,7 +18,7 @@ trait Power[T] extends exp.alt2.Power[T] with Factory[T] with Exp[T] with exp.m5
     } else if (base.eval == 0) {
       lit(0)
     } else if (base.eval == 1) {
-      lit(1.0)
+      lit(1)
     } else {
       power(base.simplify, exponent.simplify)
     }
@@ -54,7 +54,7 @@ object finalized {
 
   class Lit(val value : Double) extends exp.m7.Lit[Exp] with Exp
   class Add(var _left : exp.Exp[Exp], var _right : exp.Exp[Exp]) extends exp.m7.Add[Exp] with Exp
-  class Sub(var _left : exp.Exp[Exp], var _right : exp.Exp[Exp]) extends exp.m7.Sub[Exp]with Exp
+  class Sub(var _left : exp.Exp[Exp], var _right : exp.Exp[Exp]) extends exp.m7.Sub[Exp] with Exp
 
   class Mult(var _left : exp.Exp[Exp], var _right : exp.Exp[Exp]) extends exp.m7.Mult[Exp] with Exp
   class Neg(var _inner : exp.Exp[Exp]) extends exp.m7.Neg[Exp] with Exp
