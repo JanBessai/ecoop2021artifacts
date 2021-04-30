@@ -26,7 +26,7 @@ some that would be suitable on different platforms:
 
 Unzip this directory and set %JAVA_HOME% or $JAVA_HOME to its location on disk.
 
-You need to install thce Scala Build Tool Version 1.5.0 (https://www.scala-sbt.org/1.x/docs/Setup.html)
+You need to install the Scala Build Tool Version 1.5.0 (https://www.scala-sbt.org/1.x/docs/Setup.html)
 which can be downloaded from https://www.scala-sbt.org/download.html. You do not need
 administrator privileges to install SBT. 
 
@@ -53,7 +53,19 @@ accessible from your `Path` variable.
 
 The unit tests are automatically executed, and the test results are displayed.
 
-## Expression Problem
+## Case Studies
+
+There are several case studies included in this project. 
+
+### DOM XML Example
+
+This example contains an object-oriented model for a subset of XML, 
+demonstrating the CoCo design pattern applied to a familiar context.
+
+* dom -- Java-based dom implementation ([README](dom/src/main/java/xml/README.md))
+* dom_scala -- Scala-based dom implementation ([README](dom_scala/src/main/java/xml/README.md))
+
+### Expression Problem
 
 The Expression Problem (EP) refers to a common situation that occurs when evolving
 software systems, specifically with regard to the structure of the data types and
@@ -127,6 +139,26 @@ independent effort.
 
 This case study truly represents a non-trivial exploration of the expression problem.
 In addition, we include a significant collection of test cases to ensure code coverage.
+
+This project contains a number of fully realized implementations of various EP approaches:
+
+* coco -- Java-based CoCo implementation ([README](coco/src/main/java/coco/ep/README.md))
+* coco_scala -- Scala-based CoCo implementation ([README](coco_scala/src/main/scala/exp/README.md))
+* coco_csharp -- C#-based CoCo implementation ([README](coco_csharp/CoCo/EP/README.md))
+* extensible_visitor -- Java-based Extensible Visitor implementation ([README](extensible_visitor/src/main/java/ev/ep/README.md))
+* interpreter - Java-based Interpreter implementation ([README](interpreter/src/main/java/interpreter/ep/README.md))
+* oo -- Strawman object-oriented implementation ([README](oo/src/main/java/oo/ep/README.md))
+* trivially -- Java-based Expression Problem Trivially! implementation ([README](trivially/src/main/java/trivially/ep/README.md))
+
+### Types and Programming Languages (TAPL)
+
+This Java exmaple implements parts of the [Types and
+Programming Languages (TAPL) textbook by Pierce](https://www.cis.upenn.edu/~bcpierce/tapl).
+
+Our solution implements typed and untyped compiler modules for natural numbers, 
+Booleans, floats and strings, let-bindings, function application, and lambda-calculus.
+
+* tapl -- Java-based TAPL implementation ([README](tapl/src/main/java/tapl/README.md))
 
 ## Launching the Benchmarks
 

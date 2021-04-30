@@ -1,6 +1,6 @@
 # Introduction
 
-This sub-porject includes Scala code for the XML case study (see dom for more info).
+This sub-project includes Scala code for the XML case study (see dom for more info).
 
 It demonstrates the use of implicit convert methods and bundling of type parameters
 using path dependent types.
