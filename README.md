@@ -63,7 +63,7 @@ This example contains an object-oriented model for a subset of XML,
 demonstrating the CoCo design pattern applied to a familiar context.
 
 * dom -- Java-based dom implementation ([README](dom/src/main/java/xml/README.md))
-* dom_scala -- Scala-based dom implementation ([README](dom_scala/src/main/java/xml/README.md))
+* dom_scala -- Scala-based dom implementation ([README](dom_scala/src/main/scala/xml/README.md))
 
 ### Expression Problem
 
@@ -152,7 +152,7 @@ This project contains a number of fully realized implementations of various EP a
 
 ### Types and Programming Languages (TAPL)
 
-This Java exmaple implements parts of the [Types and
+This Java example implements parts of the [Types and
 Programming Languages (TAPL) textbook by Pierce](https://www.cis.upenn.edu/~bcpierce/tapl).
 
 Our solution implements typed and untyped compiler modules for natural numbers, 
@@ -235,22 +235,24 @@ for all code in this project
 
 | Language | files  | blank  |  comment  | code  |
 | -------- |  ----- | -----  |  -------- | ------|
-| Java     | 655    | 3242   | 106       | 11248 |
+| Java     | 656    | 3243   | 107       | 11295 |
 | C#       | 140    | 345    | 5         | 1970  |
-| Scala    | 25     | 299    | 14        | 1094  |
+| Scala    | 32     | 364    | 14        | 1406  |
 ||
-| Sum      | 820    | 3886   | 125       | 14312 |
-github.com/AlDanial/cloc v 1.88  T=0.29 s (2793.9 files/s, 62429.1 lines/s)
+| Sum      | 830    | 3960   | 126       | 14691 |
+
+```cloc `git ls-files | grep -E "\.((scala)|(java)|(cs))"` ```
 
 ### Just Tests
 | Language | files  | blank  |  comment  | code  |
 | -------- |  ----- | -----  |  -------- | ------|
-| Java     | 566    | 2450   | 90        | 8119 |
-| C#       | 129    | 245    | 2         | 1494  |
-| Scala    | 13     | 151    | 11        | 565  |
+| Java     | 89     | 790    | 16        | 3123 |
+| Scala    | 15     | 169    | 3         | 633  |
+| C#       | 11     | 100    | 3         | 476  |
 ||
-| Sum      | 708    | 2846   | 103       | 10178 |
+| Sum      | 116    | 1064   | 22       | 4247 |
 
+```cloc `git ls-files | grep -E "((src/test)|(CoCo\.Tests))/.*\.((scala)|(java)|(cs))` ```
 
 ### Just Expression Problem code (excluding tests)
 
@@ -264,22 +266,34 @@ This covers CoCo, Extensible Visitor, Interpreter Design Pattern, Trivially, and
 ||
 | Sum      | 270    | 932    | 15        | 3712 |
 
+```cloc `git ls-files | grep -E "((coco/src/main)|(CoCo)|(coco_scala/src/main))/.*\.((scala)|(java)|(cs))"` ```
+
+
 ### Just XML example domain (excluding tests)
 
 | Language | files  | blank  |  comment  | code  |
 | -------- |  ----- | -----  |  -------- | ------|
-| Java     | 30    | 124    | 0         | 412 |
+| Java     | 31    | 127     | 1         |  465  |
+| Scala    |  4    |  44     | 0         |  208  |
 ||
-| Sum      | 30    | 124    | 0        | 412 |
+| Sum      | 30    | 124     | 0         |  673  |
+
+```cloc `git ls-files | grep -E "(((dom|dom_scala)/src/main))/.*\.((scala)|(java)|(cs))"` ```
 
 ### TAPL domain (excluding tests)
 
 | Language            | files  | blank  |  comment  | code  |
 | --------            |  ----- | -----  |  -------- | ------|
-| non-finalized Java  | 99    | 219    | 0         | 825 |
-| finalized Java      | 93    | 193    | 2         | 862
+| non-finalized Java  | 99     | 219    | 0         | 825   |
+| finalized Java      | 93     | 193    | 2         | 862   |
 ||
 | Sum                 | 192    | 432    | 2        | 1687 |
+
+Non-finalized code:
+``` cloc `git ls-files | grep -E "tapl/src/main" | grep -v "/f/"` ```
+
+Finalized code:
+``` cloc `git ls-files | grep -E "tapl/src/main" | grep "/f/"` ```
 
 The finalized Java code is boilerplate Java code. The non-finalized Java code is not. 
 

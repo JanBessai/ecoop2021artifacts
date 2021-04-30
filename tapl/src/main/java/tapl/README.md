@@ -6,11 +6,11 @@ This case study is based on an example from the following book:
     Benjamin C. Pierce (2002)
     MIT Press, https://www.cis.upenn.edu/~bcpierce/tapl
 
-Both the Extended Visitor Framework (2017) and Castor framework for
+Both the Extended Visitor Framework (2017) and CASTOR framework for
 extensible generative visitors (2020) reproduce work from the TAPL book. 
 
 The extensive case study demonstrates a whole family of domains that can evolve
-to add new features and capabilities. Our TAPL case study is a subset of the EVF/Castor
+to add new features and capabilities. Our TAPL case study is a subset of the EVF/CASTOR
 case studies involving the following domains:
 
 * `Nat`, `bool`, `floatstring`, or `varapp`
@@ -70,7 +70,7 @@ mathematical expression domain (in particular, the Truncate operation).
   URL:https://doi.org/10.4230/LIPIcs.ECOOP.2017.29
   http://dx.doi.org/doi:10.4230/LIPIcs.ECOOP.2017.29
   
-* Castor: Programming with extensible generative visitors.
+* CASTOR: Programming with extensible generative visitors.
   Weixin Zhang and Bruno C. d. S. Oliveira (2020).
   Sci. Comput. Program., 193:102449
   URL: https://doi.org/10.1016/j.scico.2020.102449
