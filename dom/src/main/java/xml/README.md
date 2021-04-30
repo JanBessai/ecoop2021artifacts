@@ -29,3 +29,5 @@ XML domain. This is a binary method with side effects.
 
 Full code coverage is provided by test cases in the same fashion as the mathematical
 expression domain.
+
+For a demonstration of (non-test) client see class `Client` in in `xml.client`.
