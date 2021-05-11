@@ -99,9 +99,11 @@ The archival image contains a minimal set of software and is based on [Devuan](h
 which is a Debian fork.
 It is running with a Linux 5.10.6 kernel and boots into a graphical environment (xserver).
 If the xserver does not start, you might try selecting "no modesetting" at the boot loader.
-When dropped to the console, you can login using username "coco" with password "coco" or "root" with the same password.
-A readme file is located in the Desktop folder of user coco.
-The image is immutable and will not store anything you do with it, unless you add and mount an additional medium after it has booted.
+When still dropped to the console, you can login using username "coco" with password "coco" or "root" with the same password.
+The xserver can be started manually by typing in "startx" as user coco.
+This can help to debug error messages.
+A readme file for the artifact is located in the Desktop folder of user coco.
+While you can read and write files, the image is immutable and will not store anything you do with it across reboots, unless you add and mount an additional medium.
 License information and sources are included in the image, or available on via the [devuan webpage](https://www.devuan.org), [microsoft packages](https://docs.microsoft.com/en-us/windows-server/administration/linux-package-repository-for-microsoft-software), and [the vscodium repository](https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo).
 
 
