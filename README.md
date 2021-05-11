@@ -57,6 +57,7 @@ The unit tests are automatically executed, and the test results are displayed.
 ## Live Image
 
 You can find a live linux iso image under [live/ecoop_coco.iso](live/ecoop_coco.iso).
+It can be downloaded via the (github) web interface or via `git lfs pull` in your checked out sources (requires [git lfs](https://git-lfs.github.com/)).
 This image is intended for archival purposes.
 It allows to browse, build, and test the code of this repository without internet access.
 You can boot the image directly on your machine, or in a virtual machine.
