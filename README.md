@@ -56,12 +56,11 @@ The unit tests are automatically executed, and the test results are displayed.
 
 ## Live Image
 
-You can find a live linux iso image under [live/ecoop_coco.iso](live/ecoop_coco.iso).
-It can be downloaded via the (github) web interface or via `git lfs pull` in your checked out sources (requires [git lfs](https://git-lfs.github.com/)).
+You can find a live linux iso image under [ecoop_coco.iso](https://tu-dortmund.sciebo.de/s/hOzUJY9fTW5h3Ns).
 This image is intended for archival purposes.
 It allows to browse, build, and test the code of this repository without internet access.
 You can boot the image directly on your machine, or in a virtual machine.
-We have tested it to work with qemu-5.2.0, starting it with
+We have tested it to work with qemu-5.2.0 on a linux host, starting it with
 
 ```
 qemu-system-x86_64 \
@@ -72,7 +71,7 @@ qemu-system-x86_64 \
 which will cause it use use 2 cores of the host system (kvm line), and 4096 MB of RAM.
 Less ram is not recommended, because performance tests might fail.
 
-In VirtualBox 6.1 you need to:
+The image also has been tested in VirtualBox 6.1 on a linux host, where you need to:
 * Click on "New", 
 * Choose a name for the machine
 * Set Type to "Linux"
@@ -98,7 +97,10 @@ Note that this will erase all data on the target device!
 
 The archival image contains a minimal set of software and is based on [Devuan](https://www.devuan.org) (ceres/unstable), 
 which is a Debian fork.
-It is running with a Linux 5.10.6 kernel and boots into an xserver.
+It is running with a Linux 5.10.6 kernel and boots into a graphical environment (xserver).
+If the xserver does not start, you might try selecting "no modesetting" at the boot loader.
+When dropped to the console, you can login using username "coco" with password "coco" or "root" with the same password.
+A readme file is located in the Desktop folder of user coco.
 The image is immutable and will not store anything you do with it, unless you add and mount an additional medium after it has booted.
 License information and sources are included in the image, or available on via the [devuan webpage](https://www.devuan.org), [microsoft packages](https://docs.microsoft.com/en-us/windows-server/administration/linux-package-repository-for-microsoft-software), and [the vscodium repository](https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo).
 
