@@ -3,6 +3,7 @@
 This project contains the source code illustrating the CoCo Design Pattern in
 multiple programming languages.
 
+
 ## Installation
 
 The project is self-contained and uses the Scala Build Tool (SBT) to compile
@@ -380,3 +381,28 @@ and you can regenerate the table above from within IntelliJ by selecting the
 
 Torgersen, M. (2004). The Expression Problem Revisited: Four new solutions using 
 generics, European Conference on Object-Oriented Programming, LNCS 3086, pp. 123-146.
+
+## License
+
+Files in this repository, except for the contents of the [live/ecop_coco.iso](live/ecop_coco.iso),
+archival live image are provided under the Apache 2.0 license, that is for every file:
+
+```
+   Copyright 2021 Jan Bessai, George Heineman, Boris Düdder
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+```
+
+A copy of the full original license text is also provided in [LICENSE](LICENSE).
+
