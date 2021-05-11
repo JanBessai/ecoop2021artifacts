@@ -53,6 +53,63 @@ accessible from your `Path` variable.
 
 The unit tests are automatically executed, and the test results are displayed.
 
+## Live Image
+
+You can find a live linux iso image under [live/ecoop_coco.iso](live/ecoop_coco.iso).
+This image is intended for archival purposes.
+It allows to browse, build, and test the code of this repository without internet access.
+You can boot the image directly on your machine, or in a virtual machine.
+We have tested it to work with qemu-5.2.0, starting it with
+
+```
+qemu-system-x86_64 \
+  -enable-kvm -smp 2,sockets=1,cores=2,threads=1 -cpu host \
+  -m 4096 -cdrom live/ecoop_coco.iso
+```
+
+which will cause it use use 2 cores of the host system (kvm line), and 4096 MB of RAM.
+Less ram is not recommended, because performance tests might fail.
+
+In VirtualBox 6.1 you need to:
+* Click on "New", 
+* Choose a name for the machine
+* Set Type to "Linux"
+* Set Version to "Debian 64 Bit"
+* Set the memory size to 4096MB or more
+* Select "Do not add a virtual hard disk"
+* Click on Create
+* Right Click on the newly selected machine and select Settings
+* Add a new Optical Device under "Storage" by clicking on the Optical-Device-Logo next to the IDE Controller
+* Click on Add in the Medium Dialog
+* Select the `ecoop_coco.iso`, click on "Choose" and then on "Ok"
+* Adjust the other machine settings according to your Host Hardware (e.g. adding more cores and activating acceleration)
+
+Similar instructions apply for other virtualization technologies.
+
+Depending on your computer it should also be possible to burn the image on a DVD or flash it on an USB-drive and directly boot it.
+Using linux or similar systems the iso can be copied using
+```
+dd if=ecoop_coco.iso of=/dev/drive
+```
+where drive has to be replaced by the device file of your usb-drive (e.g. sdb).
+Note that this will erase all data on the target device!
+
+The archival image contains a minimal set of software and is based on [Devuan](https://www.devuan.org) (ceres/unstable), 
+which is a Debian fork.
+It is running with a Linux 5.10.6 kernel and boots into an xserver.
+The image is immutable and will not store anything you do with it, unless you add and mount an additional medium after it has booted.
+License information and sources are included in the image, or available on via the [devuan webpage](https://www.devuan.com), [microsoft packages](https://docs.microsoft.com/en-us/windows-server/administration/linux-package-repository-for-microsoft-software), and [the vscodium repository](https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo).
+
+
+Note that the image is intended for archival purposes:
+* It will not receive any security updates
+* It should only be booted on machines that are isolated (e.g. by a VM or physically) from any valuable data
+* It is not meant to provide a production-grade user experience
+* It does not contain translations
+* It does not have support for assistive technologies (though if you need any, please do not hesitate to get in contact and tell us how to improve the image for you!)
+
+The image was created using [instructions by Will Haly](https://willhaley.com/blog/custom-debian-live-environment/).
+
 ## Expression Problem
 
 The Expression Problem (EP) refers to a common situation that occurs when evolving
