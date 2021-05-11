@@ -99,7 +99,7 @@ The archival image contains a minimal set of software and is based on [Devuan](h
 which is a Debian fork.
 It is running with a Linux 5.10.6 kernel and boots into an xserver.
 The image is immutable and will not store anything you do with it, unless you add and mount an additional medium after it has booted.
-License information and sources are included in the image, or available on via the [devuan webpage](https://www.devuan.com), [microsoft packages](https://docs.microsoft.com/en-us/windows-server/administration/linux-package-repository-for-microsoft-software), and [the vscodium repository](https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo).
+License information and sources are included in the image, or available on via the [devuan webpage](https://www.devuan.org), [microsoft packages](https://docs.microsoft.com/en-us/windows-server/administration/linux-package-repository-for-microsoft-software), and [the vscodium repository](https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo).
 
 
 Note that the image is intended for archival purposes:
