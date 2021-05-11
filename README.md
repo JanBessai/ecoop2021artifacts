@@ -110,7 +110,7 @@ Note that the image is intended for archival purposes:
 * It does not contain translations
 * It does not have support for assistive technologies (though if you need any, please do not hesitate to get in contact and tell us how to improve the image for you!)
 
-The image was created using [instructions by Will Haly](https://willhaley.com/blog/custom-debian-live-environment/).
+The image was created using [instructions by Will Haley](https://willhaley.com/blog/custom-debian-live-environment/).
 
 ## Case Studies
 
