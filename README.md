@@ -60,7 +60,7 @@ You can find a live linux iso image under [ecoop_coco.iso](https://tu-dortmund.s
 This image is intended for archival purposes.
 It allows to browse, build, and test the code of this repository without internet access.
 You can boot the image directly on your machine, or in a virtual machine.
-We have tested it to work with qemu-5.2.0 on a linux host, starting it with
+We have tested it to work with qemu-5.2.0 on a Linux host, starting it with
 
 ```
 qemu-system-x86_64 \
@@ -71,7 +71,7 @@ qemu-system-x86_64 \
 which will cause it use use 2 cores of the host system (kvm line), and 4096 MB of RAM.
 Less ram is not recommended, because performance tests might fail.
 
-The image also has been tested in VirtualBox 6.1 on a linux host, where you need to:
+The image has also been tested in VirtualBox 6 on Linux, Mac, and Windows hosts, where you need to:
 * Click on "New", 
 * Choose a name for the machine
 * Set Type to "Linux"
