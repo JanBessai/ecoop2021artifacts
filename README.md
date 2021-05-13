@@ -56,7 +56,8 @@ The unit tests are automatically executed, and the test results are displayed.
 
 ## Live Image
 
-You can find a live linux iso image under [ecoop_coco.iso](https://tu-dortmund.sciebo.de/s/hOzUJY9fTW5h3Ns).
+You can find a live linux iso image bundled with the release version of this repository 
+and under [ecoop_coco.iso](https://tu-dortmund.sciebo.de/s/hOzUJY9fTW5h3Ns).
 This image is intended for archival purposes.
 It allows to browse, build, and test the code of this repository without internet access.
 You can boot the image directly on your machine, or in a virtual machine.
