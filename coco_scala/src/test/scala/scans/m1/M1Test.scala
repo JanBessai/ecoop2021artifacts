@@ -8,13 +8,13 @@ trait TestTemplate[FT] extends Factory[FT] {
 
   def test() : Unit = {
 
-    val circ1 = convert(this.identity(1))
-    val circ2 = convert(this.identity(1))
-    val circ3 = convert(this.identity(3))
+    val circ1 = this.identity(1)
+    val circ2 = this.identity(1)
+    val circ3 = this.identity(3)
     assert(circ1.width == circ2.width)
     assert(circ1.width != circ3.width)
 
-    val circ4 = convert(api.brentKung(this))
+    val circ4 = api.brentKung(this)
     assert(circ4.width == 4)
   }
 }

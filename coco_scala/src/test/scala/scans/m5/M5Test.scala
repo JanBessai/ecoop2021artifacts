@@ -10,7 +10,7 @@ trait TestTemplate[FT] extends Factory[FT] with scans.m1.TestTemplate[FT] {
   override def test() : Unit = {
     super.test()
 
-    val circ1 = convert(this.rstretch(api.brentKung(this), 6, 12))
+    val circ1 = this.rstretch(api.brentKung(this), 6, 12)
     assert(circ1.width == 18)
   }
 }
